@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rb;
+    public Rigidbody2D rb;
+   
+    // movement
+    private float moveX = 0f;
     public float moveSpeed = 5f;
-    public float moveX = 0f;
 
-    // Start is called before the first frame update
+    // jump
+    public float jumpForce = 0f;
+
     void Start()
     {
-
+       
     }
 
-    // Update is called once per frame
     void Update()
     {
         ProcessInput();
@@ -28,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     void ProcessInput()
     {
         moveX = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.velocity = Vector2.up * jumpForce;
+        }
     }
 
     void Move()
