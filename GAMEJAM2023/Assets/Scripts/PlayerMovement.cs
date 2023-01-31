@@ -9,17 +9,23 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
 
-    // grounded
+    [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
 
-    // movement
-    private float moveX = 0f;
+    [Header("Movement")]
+    [Range(0f, 10f)]
     public float moveSpeed = 5f;
-
-    // jump
+    private float moveX = 0f;
+    
+    [Header("Jump")]
+    [Range(0f, 10f)]
     public float jumpForce = 4f;
 
-  
+    [Header("Dash")]
+    public float dashSpeed = 5f;
+    private Vector3 dashDirection;
+    
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -58,6 +64,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = Vector2.up * jumpForce;
+        }
+
+        // dash
+        if (Input.GetButtonDown("Dash"))
+        {
+            dashDirection = new Vector3(moveX, rb.velocity.y).normalized;
+
+            rb.velocity = dashDirection * dashSpeed;
         }
     }
 
