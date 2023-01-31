@@ -16,17 +16,25 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f, 10f)]
     public float moveSpeed = 5f;
     private float moveX = 0f;
-    
+
     [Header("Jump")]
     [Range(0f, 10f)]
     public float jumpForce = 4f;
+    private bool jumpRequest = false;
 
     [Header("Dash")]
     public float dashSpeed = 5f;
-    private Vector3 dashDirection;
-    
+    public float dashingTime = 0.2f;
+    public float dashingCooldown = 1f;
 
-    void Start()
+    private bool canDash = true;
+    private bool isDashing;
+  
+    //facing direction
+    private bool isFacingRight = true;
+
+
+    void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -36,12 +44,24 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         ProcessInput();
     }
 
     private void FixedUpdate()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         Move();
+        Jump();
+        Dash();
     }
 
     void ProcessInput()
@@ -49,35 +69,64 @@ public class PlayerMovement : MonoBehaviour
         // horizontal movement
         moveX = Input.GetAxisRaw("Horizontal");
 
-        // sprite flip
-        if(moveX > 0f)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if(moveX < 0f)
-        {
-            spriteRenderer.flipX = true;
-        }
-
-
         // jump
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            rb.velocity = Vector2.up * jumpForce;
+            jumpRequest = true;
         }
 
         // dash
-        if (Input.GetButtonDown("Dash"))
+        if (Input.GetButtonDown("Dash") && canDash)
         {
-            dashDirection = new Vector3(moveX, rb.velocity.y).normalized;
-
-            rb.velocity = dashDirection * dashSpeed;
+            StartCoroutine(Dash());
         }
+
+        Flip();
     }
 
     void Move()
     {
         rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
+    }
+
+    void Jump()
+    {
+        if (jumpRequest)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            jumpRequest = false;
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+
+        yield return new WaitForSeconds(dashingTime);
+
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+
+    }
+
+    private void Flip()
+    {
+        if(isFacingRight && moveX < 0f || !isFacingRight && moveX > 0f)
+        {
+            Vector3 localScale = transform.localScale;
+            isFacingRight = !isFacingRight;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
     }
 
     private bool IsGrounded()
