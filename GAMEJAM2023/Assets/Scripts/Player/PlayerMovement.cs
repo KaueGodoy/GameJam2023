@@ -29,10 +29,17 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canDash = true;
     private bool isDashing;
-  
+    private bool dashRequest = false;
+
+    [SerializeField] TrailRenderer tr;
+
     //facing direction
     private bool isFacingRight = true;
 
+    [Header("Shooting")]
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+    private bool shootRequest = false;
 
     void Awake()
     {
@@ -44,24 +51,20 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
+        if (isDashing) return;
 
         ProcessInput();
     }
 
     private void FixedUpdate()
     {
-        if (isDashing)
-        {
-            return;
-        }
+        if (isDashing) return;
 
         Move();
+        Flip();
         Jump();
-        Dash();
+        DashTrigger();
+        Shoot();
     }
 
     void ProcessInput()
@@ -78,10 +81,15 @@ public class PlayerMovement : MonoBehaviour
         // dash
         if (Input.GetButtonDown("Dash") && canDash)
         {
-            StartCoroutine(Dash());
+            dashRequest = true;
         }
 
-        Flip();
+        // shooting
+        if (Input.GetButtonDown("Fire1"))
+        {
+           shootRequest = true;
+           
+        }
     }
 
     void Move()
@@ -98,6 +106,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void DashTrigger()
+    {
+        if (dashRequest)
+        {
+            StartCoroutine(Dash());
+            dashRequest = false;
+        }
+    }
+
     private IEnumerator Dash()
     {
         canDash = false;
@@ -107,9 +124,11 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = 0f;
 
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        tr.emitting = true;
 
         yield return new WaitForSeconds(dashingTime);
 
+        tr.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
 
@@ -118,14 +137,38 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    void Shoot()
+    {
+        if (shootRequest)
+        {
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            shootRequest = false;
+        }
+    }
+
     private void Flip()
     {
-        if(isFacingRight && moveX < 0f || !isFacingRight && moveX > 0f)
+        if (isFacingRight && moveX < 0f || !isFacingRight && moveX > 0f)
         {
+            // flipping the player using scale
+
             Vector3 localScale = transform.localScale;
             isFacingRight = !isFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
+
+            firePoint.Rotate(0f, 180f, 0f);
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                firePoint.Rotate(firePoint.rotation.x, firePoint.rotation.y, 90f);
+            }
+
+            // flipping the player using rotation
+            //transform.Rotate(0, 180f, 0);
+
+            //flipping the sprite
+            //spriteRenderer.flipX = true;
         }
     }
 
