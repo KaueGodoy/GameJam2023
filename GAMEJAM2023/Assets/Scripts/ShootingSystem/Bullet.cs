@@ -12,9 +12,17 @@ public class Bullet : MonoBehaviour
     [Header("Damage")]
     public float bulletDamage = 5f;
 
+    [Header("Distance")]
+    public float timeToDestroy = 3f;
+
     void Start()
     {
         rb.velocity = transform.right * bulletSpeed; 
+    }
+
+    private void Update()
+    {
+        Destroy(this.gameObject, timeToDestroy);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,5 +36,9 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 
 }

@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing) return;
 
         ProcessInput();
+        Shoot();
+
     }
 
     private void FixedUpdate()
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         Flip();
         Jump();
         DashTrigger();
-        Shoot();
+
     }
 
     void ProcessInput()
@@ -105,6 +107,14 @@ public class PlayerMovement : MonoBehaviour
             jumpRequest = false;
         }
     }
+    void Shoot()
+    {
+        if (shootRequest)
+        {
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            shootRequest = false;
+        }
+    }
 
     void DashTrigger()
     {
@@ -137,15 +147,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void Shoot()
-    {
-        if (shootRequest)
-        {
-            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            shootRequest = false;
-        }
-    }
-
     private void Flip()
     {
         if (isFacingRight && moveX < 0f || !isFacingRight && moveX > 0f)
@@ -156,13 +157,11 @@ public class PlayerMovement : MonoBehaviour
             isFacingRight = !isFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
+            firePoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
 
-            firePoint.Rotate(0f, 180f, 0f);
 
-            if (Input.GetKey(KeyCode.W))
-            {
-                firePoint.Rotate(firePoint.rotation.x, firePoint.rotation.y, 90f);
-            }
+            // flippping using eulerAngles
+            //firePoint.eulerAngles = new Vector3(0f, 180f, 0f);
 
             // flipping the player using rotation
             //transform.Rotate(0, 180f, 0);
@@ -170,8 +169,10 @@ public class PlayerMovement : MonoBehaviour
             //flipping the sprite
             //spriteRenderer.flipX = true;
         }
-    }
 
+
+    }
+  
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(boxCollider.bounds.min, boxCollider.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
