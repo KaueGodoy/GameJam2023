@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        GetComponent<LootBag>().InstantiateLoot(transform.position);
         Destroy(gameObject);
     }
 
