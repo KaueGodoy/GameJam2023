@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
 
     [Header("Damage")]
     public float bulletDamage = 5f;
+    public float critRate = 30f;
 
     [Header("Distance")]
     public float timeToDestroy = 3f;
@@ -30,7 +31,16 @@ public class Bullet : MonoBehaviour
         Enemy enemy = collision.GetComponent<Enemy>();
         if(enemy != null)
         {
+           
+            bool isCritical = UnityEngine.Random.Range(0, 100) < critRate;
+
+            if(isCritical)
+            {
+                bulletDamage *= 2;
+            }
+
             enemy.TakeDamage(bulletDamage);
+            DamagePopup.Create(transform.position, (int) bulletDamage, isCritical);
         }
 
         Destroy(gameObject);
