@@ -78,13 +78,13 @@ public class PlayerMovement : MonoBehaviour
         moveX = Input.GetAxisRaw("Horizontal");
 
         // jump
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !gameIsPaused)
         {
             jumpRequest = true;
         }
 
         // dash
-        if (Input.GetButtonDown("Dash") && canDash)
+        if (Input.GetButtonDown("Dash") && canDash && !gameIsPaused)
         {
             dashRequest = true;
         }
@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
            
         }
 
-        if (Time.timeScale == 0f)
+        if (PauseMenu.GameIsPaused)
         {
             gameIsPaused = true;
         }
