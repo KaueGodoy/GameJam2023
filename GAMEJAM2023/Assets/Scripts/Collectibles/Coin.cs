@@ -16,5 +16,5 @@ public class Coin : MonoBehaviour, ICollectible
         OnCoinCollected?.Invoke(coinData);
         
     }
-
+    
 }
