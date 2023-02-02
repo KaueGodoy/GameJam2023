@@ -41,6 +41,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject bulletPrefab;
     private bool shootRequest = false;
 
+    // pause
+    private bool gameIsPaused = false;
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -87,12 +90,18 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // shooting
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !gameIsPaused)
         {
            shootRequest = true;
            
         }
 
+        if (Time.timeScale == 0f)
+        {
+            gameIsPaused = true;
+        }
+        else
+            gameIsPaused = false;
     }
 
     void Move()
