@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
+
     // components
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -44,12 +46,66 @@ public class PlayerMovement : MonoBehaviour
     // pause
     private bool gameIsPaused = false;
 
-    void Awake()
+    [Header("Inventory")]
+    [SerializeField] private UI_Inventory uiInventory;
+    private Inventory inventory;
+
+    private void Start()
     {
+     
+
+        inventory = new Inventory(UseItem);
+        uiInventory.SetPlayer(this);
+        uiInventory.SetInventory(inventory);
+
+    }
+
+    private void Awake()
+    {
+        Instance = this;
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
 
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
+        if (itemWorld != null)
+        {
+            inventory.AddItem(itemWorld.GetItem());
+            itemWorld.DestroySelf();
+        }
+    }
+
+    private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.HealthPotion:
+                //heal hp
+                Debug.Log("Healed");
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+                break;
+            case Item.ItemType.SpeedPotion:
+                // speed boost
+                Debug.Log("Speed boost");
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.SpeedPotion, amount = 1 });
+                break;
+            case Item.ItemType.Coin:
+                // speed boost
+                Debug.Log("Money spent");
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.Coin, amount = 1 });
+                break;
+            case Item.ItemType.Key:
+                // speed boost
+                Debug.Log("Used key");
+                inventory.RemoveItem(item);
+                break;
+            
+        }
     }
 
     void Update()
@@ -182,7 +238,12 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
-  
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(boxCollider.bounds.min, boxCollider.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
