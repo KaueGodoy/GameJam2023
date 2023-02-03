@@ -7,6 +7,8 @@ TagManager:
   - Background
   - Grounded
   - Enemy
+  - HitStomp
+  - OneWayPlatform
   layers:
   - Default
   - TransparentFX

@@ -16,9 +16,10 @@ public class WaypointFollower : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.flipX = true;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Vector3.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
         {
