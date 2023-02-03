@@ -33642,26 +33642,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: OneWayPlatform
       objectReference: {fileID: 0}
-    - target: {fileID: 1128778429976169427, guid: 3d2a49003b244944f809c713e7ae0dc5, type: 3}
-      propertyPath: m_EdgeRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Size.y
-      value: 0.10706854
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Offset.y
-      value: -0.026921988
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_UsedByEffector
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1128778429976169426, guid: 3d2a49003b244944f809c713e7ae0dc5, type: 3}
       propertyPath: moveSpeed
       value: 3
