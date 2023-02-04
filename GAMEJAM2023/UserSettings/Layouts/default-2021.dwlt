@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1037
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 312
     height: 987
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 25
+  controlID: 334
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 26
+  controlID: 20
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GridPaintPaletteWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -245,14 +245,14 @@ MonoBehaviour:
     y: 0
     width: 440
     height: 987
-  m_MinSize: {x: 241, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -378,21 +378,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 14b6ffff26fbffff486000004c600000
+      m_ExpandedIDs: 54d4ffff0eeefffffaf3ffff00f4ffff8ef5ffff32f6ffffeef6ffff12f8fffff6f8ffff2cfbffff426000004660000056740000b4790000b8790000627a0000947a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Tilemap
-        m_OriginalName: Tilemap
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -18930
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 2}
       m_SearchString: 
@@ -443,22 +443,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - "Assets/Cen\xE1rio/Tiles"
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - "Assets/Cen\xE1rio/Tiles"
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\guilh\Documents\GitHub\GameJam2023\GAMEJAM2023
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f8870000
-    m_LastClickedID: 34808
-    m_ExpandedIDs: 00000000926500009465000096650000986500009a6500009c65000000ca9a3b
+    scrollPos: {x: 0, y: 34}
+    m_SelectedIDs: e6630000
+    m_LastClickedID: 25574
+    m_ExpandedIDs: 00000000b2630000b4630000b6630000b8630000ba630000bc630000d663000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -486,7 +486,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000926500009465000096650000986500009a6500009c650000
+    m_ExpandedIDs: 00000000b2630000b4630000b6630000b8630000ba630000bc630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000f47c00007a7f0000b2640000d07b0000966f0000c865000032690000ec600000147b0000a26600006c7b0000606100006261000064610000666100006e6100000c620000c26c00008e7a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -822,9 +822,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -4.063498, y: -4.662352, z: 0.19131684}
+    m_Target: {x: -2.8453376, y: 0.39356545, z: 0.13681187}
     speed: 2
-    m_Value: {x: -4.1388416, y: -4.5395355, z: 0.18954964}
+    m_Value: {x: -2.8453376, y: 0.39356545, z: 0.13681187}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -875,9 +875,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 3.750413
+    m_Target: 8.115228
     speed: 2
-    m_Value: 3.927134
+    m_Value: 8.115228
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1003,6 +1003,6 @@ MonoBehaviour:
     m_CachedPref: 50
     m_ControlHash: 1964396721
     m_PrefName: Preview_TilemapBrushInspector
-  m_Palette: {fileID: 4498967031683094846, guid: be97d23290796544c98290397621ce44, type: 3}
+  m_Palette: {fileID: 5264271859956180544, guid: 06f15d6733bcce3419b241994e54fd8f, type: 3}
   m_DrawGridGizmo: 1
   m_DrawGizmos: 0
