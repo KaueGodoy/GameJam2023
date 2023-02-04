@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,11 +13,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
 
-    [Header("Ground")]
-    [SerializeField] private LayerMask jumpableGround;
+    [Header("Health")]
+    public float currentHealth = 0f;
+    public float maxHealth = 3f;
 
     [Header("Movement")]
-    [Range(0f, 10f)]
     public float moveSpeed = 5f;
     private float moveX = 0f;
 
@@ -44,9 +45,18 @@ public class PlayerMovement : MonoBehaviour
     private bool shootRequest = false;
     private bool isShooting = false;
 
+    [Header("Knockback")]
+    public float knockbackForce = 2f;
+    public float knockbackCounter = 0f;
+    public float knockbackTotalTime = 1f;
+    public bool knockbackFromRight;
+
     [Header("Inventory")]
     [SerializeField] private UI_Inventory uiInventory;
     private Inventory inventory;
+
+    [Header("Ground")]
+    [SerializeField] private LayerMask jumpableGround;
 
     // facing direction
     private bool isFacingRight = true;
@@ -58,11 +68,11 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private string currentAnimation;
 
-    const string RUN_ANIMATION     = "Player_Run";
-    const string IDLE_ANIMATION    = "Player_Idle";
-    const string SHOOT_ANIMATION   = "Player_Shoot";
-    const string JUMP_ANIMATION    = "Player_Jump";
-    const string HIT_ANIMATION     = "Player_Hit";
+    const string RUN_ANIMATION = "Player_Run";
+    const string IDLE_ANIMATION = "Player_Idle";
+    const string SHOOT_ANIMATION = "Player_Shoot";
+    const string JUMP_ANIMATION = "Player_Jump";
+    const string HIT_ANIMATION = "Player_Hit";
 
 
     private void Awake()
@@ -81,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
         uiInventory.SetPlayer(this);
         uiInventory.SetInventory(inventory);
         animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
 
     }
 
@@ -121,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Used key");
                 inventory.RemoveItem(item);
                 break;
-            
+
         }
     }
 
@@ -130,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing) return;
 
         ProcessInput();
-       
+
 
     }
 
@@ -152,12 +163,12 @@ public class PlayerMovement : MonoBehaviour
         // horizontal movement
         moveX = Input.GetAxisRaw("Horizontal");
 
-   
+
 
         // jump
         if (Input.GetButtonDown("Jump") && !gameIsPaused)
         {
-            if(IsGrounded())
+            if (IsGrounded())
             {
                 jumpRequest = true;
                 doubleJump = true;
@@ -167,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpRequest = true;
                 doubleJump = false;
             }
-     
+
         }
 
         // dash
@@ -179,8 +190,8 @@ public class PlayerMovement : MonoBehaviour
         // shooting
         if (Input.GetButtonDown("Fire1") && !gameIsPaused)
         {
-           shootRequest = true;
-           
+            shootRequest = true;
+
         }
 
         // pause
@@ -206,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (IsGrounded() && !shootRequest)
         {
-            if(moveX > 0 || moveX < 0)
+            if (moveX > 0 || moveX < 0)
             {
                 ChangeAnimationState(RUN_ANIMATION);
             }
@@ -221,25 +232,56 @@ public class PlayerMovement : MonoBehaviour
             ChangeAnimationState(JUMP_ANIMATION);
         }
 
-        /*if (shootRequest)
+        /*if(knockbackFromRight || !knockbackFromRight)
         {
-            ChangeAnimationState(SHOOT_ANIMATION);
+            ChangeAnimationState(HIT_ANIMATION);
         }*/
 
-       
+
     }
 
+    public void PlayerTakeDamage(float damageAmount)
+    {
+        currentHealth -= Mathf.FloorToInt(damageAmount);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        SceneManager.LoadScene(1);
+    }
 
     void Move()
     {
-        rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
+        if (knockbackCounter <= 0)
+        {
+            rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
+        }
+        else
+        {
+            if (knockbackFromRight)
+            {
+                rb.velocity = new Vector2(-knockbackForce, knockbackForce);
+            }
+            if (!knockbackFromRight)
+            {
+                rb.velocity = new Vector2(knockbackForce, knockbackForce);
+            }
+
+            knockbackCounter -= Time.deltaTime;
+        }
+
     }
 
     void Jump()
     {
         if (jumpRequest)
         {
-            
+
             rb.velocity = Vector2.up * jumpForce;
             jumpRequest = false;
         }
@@ -260,7 +302,7 @@ public class PlayerMovement : MonoBehaviour
             if (!isShooting)
             {
                 isShooting = true;
-                
+
                 ChangeAnimationState(SHOOT_ANIMATION);
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 

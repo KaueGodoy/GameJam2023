@@ -10,8 +10,8 @@ public class HeartSystem : MonoBehaviour
 
     public Image[] hearts;
     public Sprite lifeFruit;
-    private int curLife;
-    private int maxLife = 3;
+    public int curLife;
+    public int maxLife = 3;
     private bool isDead = false;
 
     // Start is called before the first frame update
