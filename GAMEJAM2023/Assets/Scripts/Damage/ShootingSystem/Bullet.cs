@@ -17,9 +17,11 @@ public class Bullet : MonoBehaviour
     [Header("Distance")]
     public float timeToDestroy = 3f;
 
+    public bool isCritical;
+
     void Start()
     {
-        rb.velocity = transform.right * bulletSpeed; 
+        rb.velocity = transform.right * bulletSpeed;
     }
 
     private void Update()
@@ -30,18 +32,18 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Enemy enemy = collision.GetComponent<Enemy>();
-        if(enemy != null)
+        if (enemy != null)
         {
-           
-            bool isCritical = UnityEngine.Random.Range(0, 100) < critRate;
 
-            if(isCritical)
+            isCritical = UnityEngine.Random.Range(0, 100) < critRate;
+
+            if (isCritical)
             {
                 bulletDamage *= critDamage;
             }
 
             enemy.TakeDamage(bulletDamage);
-            DamagePopup.Create(transform.position, (int) bulletDamage, isCritical);
+            DamagePopup.Create(transform.position, (int)bulletDamage, isCritical);
         }
 
         Destroy(gameObject);

@@ -21,18 +21,25 @@ public class WaypointFollower : MonoBehaviour
 
     private void Update()
     {
+        ProcessCalc();
+    }
+
+    private void FixedUpdate()
+    {
+        MoveEnemy();
+    }
+
+    private void ProcessCalc()
+    {
         if (Vector3.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
         {
             currentWaypointIndex++;
-
             //transform.Rotate(transform.position.x, 180f, transform.position.z);
-
 
             if (currentWaypointIndex >= waypoints.Length)
             {
                 currentWaypointIndex = 0;
                 spriteRenderer.flipX = true;
-
             }
             else
             {
@@ -40,9 +47,12 @@ public class WaypointFollower : MonoBehaviour
             }
 
         }
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
     }
 
+    private void MoveEnemy()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
 
+    }
 }
 

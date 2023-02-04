@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bcfa6559240f1d24cbaaf7d3615db2e8
+guid: cdf9346f224013e4eb55edb0b9924072
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -101,74 +101,23 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: squirrelRunRight_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25b6f6f2327d5f640b319571621a6657
-      internalID: -1831667417
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelRunRight_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7bb5368dde0963e4a8890fd09b649906
-      internalID: -578205267
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelRunRight_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1dbc42c9ea01a324f8e60f7bbd3f2a0c
-      internalID: 1561476323
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelRunRight_3
+      name: squirrelJump_0
       rect:
         serializedVersion: 2
         x: 0
@@ -182,56 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8af4b102c969dd24396981a0b401b5bb
-      internalID: -97526688
+      spriteID: b0422c7415271ff4ea3fcf81b90523a3
+      internalID: -947161901
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squirrelRunRight_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 71ef96f4313ba7b49bac09165e1dc16c
-      internalID: 1095404552
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelRunRight_5
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1e0cbb7aa7b91db488e0a029d22eb071
-      internalID: -1134581270
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelRunRight_6
+      name: squirrelJump_1
       rect:
         serializedVersion: 2
         x: 0
@@ -245,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2772c0c21196c7f4a848210c3c2ea58f
-      internalID: 210458450
+      spriteID: fa1f6b5f2875d20418ba65e4844cac98
+      internalID: -1053576396
       vertices: []
       indices: 
       edges: []
@@ -262,13 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      squirrelRunRight_0: -1831667417
-      squirrelRunRight_6: 210458450
-      squirrelRunRight_5: -1134581270
-      squirrelRunRight_1: -578205267
-      squirrelRunRight_2: 1561476323
-      squirrelRunRight_3: -97526688
-      squirrelRunRight_4: 1095404552
+      squirrelJump_1: -1053576396
+      squirrelJump_0: -947161901
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
