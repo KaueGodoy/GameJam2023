@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 63.99
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -5436,7 +5436,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fase 1_103: -1979229154
+      Fase 1_88: 1907667137
       Fase 1_68: 1376949487
       Fase 1_92: -24074204
       Fase 1_185: 502430932
@@ -5688,7 +5688,7 @@ TextureImporter:
       Fase 1_98: 2107181361
       Fase 1_120: -1945717160
       Fase 1_171: 324076122
-      Fase 1_88: 1907667137
+      Fase 1_103: -1979229154
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
