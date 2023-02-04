@@ -2711,6 +2711,7 @@ GameObject:
   - component: {fileID: 849090943}
   - component: {fileID: 849090944}
   - component: {fileID: 849090945}
+  - component: {fileID: 849090946}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2831,6 +2832,7 @@ MonoBehaviour:
   tr: {fileID: 849090942}
   firePoint: {fileID: 1266291549}
   bulletPrefab: {fileID: 7446942302697660241, guid: 04eb9e10a44dc8e42b0335faf6b235ed, type: 3}
+  shootDelay: 0.3
   uiInventory: {fileID: 842040217}
 --- !u!61 &849090940
 BoxCollider2D:
@@ -3005,10 +3007,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hearts:
-  - {fileID: 1224999330}
-  - {fileID: 873520760}
-  - {fileID: 2134519494}
-  lifeFruit: {fileID: 0}
+  - {fileID: 1224999331}
+  - {fileID: 873520762}
+  - {fileID: 2134519496}
+  lifeFruit: {fileID: 21300000, guid: d4fa33184448e1b4a9df8f6835b02b0e, type: 3}
 --- !u!114 &849090945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3023,6 +3025,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 849090940}
   collisionDisableTime: 0.5
+--- !u!95 &849090946
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849090935}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 86efe55d9426c17499d4a09984c6b014, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &873520760
 GameObject:
   m_ObjectHideFlags: 0

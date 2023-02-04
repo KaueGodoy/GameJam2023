@@ -3402,9 +3402,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hearts:
-  - {fileID: 1224999330}
-  - {fileID: 873520760}
-  - {fileID: 2134519494}
+  - {fileID: 1224999331}
+  - {fileID: 873520762}
+  - {fileID: 2134519496}
+  lifeFruit: {fileID: 21300000, guid: d4fa33184448e1b4a9df8f6835b02b0e, type: 3}
 --- !u!114 &849090945
 MonoBehaviour:
   m_ObjectHideFlags: 0
