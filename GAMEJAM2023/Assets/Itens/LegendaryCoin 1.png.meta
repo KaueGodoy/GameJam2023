@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 088c6b88d4b94d1478d0c87a17aa6a01
+guid: bf5616baffdb1b746a7a6b634c639eff
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SilverCoin_0
+      name: LegendaryCoin 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d8ef8fddd26c09419b2a2fade27bdff
+      internalID: 480167763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LegendaryCoin 1_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d928c7b0df8ffe2429654052f2105c2c
+      internalID: -843306815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LegendaryCoin 1_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3308e8ac86b76b47ae7265d7a78c7ae
+      internalID: -1802091613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LegendaryCoin 1_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52be25ed03026434ea06cd02308e2dde
+      internalID: -1846937580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LegendaryCoin 1_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 408d394e1aa2e1447911c5b8d6062bfa
+      internalID: -1569250909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LegendaryCoin 1_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f873e4f4ba9d8ce48be50e4774fbdf2f
+      internalID: 129944439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LegendaryCoin 1_6
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 730ae7a376758fc41bb1ce96cd3005f8
-      internalID: 50985077
+      spriteID: 558dc6a7dcefd7b458520b44e1145023
+      internalID: -1644437685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilverCoin_1
+      name: LegendaryCoin 1_7
       rect:
         serializedVersion: 2
         x: 32
@@ -140,50 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f583cd00445bafb44af8e303c2211369
-      internalID: 1878710127
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverCoin_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8536794acf4b1c041b4b40f254a95c9e
-      internalID: 808149124
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverCoin_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d4030b5e788ae194ea8ded06fe7b7dc3
-      internalID: 821423799
+      spriteID: a298e216c0cfa13408ba0e536ee5b1fc
+      internalID: -1850156232
       vertices: []
       indices: 
       edges: []
@@ -199,10 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SilverCoin_1: 1878710127
-      SilverCoin_2: 808149124
-      SilverCoin_3: 821423799
-      SilverCoin_0: 50985077
+      LegendaryCoin 1_3: -1846937580
+      LegendaryCoin 1_7: -1850156232
+      LegendaryCoin 1_2: -1802091613
+      LegendaryCoin 1_4: -1569250909
+      LegendaryCoin 1_0: 480167763
+      LegendaryCoin 1_5: 129944439
+      LegendaryCoin 1_6: -1644437685
+      LegendaryCoin 1_1: -843306815
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
