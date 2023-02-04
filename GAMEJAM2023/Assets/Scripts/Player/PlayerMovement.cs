@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump")]
     [Range(0f, 10f)]
     public float jumpForce = 4f;
+    private bool doubleJump;
     private bool jumpRequest = false;
 
     [Header("Dash")]
@@ -35,30 +37,33 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] TrailRenderer tr;
 
-    //facing direction
-    private bool isFacingRight = true;
-
     [Header("Shooting")]
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public float shootDelay = 0.3f;
     private bool shootRequest = false;
-
-    // pause
-    private bool gameIsPaused = false;
+    private bool isShooting = false;
 
     [Header("Inventory")]
     [SerializeField] private UI_Inventory uiInventory;
     private Inventory inventory;
 
-    private void Start()
-    {
-     
+    // facing direction
+    private bool isFacingRight = true;
 
-        inventory = new Inventory(UseItem);
-        uiInventory.SetPlayer(this);
-        uiInventory.SetInventory(inventory);
+    // pause
+    private bool gameIsPaused = false;
 
-    }
+    // animation
+    private Animator animator;
+    private string currentAnimation;
+
+    const string RUN_ANIMATION     = "Player_Run";
+    const string IDLE_ANIMATION    = "Player_Idle";
+    const string SHOOT_ANIMATION   = "Player_Shoot";
+    const string JUMP_ANIMATION    = "Player_Jump";
+    const string HIT_ANIMATION     = "Player_Hit";
+
 
     private void Awake()
     {
@@ -67,6 +72,15 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
 
+    }
+
+
+    private void Start()
+    {
+        inventory = new Inventory(UseItem);
+        uiInventory.SetPlayer(this);
+        uiInventory.SetInventory(inventory);
+        animator = GetComponent<Animator>();
 
     }
 
@@ -91,11 +105,14 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case Item.ItemType.SpeedPotion:
                 // speed boost
+                moveSpeed *= 2;
                 Debug.Log("Speed boost");
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.SpeedPotion, amount = 1 });
                 break;
             case Item.ItemType.Coin:
-                // speed boost
+                // damage buff
+                //
+
                 Debug.Log("Money spent");
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.Coin, amount = 1 });
                 break;
@@ -113,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
         if (isDashing) return;
 
         ProcessInput();
-        Shoot();
+       
 
     }
 
@@ -125,6 +142,8 @@ public class PlayerMovement : MonoBehaviour
         Flip();
         Jump();
         DashTrigger();
+        Shoot();
+        UpdateAnimationState();
 
     }
 
@@ -133,10 +152,22 @@ public class PlayerMovement : MonoBehaviour
         // horizontal movement
         moveX = Input.GetAxisRaw("Horizontal");
 
+   
+
         // jump
-        if (Input.GetButtonDown("Jump") && IsGrounded() && !gameIsPaused)
+        if (Input.GetButtonDown("Jump") && !gameIsPaused)
         {
-            jumpRequest = true;
+            if(IsGrounded())
+            {
+                jumpRequest = true;
+                doubleJump = true;
+            }
+            else if (doubleJump)
+            {
+                jumpRequest = true;
+                doubleJump = false;
+            }
+     
         }
 
         // dash
@@ -152,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
            
         }
 
+        // pause
         if (PauseMenu.GameIsPaused)
         {
             gameIsPaused = true;
@@ -159,6 +191,44 @@ public class PlayerMovement : MonoBehaviour
         else
             gameIsPaused = false;
     }
+
+    public void ChangeAnimationState(string newAnimation)
+    {
+        if (currentAnimation == newAnimation) return;
+
+        animator.Play(newAnimation);
+        currentAnimation = newAnimation;
+
+    }
+
+    private void UpdateAnimationState()
+    {
+
+        if (IsGrounded() && !shootRequest)
+        {
+            if(moveX > 0 || moveX < 0)
+            {
+                ChangeAnimationState(RUN_ANIMATION);
+            }
+            else
+            {
+                ChangeAnimationState(IDLE_ANIMATION);
+            }
+        }
+
+        if (rb.velocity.y > .1f && !IsGrounded())
+        {
+            ChangeAnimationState(JUMP_ANIMATION);
+        }
+
+        /*if (shootRequest)
+        {
+            ChangeAnimationState(SHOOT_ANIMATION);
+        }*/
+
+       
+    }
+
 
     void Move()
     {
@@ -169,17 +239,40 @@ public class PlayerMovement : MonoBehaviour
     {
         if (jumpRequest)
         {
+            
             rb.velocity = Vector2.up * jumpForce;
             jumpRequest = false;
         }
     }
     void Shoot()
     {
-        if (shootRequest)
+        /*if (shootRequest)
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             shootRequest = false;
+        }*/
+
+
+        if (shootRequest)
+        {
+            shootRequest = false;
+
+            if (!isShooting)
+            {
+                isShooting = true;
+                
+                ChangeAnimationState(SHOOT_ANIMATION);
+                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+                Invoke("ShootComplete", shootDelay);
+            }
         }
+    }
+
+
+    void ShootComplete()
+    {
+        isShooting = false;
     }
 
     void DashTrigger()

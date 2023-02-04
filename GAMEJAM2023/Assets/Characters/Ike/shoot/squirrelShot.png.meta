@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cdf9346f224013e4eb55edb0b9924072
+guid: 5d051b79e805c4d4faac21a3652684ab
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -101,11 +101,65 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: squirrelJump_0
+      name: squirrelShot_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f2e871e1edd51b4e882816b51a7a9d5
+      internalID: -1259807961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: squirrelShot_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fd75fa782b797c4c95e070a40056ad0
+      internalID: -783882827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: squirrelShot_2
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +173,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0422c7415271ff4ea3fcf81b90523a3
-      internalID: -947161901
+      spriteID: 0c019a9f57d45a34981de0344bb0a6f7
+      internalID: -236006292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squirrelJump_1
+      name: squirrelShot_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed323d7ae9ce43440a3373704d102a1f
+      internalID: -1693374548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: squirrelShot_4
       rect:
         serializedVersion: 2
         x: 0
@@ -140,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa1f6b5f2875d20418ba65e4844cac98
-      internalID: -1053576396
+      spriteID: 8953182d316898f4c9e7015b27166065
+      internalID: -1757243419
       vertices: []
       indices: 
       edges: []
@@ -157,8 +232,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      squirrelJump_1: -1053576396
-      squirrelJump_0: -947161901
+      squirrelShot_4: -1757243419
+      squirrelShot_2: -236006292
+      squirrelShot_3: -1693374548
+      squirrelShot_0: -1259807961
+      squirrelShot_1: -783882827
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

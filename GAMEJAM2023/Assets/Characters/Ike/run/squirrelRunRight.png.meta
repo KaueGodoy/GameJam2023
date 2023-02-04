@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a2f35143a8cd4e744b97b54cac15c643
+guid: bcfa6559240f1d24cbaaf7d3615db2e8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -101,74 +101,23 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: squirrelIdle_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea2beb799d952464aa0672f478382fc6
-      internalID: -1199705646
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelIdle_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 013c7ffcb32b2ad46975558fe2935dba
-      internalID: 1711711499
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelIdle_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ec7b6ee16891174688377d4104cf0b1
-      internalID: 2030096192
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelIdle_3
+      name: squirrelRunRight_0
       rect:
         serializedVersion: 2
         x: 0
@@ -182,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 278146c0bf606284d8e22fb260a35f9a
-      internalID: 1401686710
+      spriteID: 25b6f6f2327d5f640b319571621a6657
+      internalID: -1831667417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squirrelIdle_4
+      name: squirrelRunRight_1
       rect:
         serializedVersion: 2
         x: 64
@@ -203,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bccf657e13f65f499774841074a0e96
-      internalID: 744885790
+      spriteID: 7bb5368dde0963e4a8890fd09b649906
+      internalID: -578205267
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squirrelIdle_5
+      name: squirrelRunRight_2
       rect:
         serializedVersion: 2
         x: 128
@@ -224,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c65e9001eb69a843a4615b8e68dc2c5
-      internalID: 1152047701
+      spriteID: 1dbc42c9ea01a324f8e60f7bbd3f2a0c
+      internalID: 1561476323
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squirrelIdle_6
+      name: squirrelRunRight_3
       rect:
         serializedVersion: 2
         x: 0
@@ -245,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60ce2a77ccc09af45912899e5bee749d
-      internalID: 484066550
+      spriteID: 8af4b102c969dd24396981a0b401b5bb
+      internalID: -97526688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squirrelIdle_7
+      name: squirrelRunRight_4
       rect:
         serializedVersion: 2
         x: 64
@@ -266,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b8ebde28880dd641913ce6b96447eaf
-      internalID: -1335979251
+      spriteID: 71ef96f4313ba7b49bac09165e1dc16c
+      internalID: 1095404552
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squirrelIdle_8
+      name: squirrelRunRight_5
       rect:
         serializedVersion: 2
         x: 128
@@ -287,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce43fa4b608f38d4da059da4207fb591
-      internalID: 718008081
+      spriteID: 1e0cbb7aa7b91db488e0a029d22eb071
+      internalID: -1134581270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squirrelIdle_9
+      name: squirrelRunRight_6
       rect:
         serializedVersion: 2
         x: 0
@@ -308,50 +257,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d15184de96ede4c47a05a13b09b9733c
-      internalID: 254322331
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelIdle_10
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 160bb9b7ee7597a4a89a4aa58177fd77
-      internalID: 620867153
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squirrelIdle_11
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f8ec0feeca1beb4cbe22ace5bd6c3af
-      internalID: -2044025293
+      spriteID: 2772c0c21196c7f4a848210c3c2ea58f
+      internalID: 210458450
       vertices: []
       indices: 
       edges: []
@@ -367,18 +274,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      squirrelIdle_0: -1199705646
-      squirrelIdle_8: 718008081
-      squirrelIdle_4: 744885790
-      squirrelIdle_9: 254322331
-      squirrelIdle_6: 484066550
-      squirrelIdle_11: -2044025293
-      squirrelIdle_1: 1711711499
-      squirrelIdle_7: -1335979251
-      squirrelIdle_5: 1152047701
-      squirrelIdle_10: 620867153
-      squirrelIdle_3: 1401686710
-      squirrelIdle_2: 2030096192
+      squirrelRunRight_0: -1831667417
+      squirrelRunRight_6: 210458450
+      squirrelRunRight_5: -1134581270
+      squirrelRunRight_1: -578205267
+      squirrelRunRight_2: 1561476323
+      squirrelRunRight_3: -97526688
+      squirrelRunRight_4: 1095404552
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
