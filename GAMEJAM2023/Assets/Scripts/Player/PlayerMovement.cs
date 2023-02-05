@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Health")]
     public float currentHealth = 0f;
     public float maxHealth = 3f;
+    private bool isAlive;
+    private float deathAnimationTime = 0.8f;
+    public float deathExtraDelay = 0.3f;
 
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -73,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
     const string SHOOT_ANIMATION = "Player_Shoot";
     const string JUMP_ANIMATION = "Player_Jump";
     const string HIT_ANIMATION = "Player_Hit";
+    const string DEATH_ANIMATION = "Player_Death";
+
 
 
     private void Awake()
@@ -92,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         uiInventory.SetInventory(inventory);
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+        isAlive = true;
 
     }
 
@@ -140,20 +146,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isDashing) return;
 
-        ProcessInput();
-
+        if (isAlive)
+        {
+            ProcessInput();
+        }     
 
     }
 
     private void FixedUpdate()
     {
         if (isDashing) return;
+        if (isAlive)
+        {
+            Move();
+            Flip();
+            Jump();
+            DashTrigger();
+            Shoot();
+        }
 
-        Move();
-        Flip();
-        Jump();
-        DashTrigger();
-        Shoot();
         UpdateAnimationState();
 
     }
@@ -214,29 +225,34 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimationState()
     {
-
-        if (IsGrounded() && !shootRequest)
+        if (isAlive)
         {
-            if (moveX > 0 || moveX < 0)
+            if (IsGrounded() && !shootRequest)
             {
-                ChangeAnimationState(RUN_ANIMATION);
+                if (moveX > 0 || moveX < 0)
+                {
+                    ChangeAnimationState(RUN_ANIMATION);
+                }
+                else
+                {
+                    ChangeAnimationState(IDLE_ANIMATION);
+                }
             }
-            else
+
+            if (rb.velocity.y > .1f && !IsGrounded())
             {
-                ChangeAnimationState(IDLE_ANIMATION);
+                ChangeAnimationState(JUMP_ANIMATION);
             }
+
+            /*if(knockbackFromRight || !knockbackFromRight)
+            {
+                ChangeAnimationState(HIT_ANIMATION);
+            }*/
         }
-
-        if (rb.velocity.y > .1f && !IsGrounded())
+        else if (!isAlive)
         {
-            ChangeAnimationState(JUMP_ANIMATION);
+            ChangeAnimationState(DEATH_ANIMATION);
         }
-
-        /*if(knockbackFromRight || !knockbackFromRight)
-        {
-            ChangeAnimationState(HIT_ANIMATION);
-        }*/
-
 
     }
 
@@ -246,13 +262,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+
             Die();
+
+            Invoke("RestartLevel", deathAnimationTime);
+
+
         }
+    }
+
+    void RestartLevel()
+    {
+        isAlive = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Die()
     {
-        SceneManager.LoadScene(1);
+        isAlive = false;
+        rb.bodyType = RigidbodyType2D.Static;
+
     }
 
     void Move()
@@ -310,7 +339,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
 
     void ShootComplete()
     {
