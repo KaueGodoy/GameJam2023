@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Trap
+  - Grounded
+  - Background
+  - HitStomp
+  - Wasp
+  - OneWayPlatform
+  - Enemy
+  - Beetle
   layers:
   - Default
   - TransparentFX

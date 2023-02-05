@@ -16,7 +16,7 @@ public class WaypointFollower : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.flipX = true;
+        spriteRenderer.flipX = false;
     }
 
     private void Update()
@@ -39,11 +39,11 @@ public class WaypointFollower : MonoBehaviour
             if (currentWaypointIndex >= waypoints.Length)
             {
                 currentWaypointIndex = 0;
-                spriteRenderer.flipX = true;
+                spriteRenderer.flipX = false;
             }
             else
             {
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipX = true;
             }
 
         }
