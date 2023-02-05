@@ -51,6 +51,8 @@ public class PlayerLifeSystem : MonoBehaviour
             TakeDamage(1);
             Bounce();
         }
+
+       
     }
 
     private void Bounce()
