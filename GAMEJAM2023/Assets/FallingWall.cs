@@ -18,34 +18,17 @@ public class FallingWall : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Physics2D.queriesStartInColliders = false;
-        if(isFalling == false)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distance);
-
-            Debug.DrawRay(transform.position, Vector2.down * distance, Color.red);
-
-            if(hit.transform != null)
-            {
-                if(hit.transform.tag == "Player")
-                {
-                    rb.gravityScale = 5;
-                    isFalling = true;
-                }
-            }
-        }
+        
     }
 
-    private void OnTriggerEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player")
         {
-            
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = 15;
+            isFalling = true;
         }
-        else
-        {
-            rb.gravityScale = 0;
-            boxCollider2D.enabled = false;
-        }
+        
     }
 }
