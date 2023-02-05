@@ -46,6 +46,14 @@ public class Bullet : MonoBehaviour
             DamagePopup.Create(transform.position, (int)bulletDamage, isCritical);
         }
 
+        EnemyNoAggro enemyNoAggro = collision.GetComponent<EnemyNoAggro>();
+        if(enemyNoAggro != null)
+        {
+            enemyNoAggro.TakeDamage(bulletDamage);
+            DamagePopup.Create(transform.position, (int)bulletDamage, isCritical);
+        }
+
+
         Destroy(gameObject);
     }
 

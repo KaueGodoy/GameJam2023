@@ -14,9 +14,17 @@ public class EnemyAnimationController : MonoBehaviour
     const string WASP_HIT = "Wasp_Hit";
     const string WASP_ATTACK = "Wasp_Attack";
 
+    // beetle
+    const string BEETLE_WALK = "Beetle_Walk";
+    const string BEETLE_WALK_AGGRO = "Beetle_Walk_Aggro";
+    const string BEETLE_HIT = "Beetle_Hit";
+
+
+
     public GameObject player;
     private EnemyShooting enemyShooting;
     private Enemy enemy;
+    private EnemyNoAggro enemyNoAggro;
 
     private void Start()
     {
@@ -26,6 +34,7 @@ public class EnemyAnimationController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         enemyShooting = GetComponent<EnemyShooting>();
         enemy = GetComponent<Enemy>();
+        enemyNoAggro = GetComponent<EnemyNoAggro>();
 
     }
 
@@ -60,7 +69,43 @@ public class EnemyAnimationController : MonoBehaviour
             }
         }
 
-        
+        if (GameObject.FindGameObjectWithTag("Beetle"))
+        {
+            if(enemyNoAggro.animationHit)
+            {
+                ChangeAnimationState(BEETLE_HIT);
+            }
+            else if (!enemyNoAggro.animationHit)
+            {
+                ChangeAnimationState(BEETLE_WALK);
+            }
+
+            /*
+            if (!enemyNoAggro.aggro)
+            {
+                if (enemyNoAggro.animationHit)
+                {
+                    ChangeAnimationState(BEETLE_HIT);
+                }
+                else 
+                {
+                    ChangeAnimationState(BEETLE_WALK);
+                }
+            }
+            else if (enemyNoAggro.aggro)
+            {
+                if (enemyNoAggro.animationHit)
+                {
+                    ChangeAnimationState(BEETLE_HIT);
+                }
+                else
+                {
+                    ChangeAnimationState(BEETLE_WALK_AGGRO);
+                }
+            }*/
+           
+
+        }
 
     }
 
