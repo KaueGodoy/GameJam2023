@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,13 +11,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] public float maxHealth = 3f;
 
     [Header("Damage")]
-    [SerializeField] public float damageAmount = 2f;
+    [SerializeField] public float damageAmount = 1f;
 
     public PlayerMovement player;
+
+    public bool animationHit;
 
     void Start()
     {
         currentHealth = maxHealth;
+        animationHit = false;
     }
 
 
@@ -57,17 +61,25 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        animationHit = true;
         currentHealth -= damage;
 
+        Invoke("HitComplete", 0.3f);
+        
         if (currentHealth <= 0)
         {
             Die();
         }
     }
 
+    public void HitComplete()
+    {
+        animationHit = false;
+    }
+
     void Die()
     {
-        GetComponent<LootBag>().InstantiateLoot(transform.position);
+        //GetComponent<LootBag>().InstantiateLoot(transform.position);
         Destroy(gameObject);
     }
 

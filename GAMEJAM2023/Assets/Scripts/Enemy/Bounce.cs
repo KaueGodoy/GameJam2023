@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bounce : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] public Rigidbody2D rb;
     [SerializeField] private float bounce = 2f;
 
     private void OnTriggerEnter2D(Collider2D collision)

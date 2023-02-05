@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7441157849239360449}
   - component: {fileID: 7441157849239360455}
   - component: {fileID: 7441157849239360448}
+  - component: {fileID: 7267439572578730174}
   - component: {fileID: 5989668104701309348}
   m_Layer: 0
   m_Name: WaspBullet
@@ -107,6 +108,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!61 &7267439572578730174
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441157849239360450}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.015476227, y: 0.007503271}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.25, y: 0.3125}
+    newSize: {x: 0.8, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.15526962, y: 0.24121809}
+  m_EdgeRadius: 0
 --- !u!114 &5989668104701309348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,3 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletForce: 2
+  bulletTimer: 0
+  bulletMaxTimer: 5
+  bulletDamage: 1
