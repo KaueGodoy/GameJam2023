@@ -3224,7 +3224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 6
+  maxHealth: 1
+  deathExtraDelay: 0.3
   moveSpeed: 5
   jumpForce: 6.05
   dashSpeed: 20
