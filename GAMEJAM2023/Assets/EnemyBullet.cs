@@ -54,7 +54,7 @@ public class EnemyBullet : MonoBehaviour
             }
 
             // UI update
-            var heartComponent = collision.GetComponent<HeartSystem>();
+            var heartComponent = collision.GetComponent<PlayerLifeSystem>();
             if (heartComponent != null)
             {
                 heartComponent.curLife -= Mathf.FloorToInt(bulletDamage);

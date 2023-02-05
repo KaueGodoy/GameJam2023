@@ -3,22 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Background
-  - Grounded
-  - Enemy
-  - HitStomp
-  - OneWayPlatform
-<<<<<<< HEAD
-  - Wasp
-=======
-  - Trap
->>>>>>> b796bed48ca61e4795a76e106bcabd7ec3c18dfe
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - jumpableGround
+  - 
   - Water
   - UI
   - 
@@ -50,7 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Top
-    uniqueID: 3706523637
     locked: 0
