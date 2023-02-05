@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     [Header("Damage")]
     public float bulletDamage = 5f;
     public float critRate = 30f;
-    public float critDamage = 20f;
+    public float critDamage = 2f;
 
     [Header("Distance")]
     public float timeToDestroy = 3f;

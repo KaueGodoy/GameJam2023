@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.35026363, b: 0, a: 1}
+  m_Sprite: {fileID: 351034279, guid: a4c3df6f0f33ba8428ee1660a1094320, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -121,18 +121,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.15200153, y: 0}
+  m_Offset: {x: 0.00013935566, y: -0.011586517}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.7333333, y: 0.7}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.69599694, y: 1}
+  m_Size: {x: 0.7144052, y: 0.5442483}
   m_EdgeRadius: 0
 --- !u!114 &-2770964910270716748
 MonoBehaviour:
@@ -149,4 +149,7 @@ MonoBehaviour:
   rb: {fileID: 750246761180805312}
   bulletSpeed: 10
   bulletDamage: 1
+  critRate: 30
+  critDamage: 2
   timeToDestroy: 1.5
+  isCritical: 0
