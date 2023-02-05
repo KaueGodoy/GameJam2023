@@ -44,7 +44,8 @@ GameObject:
   - component: {fileID: 1716501945837618138}
   - component: {fileID: 1716501945837618139}
   - component: {fileID: 1716501945837618136}
-  - component: {fileID: 1716501945837620262}
+  - component: {fileID: 4709449539725170185}
+  - component: {fileID: 819246084155935391}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Wasp
@@ -109,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1569146145, guid: 53f1d289b2a2fef4d999dcdd578320e9, type: 3}
+  m_Sprite: {fileID: 490867845, guid: b52d927259e763241bf752d837f85aca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,10 +131,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07236433, y: -0.1202575}
+  m_Offset: {x: -0.1129837, y: -0.15732718}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -144,7 +145,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.8712645, y: 5.534706}
+  m_Size: {x: 4.2419605, y: 5.6088457}
   m_EdgeRadius: 0
 --- !u!114 &1716501945837618139
 MonoBehaviour:
@@ -158,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1793c82fbbf5ef64c9b545a3ed493038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfBullet: {fileID: 7441157849239360450, guid: a904ea0c7d7ec5443a00c679ca93f033, type: 3}
+  pfBullet: {fileID: 4810298460210352766, guid: 32f8cb56f3e22a443913c4decf5921af, type: 3}
   bulletPos: {fileID: 1716501945085738640}
   shootTimer: 0
   shootCooldown: 2
@@ -178,9 +179,11 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 3
   damageAmount: 1
+  rangeDistance: 0
   player: {fileID: 0}
   animationHit: 0
---- !u!114 &1716501945837620262
+  isAlive: 0
+--- !u!114 &4709449539725170185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +192,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1716501945837618141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ecf7bcdb62f810458fbf52acddff73d, type: 3}
+  m_Script: {fileID: 11500000, guid: a159fcd53aec66647ac51fc85cbf4983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!95 &819246084155935391
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716501945837618141}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 325b09d3da50bec46a8bc15d78a89b02, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
