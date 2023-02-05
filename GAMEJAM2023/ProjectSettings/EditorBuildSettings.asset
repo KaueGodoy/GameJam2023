@@ -9,11 +9,23 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 63899878af8c96b45a3529ead04e7c3e
   - enabled: 1
-    path: Assets/Scenes/Area de Som.unity
+    path: Assets/Scenes/Area de Teste.unity
     guid: 0136a91d4f4e91e4cbc6d1cc33774e47
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 5de9aa33f94790c479df242cddd6595f
+  - enabled: 1
+    path: Assets/Scenes/Fase 1.unity
+    guid: f2cf70a393b8b2949816b9efe93a6ea4
+  - enabled: 1
+    path: Assets/Scenes/Fase 2.unity
+    guid: 283576c19af279f4c964298a7d7f67be
+  - enabled: 1
+    path: Assets/Scenes/Fase 3.unity
+    guid: 96a86992277059c4698b53e00c21263e
+  - enabled: 1
+    path: Assets/Scenes/Fase Boss 1.unity
+    guid: b6f72ca6585edeb4283b9478bea60b96
   - enabled: 1
     path: Assets/Scenes/Base.unity
     guid: 2cda990e2423bbf4892e6590ba056729
