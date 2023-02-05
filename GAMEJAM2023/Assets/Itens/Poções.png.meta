@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d3f7a15851da5484b901dd7892c904fb
+guid: c35d980a465a1a64a81d0e94491b06bf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: A.Azul_0
+      name: "Po\xE7\xF5es_Vida"
       rect:
         serializedVersion: 2
         x: 0
@@ -113,20 +113,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c622ec7d481bb0d4b8c677cafc7d9cb0
-      internalID: -570507592
+      spriteID: 13f88c21938fc8b44adedb60de70e1db
+      internalID: -1394426883
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: A.Azul_1
+      name: "Po\xE7\xF5es_Velocidade"
       rect:
         serializedVersion: 2
         x: 32
@@ -134,20 +134,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e74adf77229b4f47a3dc4e803d184a5
-      internalID: 1317758618
+      spriteID: cbe79558247a61f4b97ed7aef41adc06
+      internalID: 1378719942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: A.Azul_2
+      name: "Po\xE7\xF5es_Dano"
       rect:
         serializedVersion: 2
         x: 64
@@ -155,20 +155,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b545b45f907f4f43bb48f0780a4140c
-      internalID: -974226941
+      spriteID: 961a09d5d5c051342bd2750cd477711e
+      internalID: 1861581023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: A.Azul_3
+      name: "Po\xE7\xF5es_"
       rect:
         serializedVersion: 2
         x: 96
@@ -176,14 +176,14 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 092cba825993e2748a7ac4299b0944cc
-      internalID: -358626004
+      spriteID: 3b57a42a45d44184cba6ffd57c539244
+      internalID: -1329968296
       vertices: []
       indices: 
       edges: []
@@ -199,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      A.Azul_3: -358626004
-      A.Azul_0: -570507592
-      A.Azul_1: 1317758618
-      A.Azul_2: -974226941
+      "Po\xE7\xF5es_Velocidade": 1378719942
+      "Po\xE7\xF5es_Vida": -1394426883
+      "Po\xE7\xF5es_Dano": 1861581023
+      "Po\xE7\xF5es_": -1329968296
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
