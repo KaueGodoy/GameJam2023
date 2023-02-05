@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f4d1836c88bd71c469d0f81e81b3b57b
+guid: 31b7c3cf0b5e9994182e9630c7df69ce
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -101,58 +101,28 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: basilikAtk_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 158
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 884de48e9b300384dbfb9eb05d43a5d6
-      internalID: 1726552693
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basilikAtk_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 192
-        width: 158
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc7dfa6c90c16ae499986369344bf453
-      internalID: -160074904
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: basilikAtk_2
+      name: basiliskWalk_0
       rect:
         serializedVersion: 2
         x: 0
         y: 128
-        width: 158
+        width: 128
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -161,19 +131,40 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22bc2b681e28e08419dfaf984dbb3b53
-      internalID: 211430626
+      spriteID: 6a53c3e3ecf663b40a9a34e03d2f027c
+      internalID: 2087554131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: basilikAtk_3
+      name: basiliskWalk_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b35ccf9661adfa1469bc0e534fb159e2
+      internalID: -1643643629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basiliskWalk_2
       rect:
         serializedVersion: 2
         x: 0
         y: 64
-        width: 158
+        width: 128
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -182,19 +173,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0ac83e4b070437438aba967630458dc
-      internalID: -148363960
+      spriteID: ae1570adeb69e5f48bef6dd7b76c80ca
+      internalID: -1488521601
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: basilikAtk_4
+      name: basiliskWalk_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 158
+        x: 128
+        y: 64
+        width: 128
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -203,8 +194,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5938b45dfde4bbb4c9e80ca9a5ab7fc1
-      internalID: -182673992
+      spriteID: ee610638561adfd4f9073ebe6c3465ff
+      internalID: 99749358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basiliskWalk_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f203d59eb611cb4d9475c6ae316e14e
+      internalID: 593823761
       vertices: []
       indices: 
       edges: []
@@ -220,11 +232,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      basilikAtk_2: 211430626
-      basilikAtk_4: -182673992
-      basilikAtk_3: -148363960
-      basilikAtk_0: 1726552693
-      basilikAtk_1: -160074904
+      basiliskWalk_0: 2087554131
+      basiliskWalk_4: 593823761
+      basiliskWalk_3: 99749358
+      basiliskWalk_1: -1643643629
+      basiliskWalk_2: -1488521601
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

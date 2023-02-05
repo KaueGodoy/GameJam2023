@@ -11,7 +11,10 @@ public class EnemyNoAggro : MonoBehaviour
     [SerializeField] public float maxHealth = 3f;
 
     [Header("Damage")]
-    [SerializeField] public float damageAmount = 1f;
+    [SerializeField] public float damageAmount = 0f;
+
+    [Header("Range")]
+    public float rangeDistance = 5f;
 
     public PlayerMovement player;
 
@@ -26,31 +29,6 @@ public class EnemyNoAggro : MonoBehaviour
         aggro = false;
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            // HP update
-            var healthComponent = collision.GetComponent<PlayerMovement>();
-            if (healthComponent != null)
-            {
-                healthComponent.PlayerTakeDamage(damageAmount);
-            }
-
-            // UI update
-            var heartComponent = collision.GetComponent<HeartSystem>();
-            if (heartComponent != null)
-            {
-                heartComponent.curLife -= Mathf.FloorToInt(damageAmount);
-
-                
-            }
-            
-           
-
-        }
-    }
 
     public void TakeDamage(float damage)
     {

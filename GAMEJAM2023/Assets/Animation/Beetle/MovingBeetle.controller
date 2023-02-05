@@ -32,7 +32,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MovingEnemy
+  m_Name: MovingBeetle
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -59,13 +59,13 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -7865134502970903837}
-    m_Position: {x: 200, y: 0, z: 0}
+    m_Position: {x: 320, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7539093225106079497}
-    m_Position: {x: 235, y: 65, z: 0}
+    m_Position: {x: 320, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5898690570632339516}
-    m_Position: {x: 270, y: 130, z: 0}
+    m_Position: {x: 320, y: 110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

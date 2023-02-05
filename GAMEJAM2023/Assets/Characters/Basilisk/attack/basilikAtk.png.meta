@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 06101ba07d0ddc647beaa664b8389260
+guid: f4d1836c88bd71c469d0f81e81b3b57b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -101,17 +101,113 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BossAtk_0
+      name: basilikAtk_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 158
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 884de48e9b300384dbfb9eb05d43a5d6
+      internalID: 1726552693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basilikAtk_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 158
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc7dfa6c90c16ae499986369344bf453
+      internalID: -160074904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basilikAtk_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 158
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22bc2b681e28e08419dfaf984dbb3b53
+      internalID: 211430626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basilikAtk_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 158
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0ac83e4b070437438aba967630458dc
+      internalID: -148363960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: basilikAtk_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 200
-        height: 200
+        width: 158
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,92 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c51d029ade95a943b11c5b7a149041c
-      internalID: -448701637
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossAtk_1
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 0
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e4e610394792c44c8d95fd5696e7ff8
-      internalID: -817781224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossAtk_2
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 0
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7c844fab7c64033408e0911b58e88ce3
-      internalID: -306948935
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossAtk_3
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 0
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 47b11cb2cbe2cbb489d0550cb41d407c
-      internalID: 1049817387
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossAtk_4
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 0
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 92ec9c8d649e98a43b787a4b56d8cfa4
-      internalID: -884261423
+      spriteID: 5938b45dfde4bbb4c9e80ca9a5ab7fc1
+      internalID: -182673992
       vertices: []
       indices: 
       edges: []
@@ -220,11 +232,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BossAtk_3: 1049817387
-      BossAtk_0: -448701637
-      BossAtk_1: -817781224
-      BossAtk_4: -884261423
-      BossAtk_2: -306948935
+      basilikAtk_2: 211430626
+      basilikAtk_4: -182673992
+      basilikAtk_3: -148363960
+      basilikAtk_0: 1726552693
+      basilikAtk_1: -160074904
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

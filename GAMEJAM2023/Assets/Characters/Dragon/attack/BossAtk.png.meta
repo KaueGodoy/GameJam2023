@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1987b643df798764e8702485076de50b
+guid: 06101ba07d0ddc647beaa664b8389260
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -101,17 +101,29 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: basiliskHit_0
+      name: BossAtk_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 64
+        width: 200
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1b1f6f9526ba224abaa4f38d54eeadc
-      internalID: 510605507
+      spriteID: 4c51d029ade95a943b11c5b7a149041c
+      internalID: -448701637
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: basiliskHit_1
+      name: BossAtk_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 200
         y: 0
-        width: 128
-        height: 64
+        width: 200
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +152,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a624123ca2720e148ae89fbcaf185b4a
-      internalID: 1932964858
+      spriteID: 7e4e610394792c44c8d95fd5696e7ff8
+      internalID: -817781224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossAtk_2
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c844fab7c64033408e0911b58e88ce3
+      internalID: -306948935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossAtk_3
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47b11cb2cbe2cbb489d0550cb41d407c
+      internalID: 1049817387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossAtk_4
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92ec9c8d649e98a43b787a4b56d8cfa4
+      internalID: -884261423
       vertices: []
       indices: 
       edges: []
@@ -157,8 +232,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      basiliskHit_0: 510605507
-      basiliskHit_1: 1932964858
+      BossAtk_3: 1049817387
+      BossAtk_0: -448701637
+      BossAtk_1: -817781224
+      BossAtk_4: -884261423
+      BossAtk_2: -306948935
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

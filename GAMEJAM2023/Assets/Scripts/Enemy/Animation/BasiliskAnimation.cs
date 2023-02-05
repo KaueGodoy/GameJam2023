@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnimationController : MonoBehaviour
+public class BasiliskAnimation : MonoBehaviour
 {
     Rigidbody2D rb;
 
@@ -10,9 +10,11 @@ public class EnemyAnimationController : MonoBehaviour
     private Animator animator;
     private string currentAnimation;
 
-    const string WASP_IDLE = "Wasp_Idle";
-    const string WASP_HIT = "Wasp_Hit";
-    const string WASP_ATTACK = "Wasp_Attack";
+    const string BASILISK_WALK = "Basilisk_Walk";
+    const string BASILISK_ATTACK = "Basilisk_Attack";
+    const string BASILISK_HIT = "Basilisk_Hit";
+
+
 
     public GameObject player;
     private EnemyShooting enemyShooting;
@@ -27,6 +29,7 @@ public class EnemyAnimationController : MonoBehaviour
         enemyShooting = GetComponent<EnemyShooting>();
         enemy = GetComponent<Enemy>();
 
+
     }
 
 
@@ -38,30 +41,27 @@ public class EnemyAnimationController : MonoBehaviour
     public void UpdateAnimationState()
     {
 
-        if (enemy.isAlive)
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+
+        if (enemy.animationHit)
         {
-            float distance = Vector2.Distance(transform.position, player.transform.position);
+            ChangeAnimationState(BASILISK_HIT);
 
-            if (enemy.animationHit)
+        }
+        else if (!enemy.animationHit)
+        {
+            if (distance < enemy.rangeDistance)
             {
-                ChangeAnimationState(WASP_HIT);
-
+                ChangeAnimationState(BASILISK_ATTACK);
             }
-            else if (!enemy.animationHit)
+            else
             {
-                if (distance < enemyShooting.rangeDistance)
-                {
-                    ChangeAnimationState(WASP_ATTACK);
-                }
-                else
-                {
-                    ChangeAnimationState(WASP_IDLE);
-                }
-
+                ChangeAnimationState(BASILISK_WALK);
             }
 
         }
     }
+
 
     public void ChangeAnimationState(string newAnimation)
     {

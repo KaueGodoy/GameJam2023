@@ -13,14 +13,19 @@ public class Enemy : MonoBehaviour
     [Header("Damage")]
     [SerializeField] public float damageAmount = 1f;
 
+    [Header("Range")]
+    public float rangeDistance = 5f;
+
     public PlayerMovement player;
 
     public bool animationHit;
+    public bool isAlive;
 
     void Start()
     {
         currentHealth = maxHealth;
         animationHit = false;
+        isAlive = true;
     }
 
 
@@ -68,6 +73,7 @@ public class Enemy : MonoBehaviour
         
         if (currentHealth <= 0)
         {
+            isAlive = false;
             Die();
         }
     }
