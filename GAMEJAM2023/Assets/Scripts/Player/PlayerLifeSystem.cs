@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class HeartSystem : MonoBehaviour
+public class PlayerLifeSystem : MonoBehaviour
 {
 
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float bounce = 5f;
     public Image[] hearts;
     public Sprite lifeFruit;
     public int curLife;
@@ -40,6 +42,22 @@ public class HeartSystem : MonoBehaviour
             Debug.Log("Morto");
             SceneManager.LoadScene(1);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Trap")
+        {
+            TakeDamage(1);
+            Bounce();
+        }
+
+       
+    }
+
+    private void Bounce()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, bounce);
     }
 
     public void TakeDamage(int d)

@@ -9,7 +9,11 @@ TagManager:
   - Enemy
   - HitStomp
   - OneWayPlatform
+<<<<<<< HEAD
   - Wasp
+=======
+  - Trap
+>>>>>>> b796bed48ca61e4795a76e106bcabd7ec3c18dfe
   layers:
   - Default
   - TransparentFX
