@@ -5,11 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class PlayerLifeSystem : MonoBehaviour
+public class HeartSystem : MonoBehaviour
 {
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float bounce = 5f;
     public Image[] hearts;
     public Sprite lifeFruit;
     public int curLife;
@@ -21,15 +19,15 @@ public class PlayerLifeSystem : MonoBehaviour
     {
         curLife = hearts.Length;
     }
-   
+
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < hearts.Length; i++)
+        for (int i = 0; i < hearts.Length; i++)
         {
-            if(i >= curLife)
+            if (i >= curLife)
             {
-                hearts[i].enabled = false;    
+                hearts[i].enabled = false;
             }
             else
             {
@@ -37,41 +35,25 @@ public class PlayerLifeSystem : MonoBehaviour
             }
         }
 
-        if(isDead)
+        if (isDead)
         {
             Debug.Log("Morto");
             SceneManager.LoadScene(1);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Trap")
-        {
-            TakeDamage(1);
-            Bounce();
-        }
-
-       
-    }
-
-    private void Bounce()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, bounce);
-    }
-
     public void TakeDamage(int d)
     {
-        if(d > curLife)
+        if (d > curLife)
         {
             d = curLife;
         }
 
-        if(curLife >= 1)
+        if (curLife >= 1)
         {
             curLife -= d;
 
-            if(curLife < 1)
+            if (curLife < 1)
             {
                 isDead = true;
             }
@@ -80,14 +62,14 @@ public class PlayerLifeSystem : MonoBehaviour
 
     public void Heal(int h)
     {
-        if(h > maxLife - curLife)
+        if (h > maxLife - curLife)
         {
             h = maxLife - curLife;
         }
 
-        if(curLife < maxLife)
+        if (curLife < maxLife)
         {
-           curLife += h; 
+            curLife += h;
         }
     }
 }

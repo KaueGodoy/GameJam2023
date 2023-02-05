@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
             }
 
             // UI update
-            var heartComponent = collision.GetComponent<PlayerLifeSystem>();
+            var heartComponent = collision.GetComponent<HeartSystem>();
             if (heartComponent != null)
             {
                 heartComponent.curLife -= Mathf.FloorToInt(damageAmount);
