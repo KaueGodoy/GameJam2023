@@ -149,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
         if (isAlive)
         {
             ProcessInput();
+            Shoot();
         }     
 
     }
@@ -162,7 +163,6 @@ public class PlayerMovement : MonoBehaviour
             Flip();
             Jump();
             DashTrigger();
-            Shoot();
         }
 
         UpdateAnimationState();

@@ -9,16 +9,27 @@ public class GameHandler : MonoBehaviour
     public Transform playerTransform;
     public Transform enemyTransform;
     public Transform randomObj;
+    public bool bossRange = false;
 
     private void Start()
     {
-        // follow player
-        cameraFollow.Setup(()=> playerTransform.position);
 
         /*
-        // manual change
-        cameraFollow.SetGetCameraFollowPositionFunc(() => enemyTransform.position);
+        if (bossRange)
+        {
+            // manual change
+            cameraFollow.SetGetCameraFollowPositionFunc(() => randomObj.position);
+        }
+        else
+        {
+            // follow player
+            cameraFollow.Setup(() => playerTransform.position);
 
+        }
+
+        */
+
+        /*
         // UI Button
         CMDebug.ButtonUI(new Vector2(20, 20), "Enemy", () =>
         {
@@ -26,6 +37,22 @@ public class GameHandler : MonoBehaviour
 
         });
         */
+    }
+
+    private void Update()
+    {
+
+        if (bossRange)
+        {
+            // manual change
+            cameraFollow.SetGetCameraFollowPositionFunc(() => randomObj.position);
+        }
+        else
+        {
+            // follow player
+            cameraFollow.Setup(() => playerTransform.position);
+
+        }
     }
 
 }
