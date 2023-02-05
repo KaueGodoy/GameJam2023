@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - HitStomp
   - OneWayPlatform
+  - Trap
   layers:
   - Default
   - TransparentFX
