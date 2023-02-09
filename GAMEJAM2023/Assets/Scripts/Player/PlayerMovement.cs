@@ -232,6 +232,8 @@ public class PlayerMovement : MonoBehaviour
                 if (moveX > 0 || moveX < 0)
                 {
                     ChangeAnimationState(RUN_ANIMATION);
+                    //FindObjectOfType<AudioManager>().PlayOneShot("Walk");
+
                 }
                 else
                 {
@@ -258,6 +260,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerTakeDamage(float damageAmount)
     {
+        FindObjectOfType<AudioManager>().PlayOneShot("Hit");
         currentHealth -= Mathf.FloorToInt(damageAmount);
 
         if (currentHealth <= 0)
@@ -279,6 +282,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        FindObjectOfType<AudioManager>().Play("Hit");
         isAlive = false;
         rb.bodyType = RigidbodyType2D.Static;
 
