@@ -52,6 +52,8 @@ public class AudioManager : MonoBehaviour
 
         }
         s.source.Play();
+
+    
     }
 
     public void PlayOneShot(string name)
@@ -64,5 +66,18 @@ public class AudioManager : MonoBehaviour
 
         }
         s.source.PlayOneShot(s.clip);
+        
+    }
+
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound " + name + " not found!");
+            return;
+
+        }
+        s.source.Stop();
     }
 }

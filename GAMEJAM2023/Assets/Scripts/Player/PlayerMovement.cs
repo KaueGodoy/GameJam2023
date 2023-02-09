@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     const string HIT_ANIMATION = "Player_Hit";
     const string DEATH_ANIMATION = "Player_Death";
 
-
+ 
 
     private void Awake()
     {
@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        
 
     }
 
@@ -150,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         {
             ProcessInput();
             Shoot();
-        }     
+        }
 
     }
 
@@ -232,12 +233,16 @@ public class PlayerMovement : MonoBehaviour
                 if (moveX > 0 || moveX < 0)
                 {
                     ChangeAnimationState(RUN_ANIMATION);
-                    //FindObjectOfType<AudioManager>().PlayOneShot("Walk");
+                    //audioManager.Play("Walk");
+                    FindObjectOfType<AudioManager>().PlayOneShot("Walk");
+
 
                 }
                 else
                 {
                     ChangeAnimationState(IDLE_ANIMATION);
+
+
                 }
             }
 
@@ -293,6 +298,7 @@ public class PlayerMovement : MonoBehaviour
         if (knockbackCounter <= 0)
         {
             rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
+
         }
         else
         {
