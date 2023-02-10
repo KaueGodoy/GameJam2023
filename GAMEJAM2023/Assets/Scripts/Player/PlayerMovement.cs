@@ -234,7 +234,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     ChangeAnimationState(RUN_ANIMATION);
                     //audioManager.Play("Walk");
-                    FindObjectOfType<AudioManager>().PlayOneShot("Walk");
+                    //FindObjectOfType<AudioManager>().PlayOneShot("Walk");
 
 
                 }
