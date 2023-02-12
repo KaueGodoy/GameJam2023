@@ -19,6 +19,10 @@ public class Bullet : MonoBehaviour
 
     public bool isCritical;
 
+    // animation
+    PlayerMovement player;
+    private const string SHOT_ANIMATION = "Player_Shot";
+
     void Start()
     {
         rb.velocity = transform.right * bulletSpeed;
@@ -27,6 +31,7 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         Destroy(this.gameObject, timeToDestroy);
+        player.ChangeAnimationState(SHOT_ANIMATION);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

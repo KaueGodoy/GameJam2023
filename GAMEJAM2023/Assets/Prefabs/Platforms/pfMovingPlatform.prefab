@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 1128778429976169427}
   - component: {fileID: 1128778429976169424}
   - component: {fileID: 1128778429976169426}
+  - component: {fileID: 8340690896498860231}
   m_Layer: 3
   m_Name: MovingPlatform
   m_TagString: Untagged
@@ -237,3 +238,30 @@ MonoBehaviour:
   - {fileID: 1128778428656769855}
   - {fileID: 1128778428328084657}
   moveSpeed: 2
+--- !u!114 &8340690896498860231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128778429976169418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.48660278, y: 0.072666585, z: 0}
+  - {x: -0.48392868, y: 0.16518122, z: 0}
+  - {x: 0.48125458, y: 0.15446782, z: 0}
+  - {x: 0.47856903, y: 0.072666585, z: 0}
+  m_ShapePathHash: -430392603
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 53126
