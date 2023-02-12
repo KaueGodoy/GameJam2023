@@ -1,4 +1,4 @@
-# Ike and The Sanctuary of Life
+# Ike and the Sanctuary of Life
 
 A 2D, platformer-shooter, sidescroller where you control Ike, a squirrel, in his mission of saving the tree from corruption. 
 
