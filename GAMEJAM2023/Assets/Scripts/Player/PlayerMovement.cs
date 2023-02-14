@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed = 5f;
+    public float maxSpeed = 15f;
+    public float speedPotion = 0.4f;
     private float moveX = 0f;
 
     [Header("Jump")]
@@ -81,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     const string HIT_ANIMATION = "Player_Hit";
     const string DEATH_ANIMATION = "Player_Death";
 
- 
+
 
     private void Awake()
     {
@@ -89,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
-        
+
 
     }
 
@@ -128,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case Item.ItemType.SpeedPotion:
                 // speed boost
-                moveSpeed *= 2;
+                SpeedBoost(speedPotion);
                 Debug.Log("Speed boost");
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.SpeedPotion, amount = 1 });
                 break;
@@ -208,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !gameIsPaused)
         {
             shootRequest = true;
-            
+
         }
 
         // pause
@@ -228,10 +230,10 @@ public class PlayerMovement : MonoBehaviour
         currentAnimation = newAnimation;
 
     }
-    
+
     private void UpdateAnimationState()
     {
-   
+
         if (isAlive)
         {
             if (IsGrounded() && !shootRequest)
@@ -243,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
                     //FindObjectOfType<AudioManager>().PlayOneShot("Walk");
 
                 }
-                else 
+                else
                     ChangeAnimationState(IDLE_ANIMATION);
 
             }
@@ -262,7 +264,7 @@ public class PlayerMovement : MonoBehaviour
         {
             ChangeAnimationState(DEATH_ANIMATION);
         }
-        
+
 
     }
 
@@ -291,6 +293,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void SpeedBoost(float speedAmount)
+    {
+        if (moveSpeed < maxSpeed)
+        {
+            moveSpeed += speedAmount;
+        }
+    }
     void RestartLevel()
     {
         isAlive = true;
