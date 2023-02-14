@@ -16,9 +16,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Health")]
     public float currentHealth = 0f;
     public float maxHealth = 3f;
-    private bool isAlive;
-    private float deathAnimationTime = 0.8f;
     public float deathExtraDelay = 0.3f;
+
+    private float deathAnimationTime = 0.8f;
+    private bool isAlive;
+    private int hpPotion = 1;
+    private HeartSystem heartSystem;
 
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -97,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         uiInventory.SetPlayer(this);
         uiInventory.SetInventory(inventory);
         animator = GetComponent<Animator>();
+        heartSystem = GetComponent<HeartSystem>();
         currentHealth = maxHealth;
         isAlive = true;
 
@@ -118,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         {
             case Item.ItemType.HealthPotion:
                 //heal hp
+                HealPlayer(hpPotion);
                 Debug.Log("Healed");
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
                 break;
@@ -203,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !gameIsPaused)
         {
             shootRequest = true;
-
+            
         }
 
         // pause
@@ -223,9 +228,10 @@ public class PlayerMovement : MonoBehaviour
         currentAnimation = newAnimation;
 
     }
-
+    
     private void UpdateAnimationState()
     {
+   
         if (isAlive)
         {
             if (IsGrounded() && !shootRequest)
@@ -236,22 +242,18 @@ public class PlayerMovement : MonoBehaviour
                     //audioManager.Play("Walk");
                     //FindObjectOfType<AudioManager>().PlayOneShot("Walk");
 
-
                 }
-                else
-                {
+                else 
                     ChangeAnimationState(IDLE_ANIMATION);
 
-
-                }
             }
 
             if (rb.velocity.y > .1f && !IsGrounded())
             {
                 ChangeAnimationState(JUMP_ANIMATION);
             }
-
-            /*if(knockbackFromRight || !knockbackFromRight)
+            /*
+            if(knockbackFromRight || !knockbackFromRight)
             {
                 ChangeAnimationState(HIT_ANIMATION);
             }*/
@@ -260,6 +262,7 @@ public class PlayerMovement : MonoBehaviour
         {
             ChangeAnimationState(DEATH_ANIMATION);
         }
+        
 
     }
 
@@ -276,6 +279,15 @@ public class PlayerMovement : MonoBehaviour
             Invoke("RestartLevel", deathAnimationTime);
 
 
+        }
+    }
+
+    public void HealPlayer(int healAmount)
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += healAmount;
+            heartSystem.curLife += healAmount;
         }
     }
 
@@ -342,7 +354,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 isShooting = true;
 
-                ChangeAnimationState(SHOOT_ANIMATION);
+                //ChangeAnimationState(SHOOT_ANIMATION);
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
                 Invoke("ShootComplete", shootDelay);
