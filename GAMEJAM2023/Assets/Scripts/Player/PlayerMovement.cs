@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     private int hpPotion = 1;
     private HeartSystem heartSystem;
 
+    private float hitTimer = 0.0f;
+    private float hitCooldown = 0.5f;
+    private bool isHit = false;
+
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float maxSpeed = 15f;
@@ -49,7 +53,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Shooting")]
     public Transform firePoint;
     public GameObject bulletPrefab;
-    public float shootDelay = 0.3f;
+
+    private float shootTimer = 0.0f;
+    public float shootDelay = 0.5f;
+
+    private bool shootAnimation = false;
     private bool shootRequest = false;
     private bool isShooting = false;
 
@@ -173,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
             DashTrigger();
         }
 
+        UpdateTimers();
         UpdateAnimationState();
 
     }
@@ -231,9 +240,71 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void UpdateTimers()
+    {
+        // hit
+        if (isHit)
+        {
+            hitTimer += Time.deltaTime;
+        }
+
+        if (hitTimer > hitCooldown)
+        {
+            isHit = false;
+            hitTimer = 0f;
+        }
+
+        // shooting
+        if (shootAnimation)
+        {
+            shootTimer += Time.deltaTime;
+
+        }
+        if (shootTimer > shootDelay)
+        {
+            shootAnimation = false;
+            shootTimer = 0f;
+        }
+    }
     private void UpdateAnimationState()
     {
+        // dead
+        if (!isAlive)
+        {
+            ChangeAnimationState(DEATH_ANIMATION);
+        }
+        // hit
+        else if (isHit)
+        {
+            ChangeAnimationState(HIT_ANIMATION);
+        }
+        // shooting
+        else if (shootAnimation)
+        {
+            ChangeAnimationState(SHOOT_ANIMATION);
+        }
+        // jump
+        else if (rb.velocity.y > .1f && !IsGrounded())
+        {
+            ChangeAnimationState(JUMP_ANIMATION);
+        }
+        // falling
+        else if (rb.velocity.y < .1f && !IsGrounded())
+        {
+            ChangeAnimationState(JUMP_ANIMATION);
+        }
+        // move
+        else if(moveX > 0 || moveX < 0)
+        {
+            ChangeAnimationState(RUN_ANIMATION);
+        }
+        // idle
+        else
+        {
+            ChangeAnimationState(IDLE_ANIMATION);
+        }
 
+        /*
         if (isAlive)
         {
             if (IsGrounded() && !shootRequest)
@@ -258,12 +329,13 @@ public class PlayerMovement : MonoBehaviour
             if(knockbackFromRight || !knockbackFromRight)
             {
                 ChangeAnimationState(HIT_ANIMATION);
-            }*/
+            }
         }
         else if (!isAlive)
         {
             ChangeAnimationState(DEATH_ANIMATION);
         }
+        */
 
 
     }
@@ -272,6 +344,7 @@ public class PlayerMovement : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().PlayOneShot("Hit");
         currentHealth -= Mathf.FloorToInt(damageAmount);
+        isHit = true;
 
         if (currentHealth <= 0)
         {
@@ -280,7 +353,7 @@ public class PlayerMovement : MonoBehaviour
 
             Invoke("RestartLevel", deathAnimationTime);
 
-
+            
         }
     }
 
@@ -351,24 +424,29 @@ public class PlayerMovement : MonoBehaviour
         /*if (shootRequest)
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            shootAnimation = true;
             shootRequest = false;
         }*/
 
-
+    
         if (shootRequest)
         {
             shootRequest = false;
+            shootAnimation = true;
 
             if (!isShooting)
             {
                 isShooting = true;
 
                 //ChangeAnimationState(SHOOT_ANIMATION);
+                
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
                 Invoke("ShootComplete", shootDelay);
             }
         }
+
+        
     }
 
     void ShootComplete()
