@@ -50,6 +50,7 @@ public class Bullet : MonoBehaviour
             }
 
             enemy.TakeDamage(bulletDamage);
+            FindObjectOfType<AudioManager>().PlayOneShot("Hitmarker");
             DamagePopup.Create(transform.position, (int)bulletDamage, isCritical);
         }
 

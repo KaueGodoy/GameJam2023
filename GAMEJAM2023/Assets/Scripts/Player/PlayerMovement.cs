@@ -123,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
         {
             inventory.AddItem(itemWorld.GetItem());
             itemWorld.DestroySelf();
+            
         }
     }
 
@@ -363,6 +364,8 @@ public class PlayerMovement : MonoBehaviour
         {
             currentHealth += healAmount;
             heartSystem.curLife += healAmount;
+            FindObjectOfType<AudioManager>().PlayOneShot("Heal");
+
         }
     }
 
@@ -371,6 +374,8 @@ public class PlayerMovement : MonoBehaviour
         if (moveSpeed < maxSpeed)
         {
             moveSpeed += speedAmount;
+            FindObjectOfType<AudioManager>().PlayOneShot("SpeedBoost");
+
         }
     }
     void RestartLevel()
@@ -414,7 +419,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (jumpRequest)
         {
-
+            FindObjectOfType<AudioManager>().PlayOneShot("Jump");
             rb.velocity = Vector2.up * jumpForce;
             jumpRequest = false;
         }
@@ -439,7 +444,8 @@ public class PlayerMovement : MonoBehaviour
                 isShooting = true;
 
                 //ChangeAnimationState(SHOOT_ANIMATION);
-                
+                FindObjectOfType<AudioManager>().PlayOneShot("Shoot");
+
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
                 Invoke("ShootComplete", shootDelay);

@@ -63,3 +63,33 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: be17d78c36dd98540bf41de2664f9d46, type: 3}
+    name: Jump
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 08a2c32006b3acf4082aeafab2efcadb, type: 3}
+    name: Shoot
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 49ff63d482a29e94a9dcda54ab014fe2, type: 3}
+    name: Hitmarker
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 6ca0c7593f89b0244bef4532a50a17b3, type: 3}
+    name: Heal
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 9ae32f8e1a94c486c9929faca77ff03b, type: 3}
+    name: SpeedBoost
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
