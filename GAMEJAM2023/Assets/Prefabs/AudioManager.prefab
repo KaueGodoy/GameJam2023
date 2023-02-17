@@ -57,9 +57,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 35a0a834c1f2fde43bff6b3f5de03db3, type: 3}
+  - clip: {fileID: 8300000, guid: 0e1dfe62d371a9f4b995c610b39917c9, type: 3}
     name: Walk
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -90,6 +90,12 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: 9ae32f8e1a94c486c9929faca77ff03b, type: 3}
     name: SpeedBoost
     volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: b0854362ea411714ebe49a43689edfad, type: 3}
+    name: Dash
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}

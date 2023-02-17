@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Shooting")]
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public Bullet bullet;
 
     private float shootTimer = 0.0f;
     public float shootDelay = 0.5f;
@@ -60,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
     private bool shootAnimation = false;
     private bool shootRequest = false;
     private bool isShooting = false;
+
+    public int damageBuff = 2;
 
     [Header("Knockback")]
     public float knockbackForce = 2f;
@@ -99,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        bullet = GetComponent<Bullet>();
 
 
     }
@@ -145,7 +149,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case Item.ItemType.Coin:
                 // damage buff
-                //
+                //DamageBuff(damageBuff);
+                //bullet.bulletDamage *= 2;
 
                 Debug.Log("Money spent");
                 inventory.RemoveItem(new Item { itemType = Item.ItemType.Coin, amount = 1 });
@@ -341,6 +346,12 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void FootStep()
+    {
+        FindObjectOfType<AudioManager>().PlayOneShot("Walk");
+
+    }
+
     public void PlayerTakeDamage(float damageAmount)
     {
         FindObjectOfType<AudioManager>().PlayOneShot("Hit");
@@ -356,6 +367,15 @@ public class PlayerMovement : MonoBehaviour
 
             
         }
+    }
+
+    public void DamageBuff(int damageBuff)
+    {
+        float newDamage;
+        newDamage = bullet.bulletDamage + damageBuff;
+
+        //bullet.GetComponent<Bullet>().bulletDamage = newDamage;
+
     }
 
     public void HealPlayer(int healAmount)
@@ -465,6 +485,7 @@ public class PlayerMovement : MonoBehaviour
         if (dashRequest)
         {
             StartCoroutine(Dash());
+            FindObjectOfType<AudioManager>().PlayOneShot("Dash");
             dashRequest = false;
         }
     }
