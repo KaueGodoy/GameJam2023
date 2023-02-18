@@ -2566,6 +2566,8 @@ MonoBehaviour:
   maxHealth: 3
   deathExtraDelay: 0.3
   moveSpeed: 6
+  maxSpeed: 15
+  speedPotion: 0.4
   jumpForce: 7
   dashSpeed: 20
   dashingTime: 0.1
@@ -2573,7 +2575,9 @@ MonoBehaviour:
   tr: {fileID: 849090942}
   firePoint: {fileID: 1266291549}
   bulletPrefab: {fileID: 7446942302697660241, guid: 04eb9e10a44dc8e42b0335faf6b235ed, type: 3}
+  bullet: {fileID: 0}
   shootDelay: 0.3
+  damageBuff: 2
   knockbackForce: 2
   knockbackCounter: 0
   knockbackTotalTime: 1
@@ -2777,7 +2781,7 @@ MonoBehaviour:
   collisionDisableTime: 0.5
 --- !u!95 &849090946
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2794,7 +2798,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &861601043
 GameObject:
   m_ObjectHideFlags: 0
@@ -29872,7 +29876,7 @@ PrefabInstance:
       objectReference: {fileID: 849090939}
     - target: {fileID: 1716501945837618136, guid: 44ef7e04af2179f4e8306b6192553b4a, type: 3}
       propertyPath: maxHealth
-      value: 6
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1716501945837618136, guid: 44ef7e04af2179f4e8306b6192553b4a, type: 3}
       propertyPath: damageAmount
