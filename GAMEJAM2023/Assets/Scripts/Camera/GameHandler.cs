@@ -11,6 +11,12 @@ public class GameHandler : MonoBehaviour
     public Transform randomObj;
     public bool bossRange = false;
 
+    private void Awake()
+    {
+        cameraFollow.Setup(() => playerTransform.position);
+
+    }
+
     private void Start()
     {
 
