@@ -464,9 +464,8 @@ public class PlayerMovement : MonoBehaviour
                 isShooting = true;
 
                 //ChangeAnimationState(SHOOT_ANIMATION);
-                FindObjectOfType<AudioManager>().PlayOneShot("Shoot");
 
-                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                Invoke("InstantiateBullet", shootDelay - 0.1f);
 
                 Invoke("ShootComplete", shootDelay);
             }
@@ -475,6 +474,13 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    private void InstantiateBullet()
+    {
+
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        FindObjectOfType<AudioManager>().PlayOneShot("Shoot");
+
+    }
     void ShootComplete()
     {
         isShooting = false;

@@ -55,14 +55,20 @@ public class Bullet : MonoBehaviour
         }
 
         EnemyNoAggro enemyNoAggro = collision.GetComponent<EnemyNoAggro>();
-        if(enemyNoAggro != null)
+        if (enemyNoAggro != null)
         {
             enemyNoAggro.TakeDamage(bulletDamage);
             DamagePopup.Create(transform.position, (int)bulletDamage, isCritical);
         }
 
+        PlayerMovement player = collision.GetComponent<PlayerMovement>();
+        if (!player)
+        {
+            Destroy(gameObject);
 
-        Destroy(gameObject);
+        }
+
+
     }
 
     private void OnBecameInvisible()
