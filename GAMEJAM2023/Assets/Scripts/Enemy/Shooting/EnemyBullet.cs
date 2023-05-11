@@ -53,12 +53,7 @@ public class EnemyBullet : MonoBehaviour
                 healthComponent.PlayerTakeDamage(bulletDamage);
             }
 
-            // UI update
-            var heartComponent = collision.GetComponent<HeartSystem>();
-            if (heartComponent != null)
-            {
-                heartComponent.curLife -= Mathf.FloorToInt(bulletDamage);
-            }
+       
 
             Destroy(gameObject);
 

@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class OneWayPlatform : MonoBehaviour
@@ -9,12 +7,31 @@ public class OneWayPlatform : MonoBehaviour
 
     [SerializeField] private BoxCollider2D playerCollider;
     [SerializeField] private float collisionDisableTime = 0.5f;
+    [SerializeField] private GameObject downButton;
+
+    private PlayerInput playerInput;
+
+    private void Awake()
+    {
+        playerInput = new PlayerInput();
+        downButton.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        playerInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInput.Disable();
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (playerInput.Player.Down.triggered)
         {
-            if(currentOneWayPlatform != null)
+            if (currentOneWayPlatform != null)
             {
                 StartCoroutine(DisableCollision());
             }
@@ -26,6 +43,7 @@ public class OneWayPlatform : MonoBehaviour
         if (collision.gameObject.CompareTag("OneWayPlatform"))
         {
             currentOneWayPlatform = collision.gameObject;
+            downButton.SetActive(true);
         }
     }
 
@@ -34,6 +52,7 @@ public class OneWayPlatform : MonoBehaviour
         if (collision.gameObject.CompareTag("OneWayPlatform"))
         {
             currentOneWayPlatform = null;
+            downButton.SetActive(false);
         }
     }
 

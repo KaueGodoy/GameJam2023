@@ -1,19 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance { get; private set; }
 
-    // components
-    private SpriteRenderer spriteRenderer;
+
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
+    private PlayerInput playerInput;
 
     [SerializeField]
     private InputActionReference playerInputAction;
@@ -22,48 +21,79 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private UI_Inventory uiInventory;
     private Inventory inventory;
 
-
-    private PlayerInput playerInput;
-
-
     private void Awake()
     {
         Instance = this;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
-        bullet = GetComponent<Bullet>();
+
+
 
         playerInput = new PlayerInput();
-
-
     }
 
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        bullet = GetComponent<Bullet>();
+
         inventory = new Inventory(UseItem);
         uiInventory.SetPlayer(this);
         uiInventory.SetInventory(inventory);
+
         animator = GetComponent<Animator>();
         heartSystem = GetComponent<HeartSystem>();
+
         currentHealth = maxHealth;
         isAlive = true;
-
     }
 
     private void OnEnable()
     {
         playerInput.Enable();
         playerInputAction.action.Enable();
-
     }
 
     private void OnDisable()
     {
         playerInput.Disable();
         playerInputAction.action.Disable();
+    }
 
+    void Update()
+    {
+        if (!PauseMenu.GameIsPaused)
+        {
+            if (isDashing) return;
+
+            if (isAlive)
+            {
+                ProcessInput();
+                Shoot();
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!PauseMenu.GameIsPaused)
+        {
+            if (isDashing) return;
+
+            if (isAlive)
+            {
+                Move();
+                Flip();
+                Jump();
+                BetterJump();
+                DashTrigger();
+                ExitPlatform();
+            }
+
+            UpdateHeart();
+            UpdateTimers();
+            UpdateAnimationState();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -73,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
         {
             inventory.AddItem(itemWorld.GetItem());
             itemWorld.DestroySelf();
-
         }
     }
 
@@ -110,40 +139,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (!PauseMenu.GameIsPaused)
-        {
-            if (isDashing) return;
-
-            if (isAlive)
-            {
-                ProcessInput();
-                Shoot();
-            }
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (!PauseMenu.GameIsPaused)
-        {
-            if (isDashing) return;
-
-            if (isAlive)
-            {
-                Move();
-                Flip();
-                Jump();
-                BetterJump();
-                DashTrigger();
-            }
-
-            UpdateTimers();
-            UpdateAnimationState();
-        }
-    }
-
     void ProcessInput()
     {
         // jump
@@ -173,9 +168,16 @@ public class PlayerMovement : MonoBehaviour
         {
             shootRequest = true;
         }
+
+        // exit platform
+        if (playerInput.Player.Down.triggered)
+        {
+            exitPlatformTrigger = true;
+        }
+
     }
 
-
+    #region timers
 
     private void UpdateTimers()
     {
@@ -204,18 +206,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-    public void FootStep()
-    {
-        FindObjectOfType<AudioManager>().PlayOneShot("Walk");
-
-    }
+    #endregion
 
     #region health
 
     [Header("Health")]
-    public float currentHealth = 0f;
-    public float maxHealth = 3f;
+    public int currentHealth;
+    public int maxHealth = 3;
+    public Image[] hearts;
+    public Sprite lifeFruit;
     public float deathExtraDelay = 0.3f;
 
     private float deathAnimationTime = 0.8f;
@@ -226,6 +225,21 @@ public class PlayerMovement : MonoBehaviour
     private float hitTimer = 0.0f;
     private float hitCooldown = 0.5f;
     private bool isHit = false;
+
+    private void UpdateHeart()
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i >= currentHealth)
+            {
+                hearts[i].enabled = false;
+            }
+            else
+            {
+                hearts[i].enabled = true;
+            }
+        }
+    }
 
     public void PlayerTakeDamage(float damageAmount)
     {
@@ -267,9 +281,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float newDamage;
         newDamage = bullet.bulletDamage + damageBuff;
-
-        //bullet.GetComponent<Bullet>().bulletDamage = newDamage;
-
     }
 
     public void HealPlayer(int healAmount)
@@ -277,7 +288,6 @@ public class PlayerMovement : MonoBehaviour
         if (currentHealth < maxHealth)
         {
             currentHealth += healAmount;
-            heartSystem.curLife += healAmount;
             FindObjectOfType<AudioManager>().PlayOneShot("Heal");
 
         }
@@ -289,33 +299,10 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed += speedAmount;
             FindObjectOfType<AudioManager>().PlayOneShot("SpeedBoost");
-
         }
     }
 
     #endregion
-
-    void MoveOld()
-    {/*
-        if (knockbackCounter <= 0)
-        {
-            rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
-        }
-        else
-        {
-            if (knockbackFromRight)
-            {
-                rb.velocity = new Vector2(-knockbackForce, knockbackForce);
-            }
-            if (!knockbackFromRight)
-            {
-                rb.velocity = new Vector2(knockbackForce, knockbackForce);
-            }
-
-            knockbackCounter -= Time.deltaTime;
-        }
-        */
-    }
 
     #region move
 
@@ -342,6 +329,28 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
 
+    }
+
+    void MoveOld()
+    {/*
+        if (knockbackCounter <= 0)
+        {
+            rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
+        }
+        else
+        {
+            if (knockbackFromRight)
+            {
+                rb.velocity = new Vector2(-knockbackForce, knockbackForce);
+            }
+            if (!knockbackFromRight)
+            {
+                rb.velocity = new Vector2(knockbackForce, knockbackForce);
+            }
+
+            knockbackCounter -= Time.deltaTime;
+        }
+        */
     }
 
     #endregion
@@ -384,16 +393,22 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
+
         playerInputAction.action.started += context =>
         {
-            if (rb.velocity.y > 0 && context.interaction is HoldInteraction)
+            if (rb != null)
             {
-                rb.gravityScale = lowJumpMultiplier;
+                if (rb.velocity.y > 0 && context.interaction is HoldInteraction)
+                {
+                    rb.gravityScale = lowJumpMultiplier;
+                }
+                else
+                {
+                    rb.gravityScale = 1f;
+                }
+
             }
-            else if (context.interaction is PressInteraction)
-            {
-                rb.gravityScale = 1f;
-            }
+
         };
 
     }
@@ -447,7 +462,7 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
-    #region knockbak
+    #region knockback
 
     [Header("Knockback")]
     public float knockbackForce = 2f;
@@ -502,6 +517,58 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
+
+    #region oneWayPlatform
+
+    [Header("One Way Platform")]
+    [SerializeField] private float collisionDisableTime = 0.5f;
+    [SerializeField] private GameObject downButton;
+
+    private GameObject currentOneWayPlatform;
+    private bool exitPlatformTrigger = false;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("OneWayPlatform"))
+        {
+            currentOneWayPlatform = collision.gameObject;
+            downButton.SetActive(true);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("OneWayPlatform"))
+        {
+            currentOneWayPlatform = null;
+            downButton.SetActive(false);
+        }
+    }
+
+    private IEnumerator DisableCollision()
+    {
+        BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
+
+        Physics2D.IgnoreCollision(boxCollider, platformCollider);
+        yield return new WaitForSeconds(collisionDisableTime);
+        Physics2D.IgnoreCollision(boxCollider, platformCollider, false);
+    }
+
+    private void ExitPlatform()
+    {
+        if (exitPlatformTrigger)
+        {
+            exitPlatformTrigger = false;
+
+            if (currentOneWayPlatform != null)
+            {
+                StartCoroutine(DisableCollision());
+            }
+        }
+    }
+
+    #endregion
+
 
     #region animation
 
@@ -624,10 +691,13 @@ public class PlayerMovement : MonoBehaviour
         */
 
         return raycastHit.collider != null;
-
     }
 
     #endregion
+    public void FootStep()
+    {
+        FindObjectOfType<AudioManager>().PlayOneShot("Walk");
+    }
 
     public Vector3 GetPosition()
     {

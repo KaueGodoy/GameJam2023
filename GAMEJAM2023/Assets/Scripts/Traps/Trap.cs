@@ -30,14 +30,7 @@ public class Trap : MonoBehaviour
                 healthComponent.PlayerTakeDamage(damageAmount);
             }
 
-            // UI update
-            var heartComponent = collision.GetComponent<HeartSystem>();
-            if (heartComponent != null)
-            {
-                heartComponent.curLife -= Mathf.FloorToInt(damageAmount);
-
-                
-            }
+        
             
             // knockback
             player.knockbackCounter = player.knockbackTotalTime;

@@ -7,25 +7,26 @@ using UnityEngine.UI;
 
 public class HeartSystem : MonoBehaviour
 {
-
     public Image[] hearts;
     public Sprite lifeFruit;
-    public int curLife;
-    public int maxLife = 3;
-    private bool isDead = false;
+    public int currentHealth;
+    public int maxHealth = 3;
 
-    // Start is called before the first frame update
     void Start()
     {
-        curLife = hearts.Length;
+        currentHealth = hearts.Length;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
+    {
+        UpdateHeart();
+    }
+
+    private void UpdateHeart()
     {
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i >= curLife)
+            if (i >= currentHealth)
             {
                 hearts[i].enabled = false;
             }
@@ -33,43 +34,6 @@ public class HeartSystem : MonoBehaviour
             {
                 hearts[i].enabled = true;
             }
-        }
-
-        if (isDead)
-        {
-            Debug.Log("Morto");
-            SceneManager.LoadScene(1);
-        }
-    }
-
-    public void TakeDamage(int d)
-    {
-        if (d > curLife)
-        {
-            d = curLife;
-        }
-
-        if (curLife >= 1)
-        {
-            curLife -= d;
-
-            if (curLife < 1)
-            {
-                isDead = true;
-            }
-        }
-    }
-
-    public void Heal(int h)
-    {
-        if (h > maxLife - curLife)
-        {
-            h = maxLife - curLife;
-        }
-
-        if (curLife < maxLife)
-        {
-            curLife += h;
         }
     }
 }
