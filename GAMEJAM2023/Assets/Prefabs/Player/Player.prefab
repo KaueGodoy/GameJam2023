@@ -263,6 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f259035e26c8440b83658a37cb5f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInputAction: {fileID: -5874314994946857015, guid: 1fce52a07af95c743b76a7e564fb61d3, type: 3}
+  uiInventory: {fileID: 0}
   currentHealth: 0
   maxHealth: 3
   deathExtraDelay: 0.3
@@ -270,20 +272,21 @@ MonoBehaviour:
   maxSpeed: 15
   speedPotion: 0.4
   jumpForce: 6.05
+  fallMultiplier: 3.2
+  lowJumpMultiplier: 2
   dashSpeed: 20
   dashingTime: 0.1
   dashingCooldown: 0.4
   tr: {fileID: 1861227108406266786}
+  knockbackForce: 6
+  knockbackCounter: 0
+  knockbackTotalTime: 0.2
+  knockbackFromRight: 0
   firePoint: {fileID: 1861227109348016513}
   bulletPrefab: {fileID: 7446942302697660241, guid: 04eb9e10a44dc8e42b0335faf6b235ed, type: 3}
   bullet: {fileID: 0}
   shootDelay: 0.417
   damageBuff: 2
-  knockbackForce: 6
-  knockbackCounter: 0
-  knockbackTotalTime: 0.2
-  knockbackFromRight: 0
-  uiInventory: {fileID: 0}
   jumpableGround:
     serializedVersion: 2
     m_Bits: 8
