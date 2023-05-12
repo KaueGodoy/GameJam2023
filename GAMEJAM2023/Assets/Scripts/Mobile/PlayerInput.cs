@@ -42,7 +42,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""id"": ""2dc0f02f-5f26-4c09-a2a5-713ae562ca24"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press,Hold"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -220,7 +220,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1fce5fc8-342a-45f9-8108-1f53af495b87"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

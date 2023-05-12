@@ -361,7 +361,9 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f, 10f)]
     public float jumpForce = 4f;
     public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 1f;
+    public float tapJumpMultiplier = 1.8f;
+    public float holdJumpMultiplier = 1f;
+
 
     private bool doubleJump;
     private bool jumpRequest = false;
@@ -378,37 +380,25 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void BetterJump()
-    {/*
-        if (rb.velocity.y < 0)
+    {
+        if (rb.velocity.y < 0f)
         {
-            rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-        else if (rb.velocity.y > 0 && !playerInput.Player.Jump.triggered)
-        {
-            rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }*/
-
-        if (rb.velocity.y < 0)
-        {
-            rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            rb.gravityScale = fallMultiplier;
         }
 
-
-        playerInputAction.action.started += context =>
+        playerInputAction.action.canceled += context =>
         {
-            if (rb != null)
+            if (rb.velocity.y > 0)
             {
-                if (rb.velocity.y > 0 && context.interaction is HoldInteraction)
-                {
-                    rb.gravityScale = lowJumpMultiplier;
-                }
-                else
-                {
-                    rb.gravityScale = 1f;
-                }
-
+                rb.gravityScale = tapJumpMultiplier;
+                Debug.Log("tap jump");
             }
 
+        };
+        playerInputAction.action.performed += context =>
+        {
+            rb.gravityScale = holdJumpMultiplier;
+            Debug.Log("hold jump");
         };
 
     }
