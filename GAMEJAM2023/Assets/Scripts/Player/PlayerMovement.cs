@@ -25,11 +25,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Instance = this;
 
-
-
         playerInput = new PlayerInput();
     }
-
 
     private void Start()
     {
@@ -388,17 +385,24 @@ public class PlayerMovement : MonoBehaviour
 
         playerInputAction.action.canceled += context =>
         {
-            if (rb.velocity.y > 0)
+            if (rb != null)
             {
-                rb.gravityScale = tapJumpMultiplier;
-                Debug.Log("tap jump");
+                if (rb.velocity.y > 0)
+                {
+                    rb.gravityScale = tapJumpMultiplier;
+                    Debug.Log("tap jump");
+                }
             }
-
         };
+
         playerInputAction.action.performed += context =>
         {
-            rb.gravityScale = holdJumpMultiplier;
-            Debug.Log("hold jump");
+            if (rb != null)
+            {
+                rb.gravityScale = holdJumpMultiplier;
+
+                Debug.Log("hold jump");
+            }
         };
 
     }
