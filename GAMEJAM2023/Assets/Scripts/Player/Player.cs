@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
 
         currentHealth = maxHealth;
         isAlive = true;
+
+        downButton.SetActive(false);
     }
 
     private void OnEnable()

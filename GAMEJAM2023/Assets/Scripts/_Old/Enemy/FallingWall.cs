@@ -25,7 +25,7 @@ public class FallingWall : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            isFalling = true;
+            this.isFalling = true;
             rb.bodyType = RigidbodyType2D.Dynamic;
             rb.gravityScale = 15;
         }

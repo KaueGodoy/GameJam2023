@@ -11,7 +11,7 @@ TagManager:
   - Wasp
   - OneWayPlatform
   - Enemy
-  - Beetle
+  - InteractableObject
   layers:
   - Default
   - TransparentFX
