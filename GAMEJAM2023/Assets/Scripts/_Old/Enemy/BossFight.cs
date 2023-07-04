@@ -6,7 +6,7 @@ public class BossFight : MonoBehaviour
 {
     GameHandler gameHandler;
     Enemy enemy;
-    public PlayerMovement player;
+    public Player player;
 
     // Start is called before the first frame update
     void Start()

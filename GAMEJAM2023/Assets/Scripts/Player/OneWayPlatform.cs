@@ -9,11 +9,11 @@ public class OneWayPlatform : MonoBehaviour
     [SerializeField] private float collisionDisableTime = 0.5f;
     [SerializeField] private GameObject downButton;
 
-    private PlayerInput playerInput;
+    private PlayerControls playerInput;
 
     private void Awake()
     {
-        playerInput = new PlayerInput();
+        playerInput = new PlayerControls();
         downButton.SetActive(false);
     }
 

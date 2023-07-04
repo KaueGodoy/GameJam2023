@@ -47,7 +47,7 @@ public class EnemyBullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // HP update
-            var healthComponent = collision.GetComponent<PlayerMovement>();
+            var healthComponent = collision.GetComponent<Player>();
             if (healthComponent != null)
             {
                 healthComponent.PlayerTakeDamage(bulletDamage);

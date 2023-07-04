@@ -1,0 +1,98 @@
+[
+  {
+    "objectSlug": "sword",
+    "itemName": "Estilingue 1",
+    "description": "Estilingue proibido",
+    "itemType": "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "Attack",
+        "BaseValue": 674,
+        "StatName": "ATK"
+      },
+      {
+        "StatType": "CritRate",
+        "BaseValue": 45,
+        "StatName": "CRIT RATE"
+      },
+      {
+        "StatType": "CritDamage",
+        "BaseValue": 41.1,
+        "StatName": "CRIT DAMAGE"
+      },
+      {
+        "StatType": "AttackBonus",
+        "BaseValue": 20.0,
+        "StatName": "ATK%"
+      },
+      {
+        "StatType": "FlatAttack",
+        "BaseValue": 10,
+        "StatName": "ATK FLAT"
+      },
+      {
+        "StatType": "DamageBonus",
+        "BaseValue": 46.6,
+        "StatName": "DMG BONUS"
+      }
+    ]
+  },
+  {
+    "objectSlug": "staff",
+    "itemName": "Estilingue 2",
+    "description": "Estilingue Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "itemType": "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "Attack",
+        "BaseValue": 542,
+        "StatName": "ATK"
+      },
+      {
+        "StatType": "CritDamage",
+        "BaseValue": 88.2,
+        "StatName": "CRIT DAMAGE"
+      },
+      {
+        "StatType": "AttackBonus",
+        "BaseValue": 15.0,
+        "StatName": "ATK%"
+      }
+    ]
+  },
+  {
+    "objectSlug": "potion_log",
+    "itemName": "Log Potion",
+    "description": "A potion that logs something to the console.",
+    "itemType": "Consumable",
+    "actionName": "Drink",
+    "itemModifier": 0
+  },
+  {
+    "objectSlug": "coin",
+    "itemName": "Coin",
+    "description": "Money",
+    "itemType": "Consumable",
+    "actionName": "Use",
+    "itemModifier": 0
+  },
+  {
+    "objectSlug": "potion_hp",
+    "itemName": "HP Potion",
+    "description": "A potion that gives MAX HP",
+    "itemType": "Consumable",
+    "actionName": "Drink",
+    "itemModifier": 1,
+    "Stats": [
+      {
+        "StatType": "HP",
+        "BaseValue": 300,
+        "StatName": "HP"
+      }
+    ]
+  }
+]

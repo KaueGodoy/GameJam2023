@@ -15,7 +15,7 @@ public class EnemyNoAggro : MonoBehaviour
     [Header("Range")]
     public float rangeDistance = 5f;
 
-    public PlayerMovement player;
+    public Player player;
 
     public bool animationHit;
     public bool aggro;

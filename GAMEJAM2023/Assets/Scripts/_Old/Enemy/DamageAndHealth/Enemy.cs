@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     [Header("Range")]
     public float rangeDistance = 5f;
 
-    public PlayerMovement player;
+    public Player player;
 
     public bool animationHit;
     public bool isAlive;
@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             // HP update
-            var healthComponent = collision.GetComponent<PlayerMovement>();
+            var healthComponent = collision.GetComponent<Player>();
             if (healthComponent != null)
             {
                 healthComponent.PlayerTakeDamage(damageAmount);

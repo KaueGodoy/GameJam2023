@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     public bool isCritical;
 
     // animation
-    PlayerMovement player;
+    Player player;
     private const string SHOT_ANIMATION = "Player_Shot";
 
     void Start()
@@ -61,7 +61,7 @@ public class Bullet : MonoBehaviour
             DamagePopup.Create(transform.position, (int)bulletDamage, isCritical);
         }
 
-        PlayerMovement player = collision.GetComponent<PlayerMovement>();
+        Player player = collision.GetComponent<Player>();
         if (!player)
         {
             Destroy(gameObject);

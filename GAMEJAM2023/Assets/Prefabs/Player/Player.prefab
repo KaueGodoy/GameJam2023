@@ -14,12 +14,7 @@ GameObject:
   - component: {fileID: 1861227108406266790}
   - component: {fileID: 1861227108406266784}
   - component: {fileID: 1861227108406266786}
-  - component: {fileID: 1861227108406266791}
   - component: {fileID: 1861227108406266713}
-  - component: {fileID: 1861227108406266787}
-  - component: {fileID: 1861227108406266785}
-  - component: {fileID: 1861227108406266719}
-  - component: {fileID: 1861227108406266717}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -116,6 +111,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &1861227108406266790
 Rigidbody2D:
   serializedVersion: 4
@@ -271,52 +267,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 0
---- !u!114 &1861227108406266791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861227108406266795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42f259035e26c8440b83658a37cb5f3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInputAction: {fileID: -5874314994946857015, guid: 1fce52a07af95c743b76a7e564fb61d3, type: 3}
-  uiInventory: {fileID: 0}
-  currentHealth: 0
-  maxHealth: 3
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  lifeFruit: {fileID: 21300000, guid: d4fa33184448e1b4a9df8f6835b02b0e, type: 3}
-  deathExtraDelay: 0.3
-  moveSpeed: 5
-  maxSpeed: 15
-  speedPotion: 0.4
-  jumpForce: 6.05
-  fallMultiplier: 3.2
-  lowJumpMultiplier: 2
-  dashSpeed: 20
-  dashingTime: 0.1
-  dashingCooldown: 0.4
-  tr: {fileID: 1861227108406266786}
-  knockbackForce: 6
-  knockbackCounter: 0
-  knockbackTotalTime: 0.2
-  knockbackFromRight: 0
-  firePoint: {fileID: 1861227109348016513}
-  bulletPrefab: {fileID: 7446942302697660241, guid: 04eb9e10a44dc8e42b0335faf6b235ed, type: 3}
-  bullet: {fileID: 0}
-  shootDelay: 0.417
-  damageBuff: 2
-  collisionDisableTime: 0.5
-  downButton: {fileID: 0}
-  jumpableGround:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &1861227108406266713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,67 +293,10 @@ MonoBehaviour:
   - {x: 0.3141098, y: -0.38930798, z: 0}
   m_ShapePathHash: 2082270741
   m_Mesh: {fileID: 0}
-  m_InstanceId: 179960
---- !u!114 &1861227108406266787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861227108406266795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade1135f24b6b4d43ba579e18037e9bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1861227108406266785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861227108406266795}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c08492c4f1277364e81f4eb38c716c06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallMultiplier: 3.2
-  lowJumpMultiplier: 2
---- !u!114 &1861227108406266719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861227108406266795}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bef84158e8d1a2e47a347e143fe07a15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  lifeFruit: {fileID: 21300000, guid: d4fa33184448e1b4a9df8f6835b02b0e, type: 3}
-  curLife: 0
-  maxLife: 3
---- !u!114 &1861227108406266717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861227108406266795}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44783db6b5aa4184bb0fcc157a161465, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCollider: {fileID: 1861227108406266784}
-  collisionDisableTime: 0.5
-  downButton: {fileID: 0}
+  m_InstanceId: 72898
+  m_LocalBounds:
+    m_Center: {x: 0.12848282, y: 0.014345646, z: 0}
+    m_Extent: {x: 0.18562698, y: 0.47001457, z: 0}
 --- !u!1 &1861227108564492004
 GameObject:
   m_ObjectHideFlags: 0

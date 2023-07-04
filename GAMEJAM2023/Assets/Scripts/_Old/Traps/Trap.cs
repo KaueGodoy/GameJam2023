@@ -9,7 +9,7 @@ public class Trap : MonoBehaviour
     [Header("Damage")]
     [SerializeField] public float damageAmount = 1f;
 
-    public PlayerMovement player;
+    public Player player;
 
     public bool animationHit;
 
@@ -24,7 +24,7 @@ public class Trap : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             // HP update
-            var healthComponent = collision.GetComponent<PlayerMovement>();
+            var healthComponent = collision.GetComponent<Player>();
             if (healthComponent != null)
             {
                 healthComponent.PlayerTakeDamage(damageAmount);

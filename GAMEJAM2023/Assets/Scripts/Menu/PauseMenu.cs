@@ -8,11 +8,11 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
-    private PlayerInput playerInput;
+    private PlayerControls playerInput;
 
     private void Awake()
     {
-        playerInput = new PlayerInput();
+        playerInput = new PlayerControls();
     }
 
     private void OnEnable()
