@@ -21,6 +21,7 @@ public class InventoryUI : MonoBehaviour
         UIEventHandler.OnItemAddedToInventory += ItemAdded;
         inventoryPanel.gameObject.SetActive(false);
     }
+
     private void OnEnable()
     {
         playerControls.Enable();
@@ -42,9 +43,14 @@ public class InventoryUI : MonoBehaviour
     {
         if (playerControls.UI.Inventory.triggered)
         {
-            MenuIsActive = !MenuIsActive;
-            inventoryPanel.gameObject.SetActive(MenuIsActive);
+            TriggerMenu();
         }
+    }
+
+    public void TriggerMenu()
+    {
+        MenuIsActive = !MenuIsActive;
+        inventoryPanel.gameObject.SetActive(MenuIsActive);
     }
 
     public void ItemAdded(Item item)

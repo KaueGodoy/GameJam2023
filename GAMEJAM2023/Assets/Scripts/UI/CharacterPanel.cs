@@ -30,7 +30,7 @@ public class CharacterPanel : MonoBehaviour
     private PlayerWeaponController PlayerWeaponController;
     private List<TextMeshProUGUI> weaponStatTexts = new List<TextMeshProUGUI>();
 
-    private void Start()
+    private void Awake()
     {
         PlayerWeaponController = player.GetComponent<PlayerWeaponController>();
         //UIEventHandler.OnPlayerHealthChanged += UpdateHealth;

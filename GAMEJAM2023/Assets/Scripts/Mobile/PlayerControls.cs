@@ -271,6 +271,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mobile"",
+                    ""type"": ""Button"",
+                    ""id"": ""40a22c51-f267-40a6-99de-13e29bc9360f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -317,6 +326,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a82bc3d-f012-4393-bf02-04e893b8326b"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mobile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -335,6 +355,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_Stats = m_UI.FindAction("Stats", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
+        m_UI_Mobile = m_UI.FindAction("Mobile", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -477,6 +498,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Pause;
     private readonly InputAction m_UI_Stats;
     private readonly InputAction m_UI_Inventory;
+    private readonly InputAction m_UI_Mobile;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
@@ -484,6 +506,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputAction @Stats => m_Wrapper.m_UI_Stats;
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
+        public InputAction @Mobile => m_Wrapper.m_UI_Mobile;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -502,6 +525,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @Mobile.started += instance.OnMobile;
+            @Mobile.performed += instance.OnMobile;
+            @Mobile.canceled += instance.OnMobile;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -515,6 +541,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @Mobile.started -= instance.OnMobile;
+            @Mobile.performed -= instance.OnMobile;
+            @Mobile.canceled -= instance.OnMobile;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -545,5 +574,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnStats(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnMobile(InputAction.CallbackContext context);
     }
 }
