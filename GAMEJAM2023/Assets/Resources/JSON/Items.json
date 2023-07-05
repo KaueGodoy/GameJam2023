@@ -2,7 +2,7 @@
   {
     "objectSlug": "sword",
     "itemName": "Estilingue 1",
-    "description": "Estilingue proibido",
+    "description": "Nome do efeito: Estilingue proibido \n\nDescricao: Aumenta o dano da ult em 50% \n\nLore: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum' ",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,

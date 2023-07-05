@@ -50,7 +50,7 @@ public class EnemyBullet : MonoBehaviour
             var healthComponent = collision.GetComponent<Player>();
             if (healthComponent != null)
             {
-                healthComponent.PlayerTakeDamage(bulletDamage);
+                healthComponent.TakeDamage(bulletDamage);
             }
 
        

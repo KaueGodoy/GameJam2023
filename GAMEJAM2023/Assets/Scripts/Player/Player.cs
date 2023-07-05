@@ -11,17 +11,12 @@ public class Player : MonoBehaviour
 
     public CharacterStats characterStats;
 
-
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private PlayerControls playerInput;
 
     [SerializeField]
     private InputActionReference playerInputAction;
-
-    //[Header("Inventory")]
-    //[SerializeField] private UI_Inventory uiInventory;
-    //private Inventory inventory;
 
     #region BaseStats
 
@@ -54,15 +49,16 @@ public class Player : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         bullet = GetComponent<Bullet>();
 
-        //inventory = new Inventory(UseItem);
-        //uiInventory.SetPlayer(this);
-        //uiInventory.SetInventory(inventory);
-
         animator = GetComponent<Animator>();
-        heartSystem = GetComponent<HeartSystem>();
 
+
+        maxHealth = baseHealth;
         currentHealth = maxHealth;
+        //currentHealth = baseHealth;
         isAlive = true;
+
+        UpdateUI();
+        //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
 
         downButton.SetActive(false);
     }
@@ -107,55 +103,12 @@ public class Player : MonoBehaviour
                 BetterJump();
                 DashTrigger();
                 ExitPlatform();
+                UpdateUI();
             }
 
-            //UpdateHeart();
             UpdateTimers();
             UpdateAnimationState();
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
-        //if (itemWorld != null)
-        //{
-        //    inventory.AddItem(itemWorld.GetItem());
-        //    itemWorld.DestroySelf();
-        //}
-    }
-
-    private void UseItem(Item item)
-    {
-        //switch (item.itemType)
-        //{
-        //    case Item.ItemType.HealthPotion:
-        //        //heal hp
-        //        HealPlayer(hpPotion);
-        //        Debug.Log("Healed");
-        //        inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
-        //        break;
-        //    case Item.ItemType.SpeedPotion:
-        //        // speed boost
-        //        SpeedBoost(speedPotion);
-        //        Debug.Log("Speed boost");
-        //        inventory.RemoveItem(new Item { itemType = Item.ItemType.SpeedPotion, amount = 1 });
-        //        break;
-        //    case Item.ItemType.Coin:
-        //        // damage buff
-        //        //DamageBuff(damageBuff);
-        //        //bullet.bulletDamage *= 2;
-
-        //        Debug.Log("Money spent");
-        //        inventory.RemoveItem(new Item { itemType = Item.ItemType.Coin, amount = 1 });
-        //        break;
-        //    case Item.ItemType.Key:
-        //        // speed boost
-        //        Debug.Log("Used key");
-        //        inventory.RemoveItem(item);
-        //        break;
-
-        //}
     }
 
     void ProcessInput()
@@ -194,6 +147,18 @@ public class Player : MonoBehaviour
             exitPlatformTrigger = true;
         }
 
+        // damage test DELETE
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            TakeDamage(damageAmount);
+        }
+
+        // heal test DELETE
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Heal(healAmount);
+        }
+
     }
 
     #region timers
@@ -230,47 +195,47 @@ public class Player : MonoBehaviour
     #region health
 
     [Header("Health")]
-    public int currentHealth;
-    public int maxHealth = 3;
-    //public Image[] hearts;
-    public Sprite lifeFruit;
+    public float currentHealth = 0;
+    public float maxHealth = 3;
+
+    [Header("Damage and Heal")]
+    public float damageAmount = 1f;
+    public float healAmount = 1f;
+
     public float deathExtraDelay = 0.3f;
 
     private float deathAnimationTime = 0.8f;
     private bool isAlive;
-    private int hpPotion = 1;
-    private HeartSystem heartSystem;
 
     private float hitTimer = 0.0f;
     private float hitCooldown = 0.5f;
     private bool isHit = false;
 
-    //private void UpdateHeart()
-    //{
-    //    for (int i = 0; i < hearts.Length; i++)
-    //    {
-    //        if (i >= currentHealth)
-    //        {
-    //            hearts[i].enabled = false;
-    //        }
-    //        else
-    //        {
-    //            hearts[i].enabled = true;
-    //        }
-    //    }
-    //}
-
-    public void PlayerTakeDamage(float damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         FindObjectOfType<AudioManager>().PlayOneShot("Hit");
         currentHealth -= Mathf.FloorToInt(damageAmount);
         isHit = true;
 
+        //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
+
         if (currentHealth <= 0)
         {
+            UpdateUI();
             Die();
 
             Invoke("RestartLevel", deathAnimationTime);
+        }
+    }
+
+    private void Heal(float healAmount)
+    {
+        FindObjectOfType<AudioManager>().PlayOneShot("Hit");
+        currentHealth += Mathf.FloorToInt(healAmount);
+
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
         }
     }
 
@@ -710,6 +675,19 @@ public class Player : MonoBehaviour
     }
 
     #endregion
+
+    #region UI
+
+    [Header("UI")]
+    [SerializeField] private PlayerHealthBar healthBar;
+
+    public void UpdateUI()
+    {
+        healthBar.UpdateHealthBar(maxHealth, currentHealth);
+    }
+
+    #endregion
+
     public void FootStep()
     {
         FindObjectOfType<AudioManager>().PlayOneShot("Walk");

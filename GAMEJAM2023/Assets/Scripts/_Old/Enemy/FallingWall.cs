@@ -7,7 +7,7 @@ public class FallingWall : MonoBehaviour
     Rigidbody2D rb;
     BoxCollider2D boxCollider2D;
     public float distance;
-    private bool isFalling = false;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -18,17 +18,16 @@ public class FallingWall : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
-            this.isFalling = true;
             rb.bodyType = RigidbodyType2D.Dynamic;
             rb.gravityScale = 15;
         }
-        
+
     }
 }

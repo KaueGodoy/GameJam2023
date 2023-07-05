@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
             var healthComponent = collision.GetComponent<Player>();
             if (healthComponent != null)
             {
-                healthComponent.PlayerTakeDamage(damageAmount);
+                healthComponent.TakeDamage(damageAmount);
             }
 
             
