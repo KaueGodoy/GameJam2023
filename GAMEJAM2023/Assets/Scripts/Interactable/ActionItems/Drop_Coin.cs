@@ -4,31 +4,19 @@ using UnityEngine;
 
 public class Drop_Coin : Interactable
 {
-    private InventoryController inventoryController;
-
-    private void Start()
-    {
-        // Find the player object with the "Player" tag and get its InventoryController component
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        inventoryController = player.GetComponent<InventoryController>();
-    }
-
     public override void Interact()
     {
-        Debug.Log("Interacting with lore icon");
+        Debug.Log("Interacting with coin");
 
         // pop up UI (press F to pick)
         // press F 
         // add to inventory
-        if (inventoryController != null)
-        {
-            inventoryController.GiveItem("coin");
-        }
+        InventoryController.Instance.GiveItem("coin");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
-        Interact();
+        base.OnTriggerEnter2D(collision);
         // play sfx
         // destroy game obj
     }

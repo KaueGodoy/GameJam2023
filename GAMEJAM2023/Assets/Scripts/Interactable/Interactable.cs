@@ -11,6 +11,19 @@ public class Interactable : MonoBehaviour
         Debug.Log("Interacting with base class");
     }
 
+    public virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        Player player = collision.GetComponent<Player>();
+
+        if (player != null)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                Interact();
+            }
+        }
+    }
+
     //private void Update()
     //{
     //    Debug.Log("Condition: " + hasInteracted);

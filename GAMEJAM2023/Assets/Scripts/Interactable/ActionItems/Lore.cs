@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Lore : ActionItem
 {
     public override void Interact()
     {
-        base.Interact();
-
         Debug.Log("Interacting with lore item");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
-        Interact();
+        base.OnTriggerEnter2D(collision);
     }
-
 
 }

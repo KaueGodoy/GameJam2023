@@ -457,6 +457,7 @@ public class Player : MonoBehaviour
 
     [Header("Shooting")]
     public Transform firePoint;
+    public Transform spawnPoint;
     public GameObject bulletPrefab;
     public Bullet bullet;
 
@@ -626,6 +627,9 @@ public class Player : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
             firePoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
+
+            spawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
+                
 
             // flippping using eulerAngles
             //firePoint.eulerAngles = new Vector3(0f, 180f, 0f);

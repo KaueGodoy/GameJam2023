@@ -9,4 +9,9 @@ public class ActionItem : Interactable
         Debug.Log("Interacting with base ActionItem class");
     }
 
+    public override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+    }
+
 }

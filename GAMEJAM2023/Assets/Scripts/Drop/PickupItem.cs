@@ -8,19 +8,15 @@ public class PickupItem : Interactable
 
     // override and inherits from interactable
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            Interact();
-        }
+        base.OnTriggerEnter2D(collision);
     }
 
     public override void Interact()
     {
         InventoryController.Instance.GiveItem(ItemDrop);
-        Debug.Log(ItemDrop.ItemName);
-        Debug.Log("Interacting with item object");
+        Debug.Log("Interacting with item object: " + ItemDrop.ItemName);
         Destroy(gameObject);
     }
 }
