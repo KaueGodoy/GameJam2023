@@ -7,8 +7,11 @@ using UnityEngine.UI;
 public class InventoryController : MonoBehaviour
 {
     public static InventoryController Instance { get; set; }
-    
+
     public PlayerWeaponController playerWeaponController;
+    public PlayerSkillController playerSkillController;
+    public PlayerUltController playerUltController;
+
     public ConsumableController consumableController;
     public InventoryUIDetails inventoryDetailsPanel;
 
@@ -16,7 +19,7 @@ public class InventoryController : MonoBehaviour
 
     private void Start()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
@@ -26,13 +29,17 @@ public class InventoryController : MonoBehaviour
         }
 
         playerWeaponController = GetComponent<PlayerWeaponController>();
+        playerSkillController = GetComponent<PlayerSkillController>();
+        playerUltController = GetComponent<PlayerUltController>();
         consumableController = GetComponent<ConsumableController>();
 
         GiveItem("sword");
         GiveItem("staff");
-        GiveItem("potion_log");
-        GiveItem("potion_hp");
-        GiveItem("coin");
+        //GiveItem("potion_log");
+        //GiveItem("potion_hp");
+        //GiveItem("coin");
+        GiveItem("skillTest");
+        GiveItem("ultTest");
     }
 
     public void GiveItem(string itemSlug)
@@ -59,9 +66,19 @@ public class InventoryController : MonoBehaviour
         playerWeaponController.EquipWeapon(itemToEquip);
     }
 
+    public void EquipSkill(Item itemToEquip)
+    {
+        playerSkillController.EquipSkill(itemToEquip);
+    }
+
+    public void EquipUlt(Item itemToEquip)
+    {
+        playerUltController.EquipUlt(itemToEquip);
+    }
+
     public void ConsumeItem(Item itemToConsume)
     {
-        consumableController.ConsumeItem(itemToConsume);    
+        consumableController.ConsumeItem(itemToConsume);
     }
 
 }

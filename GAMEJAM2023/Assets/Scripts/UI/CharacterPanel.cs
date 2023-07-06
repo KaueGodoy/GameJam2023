@@ -26,16 +26,39 @@ public class CharacterPanel : MonoBehaviour
     [SerializeField] private Transform weaponStatPanel;
     [SerializeField] private TextMeshProUGUI weaponNameText;
     [SerializeField] private TextMeshProUGUI weaponStatPrefab;
-
     private PlayerWeaponController PlayerWeaponController;
     private List<TextMeshProUGUI> weaponStatTexts = new List<TextMeshProUGUI>();
+
+    [Header("Skill")]
+    [SerializeField] private Sprite defaultSkillSprite;
+    [SerializeField] private Image skillIcon;
+    [SerializeField] private Transform skillStatPanel;
+    [SerializeField] private TextMeshProUGUI skillNameText;
+    [SerializeField] private TextMeshProUGUI skillStatPrefab;
+    private PlayerSkillController PlayerSkillController;
+    private List<TextMeshProUGUI> skillStatTexts = new List<TextMeshProUGUI>();
+
+    [Header("Ult")]
+    [SerializeField] private Sprite defaultUltSprite;
+    [SerializeField] private Image ultIcon;
+    [SerializeField] private Transform ultStatPanel;
+    [SerializeField] private TextMeshProUGUI ultNameText;
+    [SerializeField] private TextMeshProUGUI ultStatPrefab;
+    private PlayerUltController PlayerUltController;
+    private List<TextMeshProUGUI> ultStatTexts = new List<TextMeshProUGUI>();
+
 
     private void Awake()
     {
         PlayerWeaponController = player.GetComponent<PlayerWeaponController>();
+        PlayerSkillController = player.GetComponent<PlayerSkillController>();
+        PlayerUltController = player.GetComponent<PlayerUltController>();
+
         //UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
         UIEventHandler.OnStatsChanged += UpdateStats;
         UIEventHandler.OnItemEquipped += UpdateEquippedWeapon;
+        UIEventHandler.OnSkillEquipped += UpdateEquippedSkill;
+        UIEventHandler.OnUltEquipped += UpdateEquippedUlt;
         InitializeStats();
     }
 
@@ -79,6 +102,32 @@ public class CharacterPanel : MonoBehaviour
         }
     }
 
+    private void UpdateEquippedSkill(Item item)
+    {
+        skillIcon.sprite = Resources.Load<Sprite>("UI/Icons/Items/" + item.ObjectSlug);
+        skillNameText.text = item.ItemName;
+
+        for (int i = 0; i < item.Stats.Count; i++)
+        {
+            skillStatTexts.Add(Instantiate(weaponStatPrefab));
+            skillStatTexts[i].transform.SetParent(skillStatPanel);
+            skillStatTexts[i].text = item.Stats[i].StatName + ": " + item.Stats[i].GetCalculatedStatValue().ToString();
+        }
+    }
+
+    private void UpdateEquippedUlt(Item item)
+    {
+        ultIcon.sprite = Resources.Load<Sprite>("UI/Icons/Items/" + item.ObjectSlug);
+        ultNameText.text = item.ItemName;
+
+        for (int i = 0; i < item.Stats.Count; i++)
+        {
+            ultStatTexts.Add(Instantiate(weaponStatPrefab));
+            ultStatTexts[i].transform.SetParent(ultStatPanel);
+            ultStatTexts[i].text = item.Stats[i].StatName + ": " + item.Stats[i].GetCalculatedStatValue().ToString();
+        }
+    }
+
     public void UnequipWeapon()
     {
         if (PlayerWeaponController.EquippedWeapon != null)
@@ -92,6 +141,38 @@ public class CharacterPanel : MonoBehaviour
             }
             weaponStatTexts.Clear();
             PlayerWeaponController.UnequipWeapon();
+        }
+    }
+
+    public void UnequipSkill()
+    {
+        if (PlayerSkillController.EquippedSkill != null)
+        {
+            skillNameText.text = " ";
+            skillIcon.sprite = defaultWeaponSprite;
+
+            for (int i = 0; i < skillStatTexts.Count; i++)
+            {
+                Destroy(skillStatTexts[i].gameObject);
+            }
+            skillStatTexts.Clear();
+            PlayerSkillController.UnequipSkill();
+        }
+    }
+
+    public void UnequipUlt()
+    {
+        if (PlayerUltController.EquippedUlt != null)
+        {
+            ultNameText.text = " ";
+            ultIcon.sprite = defaultWeaponSprite;
+
+            for (int i = 0; i < ultStatTexts.Count; i++)
+            {
+                Destroy(ultStatTexts[i].gameObject);
+            }
+            ultStatTexts.Clear();
+            PlayerUltController.UnequipUlt();
         }
     }
 

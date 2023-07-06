@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Item
 {
-    public enum ItemTypes { Weapon, Consumable, Quest }
+    public enum ItemTypes { Weapon, Skill, Ult, Consumable, Quest }
     public List<BaseStat> Stats { get; set; }
     public string ObjectSlug { get; set; }
 

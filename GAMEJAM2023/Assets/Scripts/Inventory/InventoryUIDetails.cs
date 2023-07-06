@@ -58,6 +58,16 @@ public class InventoryUIDetails : MonoBehaviour
             InventoryController.Instance.EquipItem(item);
             Destroy(selectedItemButton.gameObject);
         }
+        else if (item.ItemType == Item.ItemTypes.Skill)
+        {
+            InventoryController.Instance.EquipSkill(item);
+            Destroy(selectedItemButton.gameObject);
+        }
+        else if (item.ItemType == Item.ItemTypes.Ult)
+        {
+            InventoryController.Instance.EquipUlt(item);
+            Destroy(selectedItemButton.gameObject);
+        }
 
         RemoveItem();
     }

@@ -65,6 +65,46 @@
     ]
   },
   {
+    "objectSlug": "skillTest",
+    "itemName": "Skill 1",
+    "description": "Skill an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "itemType": "Skill",
+    "actionName": "Equip Skill",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "CritRate",
+        "BaseValue": 44.1,
+        "StatName": "CRIT RATE"
+      },
+      {
+        "StatType": "DamageBonus",
+        "BaseValue": 46.6,
+        "StatName": "DMG BONUS"
+      }
+    ]
+  },
+  {
+    "objectSlug": "ultTest",
+    "itemName": "Ult 1",
+    "description": "Ult an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "itemType": "Ult",
+    "actionName": "Equip Ult",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "CritDamage",
+        "BaseValue": 66,
+        "StatName": "CRIT DAMAGE"
+      },
+      {
+        "StatType": "Attack",
+        "BaseValue": 542,
+        "StatName": "ATK"
+      }
+    ]
+  },
+  {
     "objectSlug": "potion_log",
     "itemName": "Log Potion",
     "description": "A potion that logs something to the console.",
