@@ -136,10 +136,10 @@ public class Player : MonoBehaviour
         }
 
         // shooting
-        if (playerInput.Player.Attack.triggered)
-        {
-            shootRequest = true;
-        }
+        //if (playerInput.Player.Attack.triggered)
+        //{
+        //    shootRequest = true;
+        //}
 
         // exit platform
         if (playerInput.Player.Down.triggered)
@@ -458,6 +458,8 @@ public class Player : MonoBehaviour
     [Header("Shooting")]
     public Transform firePoint;
     public Transform spawnPoint;
+    public Transform skillSpawnPoint;
+    public Transform ultSpawnPoint;
     public GameObject bulletPrefab;
     public Bullet bullet;
 
@@ -629,6 +631,8 @@ public class Player : MonoBehaviour
             firePoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
 
             spawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
+            skillSpawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
+            ultSpawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
                 
 
             // flippping using eulerAngles

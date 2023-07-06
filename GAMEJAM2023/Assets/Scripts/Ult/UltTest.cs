@@ -19,7 +19,7 @@ public class UltTest : MonoBehaviour, IUlt
     {
         CurrentDamage = damage;
 
-        //animator.SetTrigger("Base_Attack");
+        animator.SetTrigger("Base_Attack");
         Debug.Log(this.name + " Ult used!");
     }
 

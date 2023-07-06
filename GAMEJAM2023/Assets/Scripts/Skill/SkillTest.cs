@@ -19,7 +19,7 @@ public class SkillTest : MonoBehaviour, ISkill
     {
         CurrentDamage = damage;
 
-        //animator.SetTrigger("Base_Attack");
+        animator.SetTrigger("Base_Attack");
         Debug.Log(this.name + " Skill used!");
     }
 

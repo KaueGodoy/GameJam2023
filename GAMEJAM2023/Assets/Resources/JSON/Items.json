@@ -85,6 +85,21 @@
     ]
   },
   {
+    "objectSlug": "skillFireball",
+    "itemName": "Skill Fireball",
+    "description": "Skill an unknown not only typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "itemType": "Skill",
+    "actionName": "Equip Skill",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "AttackBonus",
+        "BaseValue": 20.0,
+        "StatName": "ATK%"
+      }
+    ]
+  },
+  {
     "objectSlug": "ultTest",
     "itemName": "Ult 1",
     "description": "Ult an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",

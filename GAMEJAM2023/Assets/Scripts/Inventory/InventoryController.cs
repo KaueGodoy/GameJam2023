@@ -40,6 +40,7 @@ public class InventoryController : MonoBehaviour
         //GiveItem("coin");
         GiveItem("skillTest");
         GiveItem("ultTest");
+        GiveItem("skillFireball");
     }
 
     public void GiveItem(string itemSlug)
