@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Beetle : MonoBehaviour, IEnemy
+public class Slime : MonoBehaviour, IEnemy
 {
     [Header("Health")]
     public float currentHealth;
@@ -25,7 +25,7 @@ public class Beetle : MonoBehaviour, IEnemy
 
         currentHealth = maxHealth;
 
-        ID = 0; // first enemy (could use as a stat on character stats)
+        ID = 1; // first enemy (could use as a stat on character stats)
 
         DropTable = new DropTable();
         DropTable.loot = new List<LootDrop>
