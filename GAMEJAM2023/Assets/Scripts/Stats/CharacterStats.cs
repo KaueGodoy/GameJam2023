@@ -6,7 +6,9 @@ public class CharacterStats
 {
     public List<BaseStat> stats = new List<BaseStat>();
 
-    public CharacterStats(float hitPoints, float attack, float attackPercent, float attackFlat, float damageBonus, float critRate, float critDamage, float defense, float attackSpeed)
+    public CharacterStats(float hitPoints, float attack, float attackPercent, float attackFlat,
+                          float damageBonus, float critRate, float critDamage, float defense,
+                          float attackSpeed, float moveSpeed, float moveSpeedBonus, float jumpHeight, float jumpHeightBonus)
     {
         stats = new List<BaseStat>()
         {
@@ -19,6 +21,10 @@ public class CharacterStats
             new BaseStat(BaseStat.BaseStatType.CritDamage, critDamage, "CRIT DAMAGE"),
             new BaseStat(BaseStat.BaseStatType.Defense, defense, "DEF"),
             new BaseStat(BaseStat.BaseStatType.AttackSpeed, attackSpeed, "ATK SPD"),
+            new BaseStat(BaseStat.BaseStatType.MoveSpeed, moveSpeed, "Movement SPD"),
+            new BaseStat(BaseStat.BaseStatType.MoveSpeedBonus, moveSpeedBonus, "Movement SPD Bonus"),
+            new BaseStat(BaseStat.BaseStatType.JumpHeight, jumpHeight, "Jump Height"),
+            new BaseStat(BaseStat.BaseStatType.JumpHeightBonus, jumpHeightBonus, "Jump Height Bonus"),
 
         };
     }
@@ -30,7 +36,7 @@ public class CharacterStats
 
     public void AddStatBonus(List<BaseStat> statBonuses)
     {
-        foreach(BaseStat statBonus in statBonuses)
+        foreach (BaseStat statBonus in statBonuses)
         {
             GetStat(statBonus.StatType).AddStatBonus(new StatBonus(statBonus.BaseValue));
         }

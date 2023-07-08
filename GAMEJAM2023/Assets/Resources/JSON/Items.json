@@ -66,28 +66,33 @@
   },
   {
     "objectSlug": "skillTest",
-    "itemName": "Skill 1",
-    "description": "Skill an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "itemName": "Speed up [SKILL]",
+    "description": "Aumenta ATK SPD em x%, Movement SPD em x% e Jump Height em x%", 
     "itemType": "Skill",
     "actionName": "Equip Skill",
     "itemModifier": 0,
     "Stats": [
       {
-        "StatType": "CritRate",
-        "BaseValue": 44.1,
-        "StatName": "CRIT RATE"
+        "StatType": "AttackSpeed",
+        "BaseValue": 20.0,
+        "StatName": "ATK SPD%"
       },
       {
-        "StatType": "DamageBonus",
-        "BaseValue": 46.6,
-        "StatName": "DMG BONUS"
+        "StatType": "MoveSpeedBonus",
+        "BaseValue": 20.0,
+        "StatName": "MOV SPD%"
+      },
+       {
+        "StatType": "JumpHeightBonus",
+        "BaseValue": 20.0,
+        "StatName": "Jump Height%"
       }
     ]
   },
   {
     "objectSlug": "skillFireball",
-    "itemName": "Skill Fireball",
-    "description": "Skill an unknown not only typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "itemName": "Fireball [SKILL]",
+    "description": "Ao ativar conjura uma bola de fogo atravessando em linha reta",
     "itemType": "Skill",
     "actionName": "Equip Skill",
     "itemModifier": 0,
@@ -101,21 +106,26 @@
   },
   {
     "objectSlug": "ultTest",
-    "itemName": "Ult 1",
-    "description": "Ult an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "itemName": "ATK buff [ULT]",
+    "description": "Ao equipar ganha 608 de ATK Base, aumenta o ATK em 49.6% e ganha 80 de ATK Flat",
     "itemType": "Ult",
     "actionName": "Equip Ult",
     "itemModifier": 0,
     "Stats": [
       {
-        "StatType": "CritDamage",
-        "BaseValue": 66,
-        "StatName": "CRIT DAMAGE"
+        "StatType": "Attack",
+        "BaseValue": 608,
+        "StatName": "ATK"
       },
       {
-        "StatType": "Attack",
-        "BaseValue": 542,
-        "StatName": "ATK"
+        "StatType": "AttackBonus",
+        "BaseValue": 49.6,
+        "StatName": "ATK%"
+      },
+      {
+        "StatType": "FlatAttack",
+        "BaseValue": 80,
+        "StatName": "ATK FLAT"
       }
     ]
   },

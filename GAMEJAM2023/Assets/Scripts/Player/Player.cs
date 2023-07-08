@@ -30,6 +30,10 @@ public class Player : MonoBehaviour
     public float baseCritDamage = 50;
     public float baseDefense = 15;
     public float baseAttackSpeed = 5;
+    public float baseMoveSpeed = 6f;
+    public float baseMoveSpeedBonus = 0f;
+    public float baseJumpHeight = 5f;
+    public float baseJumpHeightBonus = 0;
 
     #endregion
 
@@ -37,7 +41,9 @@ public class Player : MonoBehaviour
     {
         Instance = this;
 
-        characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed);
+        characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat,
+                                            baseDamageBonus, baseCritRate, baseCritDamage, baseDefense,
+                                            baseAttackSpeed, baseMoveSpeed, baseMoveSpeedBonus, baseJumpHeight, baseJumpHeightBonus);
         Debug.Log("Player init");
 
         playerInput = new PlayerControls();
@@ -259,39 +265,39 @@ public class Player : MonoBehaviour
     #endregion
 
 
-    #region buff
+    //#region buff
 
-    public void DamageBuff(int damageBuff)
-    {
-        float newDamage;
-        newDamage = bullet.bulletDamage + damageBuff;
-    }
+    //public void DamageBuff(int damageBuff)
+    //{
+    //    float newDamage;
+    //    newDamage = bullet.bulletDamage + damageBuff;
+    //}
 
-    public void HealPlayer(int healAmount)
-    {
-        if (currentHealth < maxHealth)
-        {
-            currentHealth += healAmount;
-            FindObjectOfType<AudioManager>().PlayOneShot("Heal");
+    //public void HealPlayer(int healAmount)
+    //{
+    //    if (currentHealth < maxHealth)
+    //    {
+    //        currentHealth += healAmount;
+    //        FindObjectOfType<AudioManager>().PlayOneShot("Heal");
 
-        }
-    }
+    //    }
+    //}
 
-    public void SpeedBoost(float speedAmount)
-    {
-        if (moveSpeed < maxSpeed)
-        {
-            moveSpeed += speedAmount;
-            FindObjectOfType<AudioManager>().PlayOneShot("SpeedBoost");
-        }
-    }
+    //public void SpeedBoost(float speedAmount)
+    //{
+    //    if (moveSpeed < maxSpeed)
+    //    {
+    //        moveSpeed += speedAmount;
+    //        FindObjectOfType<AudioManager>().PlayOneShot("SpeedBoost");
+    //    }
+    //}
 
-    #endregion
+    //#endregion
 
     #region move
 
     [Header("Movement")]
-    public float moveSpeed = 5f;
+    public float moveSpeed;
     public float maxSpeed = 15f;
     public float speedPotion = 0.4f;
 
@@ -302,7 +308,12 @@ public class Player : MonoBehaviour
     {
         moveH = playerInput.Player.Move.ReadValue<Vector2>();
 
-        direction = new Vector2(moveH.x * moveSpeed, rb.velocity.y);
+        moveSpeed = baseMoveSpeed;
+
+        float currentSPD = baseMoveSpeed * (1 + (characterStats.GetStat(BaseStat.BaseStatType.MoveSpeedBonus).GetCalculatedStatValue() / 100));
+        //Debug.Log(currentSPD);
+
+        direction = new Vector2(moveH.x * currentSPD, rb.velocity.y);
 
         if (direction != Vector2.zero)
         {
@@ -342,12 +353,11 @@ public class Player : MonoBehaviour
     #region jump
 
     [Header("Jump")]
-    [Range(0f, 10f)]
-    public float jumpForce = 4f;
     public float fallMultiplier = 2.5f;
     public float tapJumpMultiplier = 1.8f;
     public float holdJumpMultiplier = 1f;
 
+    private float jumpForce;
 
     private bool doubleJump;
     private bool jumpRequest = false;
@@ -357,6 +367,9 @@ public class Player : MonoBehaviour
         if (jumpRequest)
         {
             FindObjectOfType<AudioManager>().PlayOneShot("Jump");
+
+            jumpForce = baseJumpHeight * (1 + (characterStats.GetStat(BaseStat.BaseStatType.JumpHeightBonus).GetCalculatedStatValue() / 100));
+            Debug.Log(jumpForce);
 
             rb.velocity = Vector2.up * jumpForce;
             jumpRequest = false;
@@ -633,7 +646,7 @@ public class Player : MonoBehaviour
             spawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
             skillSpawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
             ultSpawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
-                
+
 
             // flippping using eulerAngles
             //firePoint.eulerAngles = new Vector3(0f, 180f, 0f);

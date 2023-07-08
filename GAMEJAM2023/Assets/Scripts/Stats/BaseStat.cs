@@ -8,7 +8,14 @@ using UnityEngine;
 
 public class BaseStat
 {
-    public enum BaseStatType { HP, Attack, AttackBonus, FlatAttack, DamageBonus, CritRate, CritDamage, Defense, AttackSpeed }
+    public enum BaseStatType
+    {
+        HP, 
+        Attack, AttackBonus, FlatAttack,
+        DamageBonus, CritRate, CritDamage, Defense,
+        AttackSpeed, MoveSpeed, MoveSpeedBonus,
+        JumpHeight, JumpHeightBonus
+    }
 
     //public PlayerDamage damage;
     public List<StatBonus> BaseAdditives { get; set; }
