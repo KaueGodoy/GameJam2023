@@ -141,7 +141,8 @@ public class Slime : MonoBehaviour, IEnemy
     [Header("Drop")]
     public PickupItem pickupItem;
     public DropTable DropTable { get; set; }
-
+    public float CurrentHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public float MaxHealth { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     void DropLoot()
     {

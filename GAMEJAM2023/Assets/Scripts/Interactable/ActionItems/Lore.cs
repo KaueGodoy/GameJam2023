@@ -7,6 +7,7 @@ public class Lore : ActionItem
 {
     public override void Interact()
     {
+        base.Interact();
         Debug.Log("Interacting with lore item");
     }
 
@@ -14,5 +15,12 @@ public class Lore : ActionItem
     {
         base.OnTriggerEnter2D(collision);
     }
+
+    public override void OnTriggerExit2D(Collider2D collision)
+    {
+        base.OnTriggerExit2D(collision);
+    }
+
+
 
 }

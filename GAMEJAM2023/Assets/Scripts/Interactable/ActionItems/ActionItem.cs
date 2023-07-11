@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ActionItem : Interactable
 {
+    public GameObject interactPanel;
+    private bool panelIsActive;
+
     public override void Interact()
     {
         Debug.Log("Interacting with base ActionItem class");
@@ -12,6 +15,15 @@ public class ActionItem : Interactable
     public override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
+        interactPanel.SetActive(!panelIsActive);
     }
+
+
+    public virtual void OnTriggerExit2D(Collider2D collision)
+    {
+        interactPanel.SetActive(panelIsActive);
+    }
+
+
 
 }

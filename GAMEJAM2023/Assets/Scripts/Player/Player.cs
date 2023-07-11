@@ -142,10 +142,10 @@ public class Player : MonoBehaviour
         }
 
         // shooting
-        //if (playerInput.Player.Attack.triggered)
-        //{
-        //    shootRequest = true;
-        //}
+        if (playerInput.Player.Attack.triggered)
+        {
+            shootRequest = true;
+        }
 
         // exit platform
         if (playerInput.Player.Down.triggered)
@@ -485,12 +485,22 @@ public class Player : MonoBehaviour
 
     public int damageBuff = 2;
 
+    //private int animationHash;
+    //public float animationSpeedMultiplier = 1f;
+    //private string Player_Shoot = "Player_Shoot";
+
     void Shoot()
     {
         if (shootRequest)
         {
             shootRequest = false;
+
             shootAnimation = true;
+            //animator.speed = 5f;
+
+            //animationHash = Animator.StringToHash(Player_Shoot);
+            //animator.SetFloat(animationHash, animationSpeedMultiplier);
+            //Debug.Log("current speed: " + animator.speed);
 
             if (!isShooting)
             {
@@ -500,6 +510,7 @@ public class Player : MonoBehaviour
                 Invoke("ShootComplete", shootDelay);
             }
         }
+      
     }
 
     private void InstantiateBullet()
