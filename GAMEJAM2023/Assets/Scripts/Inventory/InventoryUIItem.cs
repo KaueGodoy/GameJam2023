@@ -10,6 +10,11 @@ public class InventoryUIItem : MonoBehaviour
     public TextMeshProUGUI itemText;
     public Image itemIcon;
 
+    private void Start()
+    {
+        transform.localScale = Vector3.one;
+    }
+
     public void SetItem(Item item)
     {
         this.item = item;
