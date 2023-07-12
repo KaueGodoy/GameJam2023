@@ -6,6 +6,7 @@ public class ModularEnemy : MonoBehaviour, IModularEnemy
     private ChaseBehavior chaseBehavior;
     private AttackBehavior attackBehavior;
     private RoamingBehavior roamingBehavior;
+    private IdleBehavior idleBehavior;
 
     private IEnemyBehavior behavior;
 
@@ -24,8 +25,9 @@ public class ModularEnemy : MonoBehaviour, IModularEnemy
         chaseBehavior = GetComponent<ChaseBehavior>();
         attackBehavior = GetComponent<AttackBehavior>();
         roamingBehavior = GetComponent<RoamingBehavior>();
+        idleBehavior = GetComponent<IdleBehavior>();
 
-        behavior = roamingBehavior;
+        behavior = idleBehavior;
     }
 
     private void Update()
@@ -34,16 +36,26 @@ public class ModularEnemy : MonoBehaviour, IModularEnemy
         {
             // Switch to attack behavior
             ChangeBehavior(attackBehavior);
+            attackBehavior.enabled = true;
+
         }
         else if (distanceCheck.IsPlayerInChaseRange())
         {
             // Switch to chase behavior
             ChangeBehavior(chaseBehavior);
+            chaseBehavior.enabled = true;
+
         }
+        //else if (distanceCheck.IsPlayerInRoamingDistance())
+        //{
+        //    // Switch to roaming behavior
+        //    ChangeBehavior(roamingBehavior);
+        //    chaseBehavior.enabled = false;
+        //    attackBehavior.enabled = false;
+        //}
         else
         {
-            // Switch to roaming behavior
-            ChangeBehavior(roamingBehavior);
+            ChangeBehavior(idleBehavior);
         }
 
         // Update the current behavior

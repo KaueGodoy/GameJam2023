@@ -142,10 +142,10 @@ public class Player : MonoBehaviour
         }
 
         // shooting
-        if (playerInput.Player.Attack.triggered)
-        {
-            shootRequest = true;
-        }
+        //if (playerInput.Player.Attack.triggered)
+        //{
+        //    shootRequest = true;
+        //}
 
         // exit platform
         if (playerInput.Player.Down.triggered)

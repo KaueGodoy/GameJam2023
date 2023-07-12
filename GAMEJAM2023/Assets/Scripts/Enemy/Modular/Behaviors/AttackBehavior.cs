@@ -4,19 +4,12 @@ public class AttackBehavior : MonoBehaviour, IEnemyBehavior
 {
     public float attackCooldown = 2f;
     public int attackDamage = 10;
-    
-    private DistanceCheck distanceCheck;
 
     private bool canAttack = true;
 
-    private void Start()
-    {
-        distanceCheck = GetComponent<DistanceCheck>();
-    }
-
     public void UpdateBehavior()
     {
-        if (distanceCheck.IsPlayerInAttackRange() && canAttack)
+        if (canAttack)
         {
             Attack();
         }
@@ -40,10 +33,5 @@ public class AttackBehavior : MonoBehaviour, IEnemyBehavior
     public void Disable()
     {
 
-    }
-
-    public void FlipSprite()
-    {
-        throw new System.NotImplementedException();
     }
 }

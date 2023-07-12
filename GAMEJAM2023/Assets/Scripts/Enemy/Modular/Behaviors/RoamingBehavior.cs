@@ -2,21 +2,25 @@ using UnityEngine;
 
 public class RoamingBehavior : MonoBehaviour, IEnemyBehavior
 {
-    public float moveSpeed = 3f;
-    public float patrolDistance = 5f;
 
-    private bool isMovingRight = true;
     private Vector2 originalPosition;
     private Vector2 destination;
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
+
+    public float moveSpeed = 3f;
+    public float patrolDistance = 5f;
+
+    public bool isMovingRight;
+
+    private FlipSprite flipSprite;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         originalPosition = rb.position;
         destination = originalPosition + new Vector2(patrolDistance, 0f);
+
+        flipSprite = GetComponent<FlipSprite>();
     }
 
     public void UpdateBehavior()
@@ -26,8 +30,8 @@ public class RoamingBehavior : MonoBehaviour, IEnemyBehavior
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             if (rb.position.x >= destination.x)
             {
+                flipSprite.FlipRoam();
                 isMovingRight = false;
-                FlipSprite();
             }
         }
         else
@@ -35,12 +39,11 @@ public class RoamingBehavior : MonoBehaviour, IEnemyBehavior
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             if (rb.position.x <= originalPosition.x)
             {
+                flipSprite.FlipRoam();
                 isMovingRight = true;
-                FlipSprite();
             }
         }
     }
-
 
     private void OnDrawGizmosSelected()
     {
@@ -50,12 +53,7 @@ public class RoamingBehavior : MonoBehaviour, IEnemyBehavior
 
     public void Disable()
     {
-        rb.velocity = Vector2.zero; // Assuming you have a Rigidbody2D component for movement
-
+        rb.velocity = Vector2.zero;
     }
 
-    public void FlipSprite()
-    {
-        spriteRenderer.flipX = !spriteRenderer.flipX;
-    }
 }

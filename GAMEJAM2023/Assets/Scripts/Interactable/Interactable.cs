@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    //private bool hasInteracted = false;
-
     public virtual void Interact()
     {
         Debug.Log("Interacting with base class");
+    }
+
+    public virtual void EndInteraction()
+    {
+        Debug.Log("Interaction ended");
     }
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
@@ -24,23 +27,20 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    //private void Update()
-    //{
-    //    Debug.Log("Condition: " + hasInteracted);
-    //}
+    public virtual void OnTriggerExit2D(Collider2D collision)
+    {
+        Player player = collision.GetComponent<Player>();
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (!hasInteracted)
-    //    {
-    //        Interact();
-    //        hasInteracted = true;
-    //    }
-    //}
+        if (player != null)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                EndInteraction();
+            }
+        }
+    }
 
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    hasInteracted = false;
-    //}
+
+
 
 }
