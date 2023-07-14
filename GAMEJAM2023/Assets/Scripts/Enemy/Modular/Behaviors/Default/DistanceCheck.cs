@@ -8,6 +8,9 @@ public class DistanceCheck : MonoBehaviour
     public float roamDistance = 8f;
     public float chaseDistance = 4f;
     public float attackDistance = 1f;
+    public float attackLongDistance = 1f;
+    public float attackMidDistance = 1f;
+    public float attackShortDistance = 1f;
 
     private void Start()
     {

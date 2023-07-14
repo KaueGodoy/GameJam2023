@@ -1,25 +1,20 @@
 using UnityEngine;
 
-public class ModularEnemy : MonoBehaviour
+public class ModularEnemyWorm : MonoBehaviour
 {
-    private DistanceCheck distanceCheck;
-    private ChaseBehavior chaseBehavior;
-    private AttackBehavior attackBehavior;
-    private RoamingBehavior roamingBehavior;
-    private IdleBehavior idleBehavior;
-
     private IEnemyBehavior behavior;
+
+    DistanceCheck distanceCheck;
+
+    IdleBehavior idleBehavior;
+    AttackExplosion attackExplosion;
 
     private void Start()
     {
         // Initialize the default behavior (e.g., RoamingBehavior)
-
         distanceCheck = GetComponent<DistanceCheck>();
-
-        chaseBehavior = GetComponent<ChaseBehavior>();
-        attackBehavior = GetComponent<AttackBehavior>();
-        roamingBehavior = GetComponent<RoamingBehavior>();
         idleBehavior = GetComponent<IdleBehavior>();
+        attackExplosion = GetComponent<AttackExplosion>();
 
         behavior = idleBehavior;
     }
@@ -29,24 +24,15 @@ public class ModularEnemy : MonoBehaviour
         if (distanceCheck.IsPlayerInAttackRange())
         {
             // Switch to attack behavior
-            ChangeBehavior(attackBehavior);
-            attackBehavior.enabled = true;
+            ChangeBehavior(attackExplosion);
 
         }
         else if (distanceCheck.IsPlayerInChaseRange())
         {
             // Switch to chase behavior
-            ChangeBehavior(chaseBehavior);
-            chaseBehavior.enabled = true;
+            // ChangeBehavior(idleBehavior);
 
         }
-        //else if (distanceCheck.IsPlayerInRoamingDistance())
-        //{
-        //    // Switch to roaming behavior
-        //    ChangeBehavior(roamingBehavior);
-        //    chaseBehavior.enabled = false;
-        //    attackBehavior.enabled = false;
-        //}
         else
         {
             ChangeBehavior(idleBehavior);
