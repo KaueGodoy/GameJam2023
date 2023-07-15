@@ -5,7 +5,7 @@ public class IdleBehavior : MonoBehaviour, IEnemyBehavior
     public void UpdateBehavior()
     {
         // play idle animation
-        Debug.Log("Idle");
+        //Debug.Log("Idle");
     }
 
     public void Disable()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Beetle : MonoBehaviour, IEnemy
+public class ExplosiveWorm : MonoBehaviour, IEnemy
 {
     [Header("Health")]
     public float currentHealth;

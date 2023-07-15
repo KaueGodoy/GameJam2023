@@ -1,41 +1,81 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class Beetle : MonoBehaviour, IEnemy
+public class BeetleOld : MonoBehaviour, IEnemy
 {
-    [Header("Health")]
-    public float currentHealth;
-    public float maxHealth = 200;
-    private readonly float healthThreshold = 0.0f;
-
-    private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
-
-    HealthSystem healthSystem;
-    Transform healthBarTransform;
-
     public float CurrentHealth { get; set; }
     public float MaxHealth { get; set; }
     public int ID { get; set; }
     public bool IsDead { get; set; }
 
-    private void Start()
+    [Header("Health")]
+    public float currentHealth;
+    public float maxHealth = 200;
+    //private readonly float healthThreshold = 0.0f;
+
+    private HealthSystem healthSystem;
+    private Transform healthBarTransform;
+
+    private Rigidbody2D rb;
+    private BoxCollider2D boxCollider;
+
+    private GameObject pfDeathEffect;
+
+
+    public virtual void Start()
+    {
+        Setup();
+
+        SetHealth();
+        SetID(0);
+        CreateDrop();
+
+
+        //ID = 0; // first enemy (could use as a stat on character stats)
+
+
+
+    }
+
+    // things that will never change
+
+    public void Setup()
+    {
+        GetComponents();
+        LoadResources();
+    }
+
+
+    public virtual void GetComponents()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
-        
-        pfDeathEffect = Resources.Load<GameObject>("Prefabs/pfDeathAnimationEffect");
+    }
 
+    public virtual void SetHealth()
+    {
         currentHealth = maxHealth;
+    }
 
-        ID = 1; // first enemy (could use as a stat on character stats)
+    public virtual void SetID(int id)
+    {
+        this.ID = id;
+    }
 
+    public virtual void CreateDrop()
+    {
         DropTable = new DropTable();
         DropTable.loot = new List<LootDrop>
         {
             new LootDrop("coin", 100),
         };
+    }
+
+    public virtual void LoadResources()
+    {
+        pfDeathEffect = Resources.Load<GameObject>("Prefabs/pfDeathAnimationEffect");
     }
 
     private void Update()
@@ -98,15 +138,16 @@ public class Beetle : MonoBehaviour, IEnemy
 
     [Header("Death")]
     [SerializeField] private float deathAnimationTime = 0.55f;
-    private GameObject pfDeathEffect;
 
     private void DeathEffect()
     {
         if (pfDeathEffect != null)
         {
             this.gameObject.SetActive(false);
-            GameObject effect = Instantiate(pfDeathEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 0.3f);
+            GameObject pfDeathEffectInstance = Instantiate(pfDeathEffect, transform.position, Quaternion.identity);
+
+            //GameObject effect = Instantiate(pfDeathEffect, transform.position, Quaternion.identity);
+            Destroy(pfDeathEffectInstance, 0.2f);
         }
     }
 
@@ -146,7 +187,6 @@ public class Beetle : MonoBehaviour, IEnemy
     public PickupItem pickupItem;
     public DropTable DropTable { get; set; }
 
-
     void DropLoot()
     {
         Item item = DropTable.GetDrop();
@@ -157,23 +197,5 @@ public class Beetle : MonoBehaviour, IEnemy
         }
     }
 
-    public bool IsAlive()
-    {
-        return currentHealth > healthThreshold;
-    }
 
-    public bool isDead()
-    {
-        return currentHealth <= healthThreshold;
-    }
-
-    public bool IsDamaged()
-    {
-        return currentHealth < maxHealth;
-    }
-
-    public bool isFullHealth()
-    {
-        return currentHealth == maxHealth;
-    }
 }

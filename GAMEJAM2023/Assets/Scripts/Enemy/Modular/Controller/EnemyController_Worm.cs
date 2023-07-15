@@ -1,20 +1,21 @@
 using UnityEngine;
 
-public class ModularEnemyWorm : MonoBehaviour
+public class EnemyController_Worm : MonoBehaviour
 {
     private IEnemyBehavior behavior;
 
     DistanceCheck distanceCheck;
 
     IdleBehavior idleBehavior;
-    AttackExplosion attackExplosion;
+    WormAttack wormAttack;
+
 
     private void Start()
     {
         // Initialize the default behavior (e.g., RoamingBehavior)
         distanceCheck = GetComponent<DistanceCheck>();
         idleBehavior = GetComponent<IdleBehavior>();
-        attackExplosion = GetComponent<AttackExplosion>();
+        wormAttack = GetComponent<WormAttack>();
 
         behavior = idleBehavior;
     }
@@ -24,7 +25,7 @@ public class ModularEnemyWorm : MonoBehaviour
         if (distanceCheck.IsPlayerInAttackRange())
         {
             // Switch to attack behavior
-            ChangeBehavior(attackExplosion);
+            ChangeBehavior(wormAttack);
 
         }
         else if (distanceCheck.IsPlayerInChaseRange())
