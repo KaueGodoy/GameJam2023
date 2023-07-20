@@ -26,6 +26,8 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
     public QTEUI QTEUI;
     public float QTEAmount = 10;
 
+    public Item item;
+
     private void Start()
     {
         // Find the player object and store its transform
@@ -67,8 +69,7 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
 
         if (playerHit)
         {
-            // CC
-            //QTESystem.TriggerQTE(playerHit);
+            
         }
 
 
@@ -87,7 +88,27 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
         {
             Debug.Log("Player hit");
             playerHit = true;
+
             QTEUI.InstantiateQTEUI(QTEAmount);
+            //InventoryController.Instance.ConsumeItem("potion_hp");
+
+            //Player player = collision.gameObject.GetComponent<Player>();
+            //float oldMoveSpeed = 6;
+
+            ////oldMoveSpeed = player.baseMoveSpeed;
+            
+            //CharacterStats stats = collision.gameObject.GetComponent<Player>().characterStats;
+
+            //float moveSpeedDebuff = -1 * (stats.GetStat(BaseStat.BaseStatType.MoveSpeedBonus).GetCalculatedStatValue());
+
+            //player.baseMoveSpeed *= (moveSpeedDebuff / 100);
+
+            //if (!QTELogic.stuck)
+            //{
+            //    player.baseMoveSpeed = oldMoveSpeed;
+            //}
+
+            //InventoryController.Instance.ConsumeItem(item);
             //collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         }
     }

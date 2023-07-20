@@ -7,7 +7,7 @@ public class QTELogic : MonoBehaviour
     public float currentPressAmount;
     public float requiredPressAmount;
     public float target;
-    public bool stuck;
+    public static bool stuck;
 
     private PlayerControls playerControls;
 
@@ -37,6 +37,7 @@ public class QTELogic : MonoBehaviour
     public void Initialize()
     {
         currentPressAmount = 0;
+        stuck = true;
         QTEUIContainer qteUIContainer = GetComponent<QTEUIContainer>();
         requiredPressAmount =  qteUIContainer.requiredPressAmount;
         target = currentPressAmount / requiredPressAmount;

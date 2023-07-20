@@ -79,7 +79,7 @@
       },
       {
         "StatType": "MoveSpeedBonus",
-        "BaseValue": 20.0,
+        "BaseValue": -100.0,
         "StatName": "MOV SPD%"
       },
        {
@@ -157,6 +157,11 @@
         "StatType": "HP",
         "BaseValue": 300,
         "StatName": "HP"
+      },
+      {
+        "StatType": "MoveSpeedBonus",
+        "BaseValue": -100.0,
+        "StatName": "MOV SPD%"
       }
     ]
   }

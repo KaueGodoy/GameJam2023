@@ -19,10 +19,6 @@ public class QTEUIContainer : MonoBehaviour
         QTELogic = GetComponent<QTELogic>();
     }
 
-    public void SetRequiredPressAmount(float amount)
-    {
-        requiredPressAmount = amount;
-    }
 
     public void Update()
     {

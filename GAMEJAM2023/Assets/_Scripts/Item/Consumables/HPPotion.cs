@@ -7,12 +7,17 @@ public class HPPotion : MonoBehaviour, IConsumable
     public List<BaseStat> Stats { get; set; }
     public void Consume()
     {
-        Debug.Log("You've just consumed this potion. Nice");
+        Debug.Log("HP potion consumed. Stats NOT changed");
         Destroy(gameObject);
     }
 
     public void Consume(CharacterStats stats)
     {
-        Debug.Log("You've just consumed this potion. Not nice");
+        Debug.Log("HP potion consumed. Stats changed");
+
+        Destroy(gameObject);
     }
+
+
+
 }

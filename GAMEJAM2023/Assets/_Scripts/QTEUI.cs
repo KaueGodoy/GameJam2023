@@ -7,7 +7,8 @@ public class QTEUI : MonoBehaviour
 
     private void Awake()
     {
-        container = Resources.Load<QTEUIContainer>("UI/QTE_Container");
+        if (container == null)
+            container = Resources.Load<QTEUIContainer>("UI/QTE_Container");
     }
 
     public void InstantiateQTEUI(float requiredPressAmount)

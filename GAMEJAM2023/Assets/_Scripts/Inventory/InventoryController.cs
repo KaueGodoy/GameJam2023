@@ -36,7 +36,6 @@ public class InventoryController : MonoBehaviour
         GiveItem("sword");
         GiveItem("staff");
         //GiveItem("potion_log");
-        //GiveItem("potion_hp");
         //GiveItem("coin");
         GiveItem("skillTest");
         GiveItem("ultTest");
@@ -78,6 +77,11 @@ public class InventoryController : MonoBehaviour
     }
 
     public void ConsumeItem(Item itemToConsume)
+    {
+        consumableController.ConsumeItem(itemToConsume);
+    }
+    // NEW
+    public void ConsumeItem(string itemToConsume)
     {
         consumableController.ConsumeItem(itemToConsume);
     }

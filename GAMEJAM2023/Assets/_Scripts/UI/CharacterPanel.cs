@@ -60,6 +60,7 @@ public class CharacterPanel : MonoBehaviour
         UIEventHandler.OnSkillEquipped += UpdateEquippedSkill;
         UIEventHandler.OnUltEquipped += UpdateEquippedUlt;
         InitializeStats();
+
     }
 
     //private void UpdateHealth(float currentHealth, float maxHealth)
@@ -86,6 +87,8 @@ public class CharacterPanel : MonoBehaviour
         {
             playerStatTexts[i].text = player.characterStats.stats[i].StatName + ": " +
                 player.characterStats.stats[i].GetCalculatedStatValue().ToString();
+
+            playerStatTexts[i].transform.localScale = Vector3.one;
         }
     }
 
@@ -99,6 +102,8 @@ public class CharacterPanel : MonoBehaviour
             weaponStatTexts.Add(Instantiate(weaponStatPrefab));
             weaponStatTexts[i].transform.SetParent(weaponStatPanel);
             weaponStatTexts[i].text = item.Stats[i].StatName + ": " + item.Stats[i].GetCalculatedStatValue().ToString();
+
+            weaponStatTexts[i].transform.localScale = Vector3.one;
         }
     }
 
@@ -112,6 +117,8 @@ public class CharacterPanel : MonoBehaviour
             skillStatTexts.Add(Instantiate(weaponStatPrefab));
             skillStatTexts[i].transform.SetParent(skillStatPanel);
             skillStatTexts[i].text = item.Stats[i].StatName + ": " + item.Stats[i].GetCalculatedStatValue().ToString();
+
+            skillStatTexts[i].transform.localScale = Vector3.one;
         }
     }
 
@@ -125,6 +132,8 @@ public class CharacterPanel : MonoBehaviour
             ultStatTexts.Add(Instantiate(weaponStatPrefab));
             ultStatTexts[i].transform.SetParent(ultStatPanel);
             ultStatTexts[i].text = item.Stats[i].StatName + ": " + item.Stats[i].GetCalculatedStatValue().ToString();
+
+            ultStatTexts[i].transform.localScale = Vector3.one;
         }
     }
 
