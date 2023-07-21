@@ -5,18 +5,21 @@ using UnityEngine;
 public class ActionItem : Interactable
 {
     public GameObject interactPanel;
+    public GameObject itemPanel;
     private bool panelIsActive;
 
     public override void Interact()
     {
         Debug.Log("Interacting with base ActionItem class /n panel active");
         interactPanel.SetActive(!panelIsActive);
+        itemPanel.SetActive(!panelIsActive);
     }
 
     public override void EndInteraction()
     {
         Debug.Log("Interacting with base ActionItem class /n panel disabled");
         interactPanel.SetActive(panelIsActive);
+        itemPanel.SetActive(panelIsActive);
     }
 
     public override void OnTriggerEnter2D(Collider2D collision)

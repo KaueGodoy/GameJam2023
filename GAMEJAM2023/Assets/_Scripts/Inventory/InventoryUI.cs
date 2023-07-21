@@ -43,7 +43,9 @@ public class InventoryUI : MonoBehaviour
     {
         if (playerControls.UI.Inventory.triggered)
         {
+
             TriggerMenu();
+
         }
     }
 
