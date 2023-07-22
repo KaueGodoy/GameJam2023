@@ -33,6 +33,11 @@
         "StatName": "ATK FLAT"
       },
       {
+        "StatType": "MoveSpeedBonus",
+        "BaseValue": 10.0,
+        "StatName": "MOV SPD%"
+      },
+      {
         "StatType": "DamageBonus",
         "BaseValue": 46.6,
         "StatName": "DMG BONUS"
@@ -121,6 +126,11 @@
         "StatType": "AttackBonus",
         "BaseValue": 49.6,
         "StatName": "ATK%"
+      },
+      {
+        "StatType": "MoveSpeedBonus",
+        "BaseValue": 30.0,
+        "StatName": "MOV SPD%"
       },
       {
         "StatType": "FlatAttack",

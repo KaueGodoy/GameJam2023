@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private PlayerControls playerInput;
+
+    protected EffectableObject Effectable;
 
     [SerializeField]
     private InputActionReference playerInputAction;
@@ -47,6 +50,8 @@ public class Player : MonoBehaviour
         Debug.Log("Player init");
 
         playerInput = new PlayerControls();
+
+        Effectable = GetComponent<EffectableObject>();
     }
 
     private void Start()
@@ -83,38 +88,67 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!PauseMenu.GameIsPaused)
-        {
-            if (isDashing) return;
+        //if (!PauseMenu.GameIsPaused)
+        //{
+        //    if (isDashing) return;
 
-            if (isAlive)
-            {
-                ProcessInput();
-                Shoot();
-            }
+        //    if (isAlive)
+        //    {
+        //        ProcessInput();
+        //        Shoot();
+        //    }
+        //}
+
+        if (PauseMenu.GameIsPaused) return;
+
+        if (isDashing) return;
+
+        if (isAlive)
+        {
+            ProcessInput();
+            Shoot();
         }
     }
 
     private void FixedUpdate()
     {
-        if (!PauseMenu.GameIsPaused)
+        //if (!PauseMenu.GameIsPaused)
+        //{
+        //    if (isDashing) return;
+
+        //    if (isAlive)
+        //    {
+        //        Move();
+        //        Flip();
+        //        Jump();
+        //        BetterJump();
+        //        DashTrigger();
+        //        ExitPlatform();
+        //        UpdateUI();
+        //    }
+
+        //    UpdateTimers();
+        //    UpdateAnimationState();
+        //}
+
+        if (PauseMenu.GameIsPaused) return;
+
+
+        if (isDashing) return;
+
+        if (isAlive)
         {
-            if (isDashing) return;
-
-            if (isAlive)
-            {
-                Move();
-                Flip();
-                Jump();
-                BetterJump();
-                DashTrigger();
-                ExitPlatform();
-                UpdateUI();
-            }
-
-            UpdateTimers();
-            UpdateAnimationState();
+            Move();
+            Flip();
+            Jump();
+            BetterJump();
+            DashTrigger();
+            ExitPlatform();
+            UpdateUI();
         }
+
+        UpdateTimers();
+        UpdateAnimationState();
     }
 
     void ProcessInput()
@@ -301,6 +335,18 @@ public class Player : MonoBehaviour
     public float maxSpeed = 15f;
     public float speedPotion = 0.4f;
 
+    public float CurrentSpeed
+    {
+        get
+        {
+            return 
+                Effectable.Effect_GroundSpeed(
+                    baseMoveSpeed * (1 + Effectable.Effect_BonusGroundSpeed(
+                    (characterStats.GetStat(BaseStat.BaseStatType.MoveSpeedBonus).GetCalculatedStatValue() / 100)))
+                );
+        }
+    }
+
     private Vector2 moveH;
     private Vector2 direction;
 
@@ -310,10 +356,10 @@ public class Player : MonoBehaviour
 
         moveSpeed = baseMoveSpeed;
 
-        float currentSPD = baseMoveSpeed * (1 + (characterStats.GetStat(BaseStat.BaseStatType.MoveSpeedBonus).GetCalculatedStatValue() / 100));
-        //Debug.Log(currentSPD);
 
-        direction = new Vector2(moveH.x * currentSPD, rb.velocity.y);
+        Debug.Log(CurrentSpeed);
+
+        direction = new Vector2(moveH.x * CurrentSpeed, rb.velocity.y);
 
         if (direction != Vector2.zero)
         {
@@ -510,7 +556,7 @@ public class Player : MonoBehaviour
                 Invoke("ShootComplete", shootDelay);
             }
         }
-      
+
     }
 
     private void InstantiateBullet()
@@ -686,9 +732,9 @@ public class Player : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.down, extraHeightText, jumpableGround);
 
         // draw gizmos
-        
+
         //Color rayColor;
-        
+
         //if(raycastHit.collider != null)
         //{
         //    rayColor = Color.green;
