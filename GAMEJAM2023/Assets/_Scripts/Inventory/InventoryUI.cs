@@ -6,7 +6,19 @@ using UnityEngine.InputSystem;
 public class InventoryUI : MonoBehaviour
 {
     public RectTransform inventoryPanel;
-    public RectTransform scrollViewContent;
+
+    [Header("Content")]
+    public RectTransform WeaponScrollViewContent;
+    public RectTransform SkillScrollViewContent;
+    public RectTransform UltScrollViewContent;
+    public RectTransform ConsumableScrollViewContent;
+
+    [Header("Sections")]
+    public RectTransform sectionPanelWeapon;
+    public RectTransform sectionPanelSkill;
+    public RectTransform sectionPanelUlt;
+    public RectTransform sectionPanelConsumable;
+
     InventoryUIItem ItemContainer { get; set; }
     bool MenuIsActive { get; set; }
     Item CurrentSelectedItem { get; set; }
@@ -20,6 +32,11 @@ public class InventoryUI : MonoBehaviour
         ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
         UIEventHandler.OnItemAddedToInventory += ItemAdded;
         inventoryPanel.gameObject.SetActive(false);
+
+        sectionPanelWeapon.gameObject.SetActive(true);
+        sectionPanelSkill.gameObject.SetActive(false);
+        sectionPanelUlt.gameObject.SetActive(false);
+        sectionPanelConsumable.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -55,10 +72,64 @@ public class InventoryUI : MonoBehaviour
         inventoryPanel.gameObject.SetActive(MenuIsActive);
     }
 
+    public void EnableSectionWeapon()
+    {
+        sectionPanelWeapon.gameObject.SetActive(true);
+        sectionPanelSkill.gameObject.SetActive(false);
+        sectionPanelUlt.gameObject.SetActive(false);
+        sectionPanelConsumable.gameObject.SetActive(false);
+    }
+
+
+    public void EnableSectionSkill()
+    {
+        sectionPanelWeapon.gameObject.SetActive(false);
+        sectionPanelSkill.gameObject.SetActive(true);
+        sectionPanelUlt.gameObject.SetActive(false);
+        sectionPanelConsumable.gameObject.SetActive(false);
+    }
+
+    public void EnableSectionUlt()
+    {
+        sectionPanelWeapon.gameObject.SetActive(false);
+        sectionPanelSkill.gameObject.SetActive(false);
+        sectionPanelUlt.gameObject.SetActive(true);
+        sectionPanelConsumable.gameObject.SetActive(false);
+    }
+
+    public void EnableSectionConsumablel()
+    {
+        sectionPanelWeapon.gameObject.SetActive(false);
+        sectionPanelSkill.gameObject.SetActive(false);
+        sectionPanelUlt.gameObject.SetActive(false);
+        sectionPanelConsumable.gameObject.SetActive(true);
+    }
+
     public void ItemAdded(Item item)
     {
         InventoryUIItem emptyItem = Instantiate(ItemContainer);
         emptyItem.SetItem(item);
-        emptyItem.transform.SetParent(scrollViewContent);
+
+        if (item.ItemType == Item.ItemTypes.Weapon)
+        {
+            emptyItem.transform.SetParent(WeaponScrollViewContent);
+        }
+        else if (item.ItemType == Item.ItemTypes.Skill)
+        {
+            emptyItem.transform.SetParent(SkillScrollViewContent);
+        }
+        else if (item.ItemType == Item.ItemTypes.Ult)
+        {
+            emptyItem.transform.SetParent(UltScrollViewContent);
+        }
+        else if (item.ItemType == Item.ItemTypes.Consumable)
+        {
+            emptyItem.transform.SetParent(ConsumableScrollViewContent);
+        }
+        else if (item.ItemType == Item.ItemTypes.Quest)
+        {
+            emptyItem.transform.SetParent(ConsumableScrollViewContent);
+        }
+
     }
 }
