@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
 {
-    private Transform player; // Reference to the player's transform
-
     public float chargeTime = 1.5f; // The time it takes for the enemy to charge the attack
     public float speedForce = 10f; // The speed at which the enemy charges towards the player
 
@@ -19,20 +17,26 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
     public bool hasCharged = false;
     public bool playerHit = false;
 
-    private Vector2 force; // The force to be applied to the worm
+    private Vector2 force; 
 
-    private Rigidbody2D rb;
+    private Transform _player; 
+    private Rigidbody2D _rb;
+    private SpriteRenderer _spriteRenderer;
 
     public QTEUI QTEUI;
     public float QTEAmount = 10;
 
     public Item item;
 
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
-        // Find the player object and store its transform
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        rb = GetComponent<Rigidbody2D>();
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public void UpdateBehavior()
@@ -45,6 +49,8 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
 
     private IEnumerator Charge()
     {
+        _spriteRenderer.color = Color.red;
+
         isCooldown = true;
 
         isCharging = true;
@@ -55,11 +61,13 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
 
         isCharging = false;
 
-        Vector2 direction = (player.position - transform.position).normalized;
+        _spriteRenderer.color = Color.white;
 
-        force = new Vector2(direction.x * speedForce, rb.velocity.y);
+        Vector2 direction = (_player.position - transform.position).normalized;
 
-        rb.AddForce(force, ForceMode2D.Impulse);
+        force = new Vector2(direction.x * speedForce, _rb.velocity.y);
+
+        _rb.AddForce(force, ForceMode2D.Impulse);
 
         Debug.Log("Has charged");
 
@@ -76,7 +84,7 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
         float cooldown = Random.Range(cooldownMin, cooldownMax);
 
         yield return new WaitForSeconds(cooldown);
-        rb.velocity = Vector2.zero;
+        _rb.velocity = Vector2.zero;
 
         hasCharged = false;
         isCooldown = false;

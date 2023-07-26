@@ -339,7 +339,7 @@ public class Player : MonoBehaviour
     {
         get
         {
-            return 
+            return
                 Effectable.Effect_GroundSpeed(
                     baseMoveSpeed * (1 + Effectable.Effect_BonusGroundSpeed(
                     (characterStats.GetStat(BaseStat.BaseStatType.MoveSpeedBonus).GetCalculatedStatValue() / 100)))
@@ -357,7 +357,7 @@ public class Player : MonoBehaviour
         moveSpeed = baseMoveSpeed;
 
 
-        Debug.Log(CurrentSpeed);
+        //Debug.Log(CurrentSpeed);
 
         direction = new Vector2(moveH.x * CurrentSpeed, rb.velocity.y);
 

@@ -3,10 +3,10 @@ using UnityEngine;
 public class ModularEnemy : MonoBehaviour
 {
     private DistanceCheck distanceCheck;
-    private ChaseBehavior chaseBehavior;
+    private EnemyBehavior_Chase _chase;
     private AttackBehavior attackBehavior;
-    private RoamingBehavior roamingBehavior;
-    private IdleBehavior idleBehavior;
+    private EnemyBehavior_Patrol patrolBehavior;
+    private EnemyBehavior_Idle idleBehavior;
 
     private IEnemyBehavior behavior;
 
@@ -16,10 +16,10 @@ public class ModularEnemy : MonoBehaviour
 
         distanceCheck = GetComponent<DistanceCheck>();
 
-        chaseBehavior = GetComponent<ChaseBehavior>();
+        _chase = GetComponent<EnemyBehavior_Chase>();
         attackBehavior = GetComponent<AttackBehavior>();
-        roamingBehavior = GetComponent<RoamingBehavior>();
-        idleBehavior = GetComponent<IdleBehavior>();
+        patrolBehavior = GetComponent<EnemyBehavior_Patrol>();
+        idleBehavior = GetComponent<EnemyBehavior_Idle>();
 
         behavior = idleBehavior;
     }
@@ -36,8 +36,8 @@ public class ModularEnemy : MonoBehaviour
         else if (distanceCheck.IsPlayerInChaseRange())
         {
             // Switch to chase behavior
-            ChangeBehavior(chaseBehavior);
-            chaseBehavior.enabled = true;
+            ChangeBehavior(_chase);
+            _chase.enabled = true;
 
         }
         //else if (distanceCheck.IsPlayerInRoamingDistance())

@@ -1,67 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FlipSprite : MonoBehaviour
 {
-    private Transform target;
-    private SpriteRenderer spriteRenderer;
-    private Rigidbody2D rb;
-   
-    public bool isFacingRight;
+    private Transform _target;
+    private SpriteRenderer _spriteRenderer;
+    private Rigidbody2D _rb;
+
+    public bool IsFacingRight;
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _rb = GetComponent<Rigidbody2D>();
+    }
 
     private void Start()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-        {
-            target = playerObject.transform;
-        }
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        if (playerObject != null) _target = playerObject.transform;
     }
 
-    public void Flip2()
+    public void FlipBasedOnMovingDirection()
     {
-        if (isFacingRight && transform.position.x < 0f || !isFacingRight && transform.position.x > 0f)
+        Vector3 direction = _rb.velocity;
+
+        if (direction.x < 0.1f)
         {
-            isFacingRight = !isFacingRight;
-            spriteRenderer.flipX = isFacingRight;
+            _spriteRenderer.flipX = false;
         }
-
-    }
-
-    public void FlipOld()
-    {
-        if (isFacingRight && transform.position.x < 0f || !isFacingRight && transform.position.x > 0f)
+        else
         {
-            Vector3 localScale = transform.localScale;
-            isFacingRight = !isFacingRight;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
-
-    public void FlipRoam()
-    {
-        Vector3 direction = rb.velocity;
-
-        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            spriteRenderer.flipX = isFacingRight;
+            _spriteRenderer.flipX = true;
         }
     }
 
     public void FlipBasedOnPlayerPosition()
     {
-        Vector3 direction = (target.position - transform.position).normalized;
+        Vector3 direction = (_target.position - transform.position).normalized;
 
-        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
+        if (IsFacingRight && direction.x < 0.1f || !IsFacingRight && direction.x > 0.1f)
         {
-            isFacingRight = !isFacingRight;
-            spriteRenderer.flipX = isFacingRight;
+            IsFacingRight = !IsFacingRight;
+            _spriteRenderer.flipX = IsFacingRight;
         }
     }
+
+    public void FlipTest()
+    {
+        Vector3 direction = (_target.position - transform.position).normalized;
+
+        if (direction.x < 0.1f)
+        {
+            _spriteRenderer.flipX = false;
+        }
+        else
+        {
+            _spriteRenderer.flipX = true;
+        }
+    }
+
+    //public void FlipBasedOnPlayerPosition(Vector3 distance)
+    //{
+    //    Vector3 direction = (_target.position - transform.position).normalized;
+
+    //    distance = direction;
+
+    //    if (IsFacingRight && distance.x < 0f || !IsFacingRight && distance.x > 0f)
+    //    {
+    //        IsFacingRight = !IsFacingRight;
+    //        _spriteRenderer.flipX = IsFacingRight;
+    //    }
+    //}
 }

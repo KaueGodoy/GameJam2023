@@ -6,7 +6,7 @@ public class EnemyController_Worm : MonoBehaviour
 
     DistanceCheck distanceCheck;
 
-    IdleBehavior idleBehavior;
+    EnemyBehavior_Idle idleBehavior;
     WormAttack wormAttack;
 
 
@@ -14,7 +14,7 @@ public class EnemyController_Worm : MonoBehaviour
     {
         // Initialize the default behavior (e.g., RoamingBehavior)
         distanceCheck = GetComponent<DistanceCheck>();
-        idleBehavior = GetComponent<IdleBehavior>();
+        idleBehavior = GetComponent<EnemyBehavior_Idle>();
         wormAttack = GetComponent<WormAttack>();
 
         behavior = idleBehavior;

@@ -4,55 +4,58 @@ using UnityEngine;
 
 public class EnemyController_Wasp : MonoBehaviour
 {
-    private IEnemyBehavior behavior;
+    private IEnemyBehavior _behavior;
 
-    DistanceCheck distanceCheck;
+    private DistanceCheck _distanceCheck;
 
-    IdleBehavior idleBehavior;
-    EnemyBehavior_Shoot shoot;
+    private EnemyBehavior_Idle _idle;
+    private EnemyBehavior_Shoot _shoot;
+    private EnemyBehavior_Patrol _patrol;
+
+    private void Awake()
+    {
+        _distanceCheck = GetComponent<DistanceCheck>();
+
+        _idle = GetComponent<EnemyBehavior_Idle>();
+        _shoot = GetComponent<EnemyBehavior_Shoot>();
+        _patrol = GetComponent<EnemyBehavior_Patrol>();
+    }
 
     private void Start()
     {
-        distanceCheck = GetComponent<DistanceCheck>();
-
-        idleBehavior = GetComponent<IdleBehavior>();
-        shoot = GetComponent<EnemyBehavior_Shoot>();
-
-        behavior = idleBehavior;
+        _behavior = _idle;
     }
 
     private void Update()
     {
-        if (distanceCheck.IsPlayerInAttackRange())
+        if (_distanceCheck.IsPlayerInAttackRange())
         {
-            // Switch to attack behavior
-            ChangeBehavior(shoot);
+            ChangeBehavior(_shoot);
+        }
+        else if (_distanceCheck.IsPlayerInChaseRange())
+        {
 
         }
-        else if (distanceCheck.IsPlayerInChaseRange())
+        else if (_distanceCheck.IsPlayerInPatrolRange())
         {
-            // ChangeBehavior(idleBehavior);
-
+            ChangeBehavior(_patrol);
         }
         else
         {
-            ChangeBehavior(idleBehavior);
+            ChangeBehavior(_idle);
         }
 
-        // Update the current behavior
-        behavior.UpdateBehavior();
+        _behavior.UpdateBehavior();
     }
 
     public void ChangeBehavior(IEnemyBehavior newBehavior)
     {
-        // Disable the current behavior
-        if (behavior != null)
+        if (_behavior != null)
         {
-            behavior.Disable();
+            _behavior.Disable();
         }
 
-        // Enable and assign the new behavior
-        behavior = newBehavior;
+        _behavior = newBehavior;
     }
 }
 

@@ -8,14 +8,14 @@ public class EnemyController_Wasp_Hitscan : MonoBehaviour
 
     DistanceCheck distanceCheck;
 
-    IdleBehavior idleBehavior;
+    EnemyBehavior_Idle idleBehavior;
     EnemyBehavior_Hitscan shoot;
 
     private void Start()
     {
         distanceCheck = GetComponent<DistanceCheck>();
 
-        idleBehavior = GetComponent<IdleBehavior>();
+        idleBehavior = GetComponent<EnemyBehavior_Idle>();
         shoot = GetComponent<EnemyBehavior_Hitscan>();
 
         behavior = idleBehavior;

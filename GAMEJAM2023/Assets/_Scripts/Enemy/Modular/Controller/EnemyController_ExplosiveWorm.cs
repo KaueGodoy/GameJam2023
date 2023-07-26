@@ -6,14 +6,14 @@ public class EnemyController_ExplosiveWorm : MonoBehaviour
 
     DistanceCheck distanceCheck;
 
-    IdleBehavior idleBehavior;
+    EnemyBehavior_Idle idleBehavior;
     AttackExplosion attackExplosion;
 
     private void Start()
     {
         // Initialize the default behavior (e.g., RoamingBehavior)
         distanceCheck = GetComponent<DistanceCheck>();
-        idleBehavior = GetComponent<IdleBehavior>();
+        idleBehavior = GetComponent<EnemyBehavior_Idle>();
         attackExplosion = GetComponent<AttackExplosion>();
 
         behavior = idleBehavior;
