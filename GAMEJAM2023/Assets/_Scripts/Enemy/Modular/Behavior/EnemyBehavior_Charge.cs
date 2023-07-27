@@ -17,50 +17,51 @@ public class EnemyBehavior_Charge : MonoBehaviour, IEnemyBehavior
     public bool hasCharged = false;
     public bool playerHit = false;
 
+    public float damage = 1200f;
+
     private Vector2 force; // The force to be applied to the worm
 
-    private Transform _player;
+    private Player _player;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
 
+    private Coroutine _chargeAttackCoroutine;
+
     private void Awake()
     {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void Start()
-    {
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public void UpdateBehavior()
     {
         if (!IsCooldown && !isCharging && !hasCharged)
         {
-            StartCoroutine(Charge());
+            CallChargeAttack();
         }
     }
 
-    private IEnumerator Charge()
+    public void CallChargeAttack()
+    {
+        _chargeAttackCoroutine = StartCoroutine(ChargeAttackCoroutine());
+    }
+
+    private IEnumerator ChargeAttackCoroutine()
     {
         _spriteRenderer.color = Color.red;
-
         IsCooldown = true;
-
         isCharging = true;
-
         Debug.Log("Charging");
 
         yield return new WaitForSeconds(chargeTime);
 
         isCharging = false;
-
         _spriteRenderer.color = Color.white;
 
-        Vector2 direction = (_player.position - transform.position).normalized;
+        Vector2 direction = (_player.transform.position - transform.position).normalized;
 
-        force = new Vector2(direction.x * speedForce, _rb.velocity.y);
+        force = new Vector2(direction.x * speedForce, 0f);
 
         _rb.AddForce(force, ForceMode2D.Impulse);
 
@@ -70,13 +71,22 @@ public class EnemyBehavior_Charge : MonoBehaviour, IEnemyBehavior
 
         yield return new WaitForSeconds(cooldownDefault);
 
+
         if (playerHit)
         {
             yield return new WaitForSeconds(stepBackCooldown);
             _rb.velocity = Vector2.zero;
 
-            Vector2 stepback = new Vector2(direction.x * -(speedForce / 2), _rb.velocity.y);
+            Vector2 stepback = new Vector2(direction.x * -(speedForce / 2), 0f);
             _rb.AddForce(stepback, ForceMode2D.Impulse);
+
+            playerHit = false;
+        }
+        else
+        {
+            _spriteRenderer.color = Color.yellow;
+            _rb.velocity = Vector2.zero;
+            yield return new WaitForSeconds(cooldownDefault);
         }
 
         float cooldown = Random.Range(cooldownMin, cooldownMax);
@@ -93,14 +103,20 @@ public class EnemyBehavior_Charge : MonoBehaviour, IEnemyBehavior
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player hit");
             playerHit = true;
+            PerformAttack();
         }
+    }
+
+    public void PerformAttack()
+    {
+        _player.TakeDamage(damage);
+        DamagePopup.Create(_player.transform.position + Vector3.right + Vector3.up, (int)damage);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        playerHit = false;
+
     }
 
     public void Disable()

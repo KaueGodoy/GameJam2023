@@ -9,8 +9,8 @@ public class Enemy_Basilisk : MonoBehaviour, IEnemy
     public float maxHealth = 200;
     private readonly float healthThreshold = 0.0f;
 
-    private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
+    private Rigidbody2D _rb;
+    private BoxCollider2D _boxCollider;
 
     HealthSystem healthSystem;
     Transform healthBarTransform;
@@ -20,16 +20,18 @@ public class Enemy_Basilisk : MonoBehaviour, IEnemy
     public int ID { get; set; }
     public bool IsDead { get; set; }
 
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+        pfDeathEffect = Resources.Load<GameObject>("Prefabs/pfDeathAnimationEffect");
+    }
+
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
-        
-        pfDeathEffect = Resources.Load<GameObject>("Prefabs/pfDeathAnimationEffect");
-
         currentHealth = maxHealth;
 
-        ID = 1; // first enemy (could use as a stat on character stats)
+        ID = 5;
 
         DropTable = new DropTable();
         DropTable.loot = new List<LootDrop>
@@ -88,8 +90,8 @@ public class Enemy_Basilisk : MonoBehaviour, IEnemy
         {
             DisableHealthBar();
 
-            rb.bodyType = RigidbodyType2D.Static;
-            boxCollider.enabled = false;
+            _rb.bodyType = RigidbodyType2D.Static;
+            _boxCollider.enabled = false;
 
             Invoke("Die", deathAnimationTime);
             Invoke("DeathEffect", deathAnimationTime);

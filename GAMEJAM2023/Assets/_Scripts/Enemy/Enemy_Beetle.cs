@@ -24,16 +24,14 @@ public class Enemy_Beetle : MonoBehaviour, IEnemy
     {
         _rb = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
+        pfDeathEffect = Resources.Load<GameObject>("Prefabs/pfDeathAnimationEffect");
     }
 
     private void Start()
     {
-        
-        pfDeathEffect = Resources.Load<GameObject>("Prefabs/pfDeathAnimationEffect");
-
         currentHealth = maxHealth;
 
-        ID = 1; // first enemy (could use as a stat on character stats)
+        ID = 3;
 
         DropTable = new DropTable();
         DropTable.loot = new List<LootDrop>

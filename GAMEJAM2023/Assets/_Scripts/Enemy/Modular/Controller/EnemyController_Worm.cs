@@ -2,56 +2,56 @@ using UnityEngine;
 
 public class EnemyController_Worm : MonoBehaviour
 {
-    private IEnemyBehavior behavior;
+    private IEnemyBehavior _behavior;
 
-    DistanceCheck distanceCheck;
+    private DistanceCheck _distanceCheck;
 
-    EnemyBehavior_Idle idleBehavior;
-    WormAttack wormAttack;
+    private EnemyBehavior_Idle _idle;
+    private EnemyBehavior_JumpTowards _jumpAttack;
+    private EnemyBehavior_Patrol _patrol;
 
+    private void Awake()
+    {
+        _distanceCheck = GetComponent<DistanceCheck>();
+        _idle = GetComponent<EnemyBehavior_Idle>();
+        _patrol = GetComponent<EnemyBehavior_Patrol>();
+        _jumpAttack = GetComponent<EnemyBehavior_JumpTowards>();
+    }
 
     private void Start()
     {
-        // Initialize the default behavior (e.g., RoamingBehavior)
-        distanceCheck = GetComponent<DistanceCheck>();
-        idleBehavior = GetComponent<EnemyBehavior_Idle>();
-        wormAttack = GetComponent<WormAttack>();
-
-        behavior = idleBehavior;
+        _behavior = _idle;
     }
 
     private void Update()
     {
-        if (distanceCheck.IsPlayerInAttackRange())
+        if (_distanceCheck.IsPlayerInAttackRange())
         {
-            // Switch to attack behavior
-            ChangeBehavior(wormAttack);
-
+            ChangeBehavior(_jumpAttack);
         }
-        else if (distanceCheck.IsPlayerInChaseRange())
+        else if (_distanceCheck.IsPlayerInChaseRange())
         {
-            // Switch to chase behavior
             // ChangeBehavior(idleBehavior);
-
+        }
+        else if (_distanceCheck.IsPlayerInPatrolRange())
+        {
+            ChangeBehavior(_patrol);
         }
         else
         {
-            ChangeBehavior(idleBehavior);
+            ChangeBehavior(_idle);
         }
 
-        // Update the current behavior
-        behavior.UpdateBehavior();
+        _behavior.UpdateBehavior();
     }
 
     public void ChangeBehavior(IEnemyBehavior newBehavior)
     {
-        // Disable the current behavior
-        if (behavior != null)
+        if (_behavior != null)
         {
-            behavior.Disable();
+            _behavior.Disable();
         }
 
-        // Enable and assign the new behavior
-        behavior = newBehavior;
+        _behavior = newBehavior;
     }
 }
