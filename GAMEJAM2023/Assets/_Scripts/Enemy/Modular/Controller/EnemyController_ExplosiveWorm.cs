@@ -2,55 +2,51 @@ using UnityEngine;
 
 public class EnemyController_ExplosiveWorm : MonoBehaviour
 {
-    private IEnemyBehavior behavior;
+    private IEnemyBehavior _behavior;
 
-    DistanceCheck distanceCheck;
+    private DistanceCheck _distanceCheck;
 
-    EnemyBehavior_Idle idleBehavior;
-    AttackExplosion attackExplosion;
+    private EnemyBehavior_Idle _idle;
+    private EnemyBehavior_Explode _explodeAttack;
+
+    private void Awake()
+    {
+        _distanceCheck = GetComponent<DistanceCheck>();
+
+        _idle = GetComponent<EnemyBehavior_Idle>();
+        _explodeAttack = GetComponent<EnemyBehavior_Explode>();
+    }
 
     private void Start()
     {
-        // Initialize the default behavior (e.g., RoamingBehavior)
-        distanceCheck = GetComponent<DistanceCheck>();
-        idleBehavior = GetComponent<EnemyBehavior_Idle>();
-        attackExplosion = GetComponent<AttackExplosion>();
-
-        behavior = idleBehavior;
+        _behavior = _idle;
     }
 
     private void Update()
     {
-        if (distanceCheck.IsPlayerInAttackRange())
+        if (_distanceCheck.IsPlayerInAttackRange())
         {
-            // Switch to attack behavior
-            ChangeBehavior(attackExplosion);
-
+            ChangeBehavior(_explodeAttack);
         }
-        else if (distanceCheck.IsPlayerInChaseRange())
+        else if (_distanceCheck.IsPlayerInChaseRange())
         {
-            // Switch to chase behavior
             // ChangeBehavior(idleBehavior);
-
         }
         else
         {
-            ChangeBehavior(idleBehavior);
+            ChangeBehavior(_idle);
         }
 
-        // Update the current behavior
-        behavior.UpdateBehavior();
+        _behavior.UpdateBehavior();
     }
 
     public void ChangeBehavior(IEnemyBehavior newBehavior)
     {
-        // Disable the current behavior
-        if (behavior != null)
+        if (_behavior != null)
         {
-            behavior.Disable();
+            _behavior.Disable();
         }
 
-        // Enable and assign the new behavior
-        behavior = newBehavior;
+        _behavior = newBehavior;
     }
 }
