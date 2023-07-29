@@ -37,6 +37,11 @@
         "BaseValue": 10.0,
         "StatName": "MOV SPD%"
       },
+        {
+        "StatType": "HP",
+        "BaseValue": 2000,
+        "StatName": "MAX HP"
+      },
       {
         "StatType": "DamageBonus",
         "BaseValue": 46.6,
@@ -133,6 +138,11 @@
         "StatName": "MOV SPD%"
       },
       {
+        "StatType": "HPBonus",
+        "BaseValue": 30.0,
+        "StatName": "HP Bonus"
+      },
+      {
         "StatType": "FlatAttack",
         "BaseValue": 80,
         "StatName": "ATK FLAT"
@@ -164,9 +174,9 @@
     "itemModifier": 1,
     "Stats": [
       {
-        "StatType": "HP",
+        "StatType": "HPBonus",
         "BaseValue": 300,
-        "StatName": "HP"
+        "StatName": "HP Bonus"
       },
       {
         "StatType": "MoveSpeedBonus",

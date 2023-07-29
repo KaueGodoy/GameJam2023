@@ -17,9 +17,9 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
     public bool hasCharged = false;
     public bool playerHit = false;
 
-    private Vector2 force; 
+    private Vector2 force;
 
-    private Transform _player; 
+    private Transform _player;
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
 
@@ -77,14 +77,16 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
 
         if (playerHit)
         {
-            
+
         }
 
 
         float cooldown = Random.Range(cooldownMin, cooldownMax);
 
         yield return new WaitForSeconds(cooldown);
-        _rb.velocity = Vector2.zero;
+
+        if (_rb != null)
+            _rb.velocity = Vector2.zero;
 
         hasCharged = false;
         isCooldown = false;
@@ -104,7 +106,7 @@ public class EnemyBehavior_Bite : MonoBehaviour, IEnemyBehavior
             //float oldMoveSpeed = 6;
 
             ////oldMoveSpeed = player.baseMoveSpeed;
-            
+
             //CharacterStats stats = collision.gameObject.GetComponent<Player>().characterStats;
 
             //float moveSpeedDebuff = -1 * (stats.GetStat(BaseStat.BaseStatType.MoveSpeedBonus).GetCalculatedStatValue());

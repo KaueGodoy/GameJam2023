@@ -54,4 +54,14 @@ public class BaseEffect : ScriptableObject
     {
         return originalInAirSpeed;
     }
+
+    public virtual float Effect_MaxHealth(float originalMaxHealth)
+    {
+        return originalMaxHealth;
+    }
+
+    public virtual float Effect_BonusMaxHealth(float originalBonusMaxHealth)
+    {
+        return originalBonusMaxHealth;
+    }
 }

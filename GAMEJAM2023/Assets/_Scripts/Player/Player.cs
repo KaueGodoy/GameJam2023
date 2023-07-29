@@ -12,9 +12,9 @@ public class Player : MonoBehaviour
 
     public CharacterStats characterStats;
 
-    private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
-    private PlayerControls playerInput;
+    private Rigidbody2D _rb;
+    private BoxCollider2D _boxCollider;
+    private PlayerControls _playerInput;
 
     protected EffectableObject Effectable;
 
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
 
     [Header("Base Stats")]
     public float baseHealth = 22000f;
+    public float baseHealthBonus = 0f;
     public float baseAttack = 10;
     public float baseAttackPercent = 0;
     public float baseAttackFlat = 0;
@@ -44,61 +45,44 @@ public class Player : MonoBehaviour
     {
         Instance = this;
 
-        characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat,
+        characterStats = new CharacterStats(baseHealth, baseHealthBonus, baseAttack, baseAttackPercent, baseAttackFlat,
                                             baseDamageBonus, baseCritRate, baseCritDamage, baseDefense,
                                             baseAttackSpeed, baseMoveSpeed, baseMoveSpeedBonus, baseJumpHeight, baseJumpHeightBonus);
         Debug.Log("Player init");
 
-        playerInput = new PlayerControls();
+        _playerInput = new PlayerControls();
+
+        _rb = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _animator = GetComponent<Animator>();
 
         Effectable = GetComponent<EffectableObject>();
     }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
         bullet = GetComponent<Bullet>();
-
-        animator = GetComponent<Animator>();
-
-
-        maxHealth = baseHealth;
-        currentHealth = maxHealth;
-        //currentHealth = baseHealth;
+        currentHealth = MaxHealth;
         isAlive = true;
 
-        UpdateUI();
-        //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
-
+        UpdateHealthBar();
         downButton.SetActive(false);
     }
 
     private void OnEnable()
     {
-        playerInput.Enable();
+        _playerInput.Enable();
         playerInputAction.action.Enable();
     }
 
     private void OnDisable()
     {
-        playerInput.Disable();
+        _playerInput.Disable();
         playerInputAction.action.Disable();
     }
 
     void Update()
     {
-        //if (!PauseMenu.GameIsPaused)
-        //{
-        //    if (isDashing) return;
-
-        //    if (isAlive)
-        //    {
-        //        ProcessInput();
-        //        Shoot();
-        //    }
-        //}
-
         if (PauseMenu.GameIsPaused) return;
 
         if (isDashing) return;
@@ -112,27 +96,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (!PauseMenu.GameIsPaused)
-        //{
-        //    if (isDashing) return;
-
-        //    if (isAlive)
-        //    {
-        //        Move();
-        //        Flip();
-        //        Jump();
-        //        BetterJump();
-        //        DashTrigger();
-        //        ExitPlatform();
-        //        UpdateUI();
-        //    }
-
-        //    UpdateTimers();
-        //    UpdateAnimationState();
-        //}
-
         if (PauseMenu.GameIsPaused) return;
-
 
         if (isDashing) return;
 
@@ -144,7 +108,7 @@ public class Player : MonoBehaviour
             BetterJump();
             DashTrigger();
             ExitPlatform();
-            UpdateUI();
+            UpdateHealthBar();
         }
 
         UpdateTimers();
@@ -154,7 +118,7 @@ public class Player : MonoBehaviour
     void ProcessInput()
     {
         // jump
-        if (playerInput.Player.Jump.triggered)
+        if (_playerInput.Player.Jump.triggered)
         {
             if (IsGrounded())
             {
@@ -170,7 +134,7 @@ public class Player : MonoBehaviour
         }
 
         // dash
-        if (playerInput.Player.Dash.triggered && canDash)
+        if (_playerInput.Player.Dash.triggered && canDash)
         {
             dashRequest = true;
         }
@@ -182,7 +146,7 @@ public class Player : MonoBehaviour
         //}
 
         // exit platform
-        if (playerInput.Player.Down.triggered)
+        if (_playerInput.Player.Down.triggered)
         {
             exitPlatformTrigger = true;
         }
@@ -235,8 +199,33 @@ public class Player : MonoBehaviour
     #region health
 
     [Header("Health")]
-    public float currentHealth = 0;
-    public float maxHealth = 3;
+    public float currentHealth;
+
+    public float MaxHealth
+    {
+        get
+        {
+            baseHealth = characterStats.GetStat(BaseStat.BaseStatType.HP).GetCalculatedStatValue();
+            baseHealthBonus = characterStats.GetStat(BaseStat.BaseStatType.HPBonus).GetCalculatedStatValue() / 100;
+
+            float maxHealth = Effectable.Effect_MaxHealth(baseHealth * (1 + Effectable.Effect_BonusMaxHealth(baseHealthBonus)));
+
+            return Mathf.Max(maxHealth, 0f);
+        }
+    }
+
+    public float MaxHealthNoIntermediateVariables
+    {
+        get
+        {
+            return
+                Effectable.Effect_MaxHealth(
+                 (baseHealth = characterStats.GetStat(BaseStat.BaseStatType.HP).GetCalculatedStatValue())
+                  * (1 + Effectable.Effect_BonusMaxHealth(
+                 (characterStats.GetStat(BaseStat.BaseStatType.HPBonus).GetCalculatedStatValue() / 100)))
+                );
+        }
+    }
 
     [Header("Damage and Heal")]
     public float damageAmount = 1f;
@@ -257,15 +246,7 @@ public class Player : MonoBehaviour
         currentHealth -= Mathf.FloorToInt(damageAmount);
         isHit = true;
 
-        //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
-
-        if (currentHealth <= 0)
-        {
-            UpdateUI();
-            Die();
-
-            Invoke("RestartLevel", deathAnimationTime);
-        }
+        UpdateHealthBar();
     }
 
     private void Heal(float healAmount)
@@ -273,10 +254,37 @@ public class Player : MonoBehaviour
         FindObjectOfType<AudioManager>().PlayOneShot("Hit");
         currentHealth += Mathf.FloorToInt(healAmount);
 
-        if (currentHealth >= maxHealth)
+        UpdateHealthBar();
+    }
+
+    [Header("HealthBar")]
+    [SerializeField] private PlayerHealthBar healthBar;
+
+    public void UpdateHealthBar()
+    {
+        if (currentHealth > 0.1f && currentHealth >= MaxHealth)
         {
-            currentHealth = maxHealth;
+            currentHealth = MaxHealth;
         }
+
+        if (currentHealth <= 0f)
+        {
+            currentHealth = 0;
+            Die();
+            Invoke("RestartLevel", deathAnimationTime);
+        }
+
+        healthBar.UpdateHealthBar(Mathf.FloorToInt(MaxHealth), Mathf.FloorToInt(currentHealth));
+
+        //UIEventHandler.HealthChanged(currentHealth, MaxHealth);
+
+        // add status > (equip item (that has the stats)) > change stats in UI
+        // final max HP = (base)MaxHP + HP% + HP flat
+        // cant show the buffs from effects this way
+
+        //characterStats.AddStatBonus(itemToEquip.Stats);
+        //UIEventHandler.ItemEquipped(itemToEquip);
+        //UIEventHandler.StatsChanged();
     }
 
     #endregion
@@ -293,40 +301,10 @@ public class Player : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("Hit");
         isAlive = false;
-        rb.bodyType = RigidbodyType2D.Static;
+        _rb.bodyType = RigidbodyType2D.Static;
     }
 
     #endregion
-
-
-    //#region buff
-
-    //public void DamageBuff(int damageBuff)
-    //{
-    //    float newDamage;
-    //    newDamage = bullet.bulletDamage + damageBuff;
-    //}
-
-    //public void HealPlayer(int healAmount)
-    //{
-    //    if (currentHealth < maxHealth)
-    //    {
-    //        currentHealth += healAmount;
-    //        FindObjectOfType<AudioManager>().PlayOneShot("Heal");
-
-    //    }
-    //}
-
-    //public void SpeedBoost(float speedAmount)
-    //{
-    //    if (moveSpeed < maxSpeed)
-    //    {
-    //        moveSpeed += speedAmount;
-    //        FindObjectOfType<AudioManager>().PlayOneShot("SpeedBoost");
-    //    }
-    //}
-
-    //#endregion
 
     #region move
 
@@ -352,46 +330,23 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        moveH = playerInput.Player.Move.ReadValue<Vector2>();
+        moveH = _playerInput.Player.Move.ReadValue<Vector2>();
 
         moveSpeed = baseMoveSpeed;
 
-
         //Debug.Log(CurrentSpeed);
 
-        direction = new Vector2(moveH.x * CurrentSpeed, rb.velocity.y);
+        direction = new Vector2(moveH.x * CurrentSpeed, _rb.velocity.y);
 
         if (direction != Vector2.zero)
         {
-            rb.velocity = direction;
+            _rb.velocity = direction;
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            _rb.velocity = Vector3.zero;
         }
 
-    }
-
-    void MoveOld()
-    {/*
-        if (knockbackCounter <= 0)
-        {
-            rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
-        }
-        else
-        {
-            if (knockbackFromRight)
-            {
-                rb.velocity = new Vector2(-knockbackForce, knockbackForce);
-            }
-            if (!knockbackFromRight)
-            {
-                rb.velocity = new Vector2(knockbackForce, knockbackForce);
-            }
-
-            knockbackCounter -= Time.deltaTime;
-        }
-        */
     }
 
     #endregion
@@ -417,25 +372,25 @@ public class Player : MonoBehaviour
             jumpForce = baseJumpHeight * (1 + (characterStats.GetStat(BaseStat.BaseStatType.JumpHeightBonus).GetCalculatedStatValue() / 100));
             Debug.Log(jumpForce);
 
-            rb.velocity = Vector2.up * jumpForce;
+            _rb.velocity = Vector2.up * jumpForce;
             jumpRequest = false;
         }
     }
 
     private void BetterJump()
     {
-        if (rb.velocity.y < 0f)
+        if (_rb.velocity.y < 0f)
         {
-            rb.gravityScale = fallMultiplier;
+            _rb.gravityScale = fallMultiplier;
         }
 
         playerInputAction.action.canceled += context =>
         {
-            if (rb != null)
+            if (_rb != null)
             {
-                if (rb.velocity.y > 0)
+                if (_rb.velocity.y > 0)
                 {
-                    rb.gravityScale = tapJumpMultiplier;
+                    _rb.gravityScale = tapJumpMultiplier;
                     //Debug.Log("tap jump");
                 }
             }
@@ -443,9 +398,9 @@ public class Player : MonoBehaviour
 
         playerInputAction.action.performed += context =>
         {
-            if (rb != null)
+            if (_rb != null)
             {
-                rb.gravityScale = holdJumpMultiplier;
+                _rb.gravityScale = holdJumpMultiplier;
 
                 //Debug.Log("hold jump");
             }
@@ -483,16 +438,16 @@ public class Player : MonoBehaviour
         canDash = false;
         isDashing = true;
 
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
+        float originalGravity = _rb.gravityScale;
+        _rb.gravityScale = 0f;
 
-        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        _rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
         tr.emitting = true;
 
         yield return new WaitForSeconds(dashingTime);
 
         tr.emitting = false;
-        rb.gravityScale = originalGravity;
+        _rb.gravityScale = originalGravity;
         isDashing = false;
 
         yield return new WaitForSeconds(dashingCooldown);
@@ -603,9 +558,9 @@ public class Player : MonoBehaviour
     {
         BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
 
-        Physics2D.IgnoreCollision(boxCollider, platformCollider);
+        Physics2D.IgnoreCollision(_boxCollider, platformCollider);
         yield return new WaitForSeconds(collisionDisableTime);
-        Physics2D.IgnoreCollision(boxCollider, platformCollider, false);
+        Physics2D.IgnoreCollision(_boxCollider, platformCollider, false);
     }
 
     private void ExitPlatform()
@@ -626,7 +581,7 @@ public class Player : MonoBehaviour
 
     #region animation
 
-    private Animator animator;
+    private Animator _animator;
     private string currentAnimation;
 
     const string RUN_ANIMATION = "Player_Run";
@@ -654,12 +609,12 @@ public class Player : MonoBehaviour
             ChangeAnimationState(SHOOT_ANIMATION);
         }
         // jump
-        else if (rb.velocity.y > .1f && !IsGrounded())
+        else if (_rb.velocity.y > .1f && !IsGrounded())
         {
             ChangeAnimationState(JUMP_ANIMATION);
         }
         // falling
-        else if (rb.velocity.y < .1f && !IsGrounded())
+        else if (_rb.velocity.y < .1f && !IsGrounded())
         {
             ChangeAnimationState(JUMP_ANIMATION);
         }
@@ -679,7 +634,7 @@ public class Player : MonoBehaviour
     {
         if (currentAnimation == newAnimation) return;
 
-        animator.Play(newAnimation);
+        _animator.Play(newAnimation);
         currentAnimation = newAnimation;
     }
 
@@ -729,7 +684,7 @@ public class Player : MonoBehaviour
 
         float extraHeightText = .1f;
 
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.down, extraHeightText, jumpableGround);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.down, extraHeightText, jumpableGround);
 
         // draw gizmos
 
@@ -749,18 +704,6 @@ public class Player : MonoBehaviour
         //Debug.Log(raycastHit.collider);
 
         return raycastHit.collider != null;
-    }
-
-    #endregion
-
-    #region UI
-
-    [Header("UI")]
-    [SerializeField] private PlayerHealthBar healthBar;
-
-    public void UpdateUI()
-    {
-        healthBar.UpdateHealthBar(maxHealth, currentHealth);
     }
 
     #endregion

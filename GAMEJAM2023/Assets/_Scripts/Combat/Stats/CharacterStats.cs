@@ -6,13 +6,14 @@ public class CharacterStats
 {
     public List<BaseStat> stats = new List<BaseStat>();
 
-    public CharacterStats(float hitPoints, float attack, float attackPercent, float attackFlat,
+    public CharacterStats(float hitPoints, float hitPointsBonus, float attack, float attackPercent, float attackFlat,
                           float damageBonus, float critRate, float critDamage, float defense,
                           float attackSpeed, float moveSpeed, float moveSpeedBonus, float jumpHeight, float jumpHeightBonus)
     {
         stats = new List<BaseStat>()
         {
             new BaseStat(BaseStat.BaseStatType.HP, hitPoints, "MAX HP"),
+            new BaseStat(BaseStat.BaseStatType.HPBonus, hitPointsBonus, "BONUS HP"),
             new BaseStat(BaseStat.BaseStatType.Attack, attack, "ATK"),
             new BaseStat(BaseStat.BaseStatType.AttackBonus, attackPercent, "ATK%"),
             new BaseStat(BaseStat.BaseStatType.FlatAttack, attackFlat, "ATK FLAT"),

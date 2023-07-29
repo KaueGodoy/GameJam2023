@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class EffectableObject : MonoBehaviour
 {
-
+    private CharacterStats characterStats;
     List<BaseEffect> ActiveEffects = new List<BaseEffect>();
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
+        characterStats = GetComponent<Player>().characterStats;
     }
-
-    // Update is called once per frame
     void Update()
     {
         // tick all active effects - clean up any that are finished (in reverse order to not get null index)
@@ -142,5 +139,39 @@ public class EffectableObject : MonoBehaviour
         }
 
         return workingInAirSpeed;
+    }
+
+    public float Effect_MaxHealth(float originalMaxHealth)
+    {
+        float workingMaxHealth = originalMaxHealth;
+
+        for (int index = 0; index < ActiveEffects.Count; ++index)
+        {
+            if (!ActiveEffects[index].IsActive)
+            {
+                continue;
+            }
+
+            workingMaxHealth = ActiveEffects[index].Effect_MaxHealth(workingMaxHealth);
+        }
+
+        return workingMaxHealth;
+    }
+
+    public float Effect_BonusMaxHealth(float originalBonusMaxHealth)
+    {
+        float workingBonusMaxHealth = originalBonusMaxHealth;
+
+        for (int index = 0; index < ActiveEffects.Count; ++index)
+        {
+            if (!ActiveEffects[index].IsActive)
+            {
+                continue;
+            }
+
+            workingBonusMaxHealth = ActiveEffects[index].Effect_BonusMaxHealth(workingBonusMaxHealth);
+        }
+        //workingBonusMaxHealth += (characterStats.GetStat(BaseStat.BaseStatType.HPBonus).GetCalculatedStatValue() / 100);
+        return workingBonusMaxHealth;
     }
 }

@@ -10,7 +10,7 @@ public class BaseStat
 {
     public enum BaseStatType
     {
-        HP,
+        HP, HPBonus,
         Attack, AttackBonus, FlatAttack,
         DamageBonus, CritRate, CritDamage,
         Defense,

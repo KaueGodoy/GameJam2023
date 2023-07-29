@@ -8,6 +8,8 @@ public class EnemyBehavior_Knockback : MonoBehaviour
 
     public float knockbackForce = 12f;
     public float KnockbackTime = 0.18f;
+    public float KnockbackCooldown = 0.75f;
+    public float KnockbackCooldownTime = 0f;
     public bool IsKnockback;
 
     public AnimationCurve knockbackCurve;
@@ -60,7 +62,7 @@ public class EnemyBehavior_Knockback : MonoBehaviour
                 force = directionalforce * knockbackCurve.Evaluate(elapsedTime);
 
                 _rb.AddForce(force);
-           
+
                 yield return new WaitForFixedUpdate();
             }
 
@@ -72,9 +74,11 @@ public class EnemyBehavior_Knockback : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && Time.time > KnockbackCooldownTime)
         {
             IsKnockback = true;
+            KnockbackCooldownTime = Time.time + KnockbackCooldown;
         }
     }
+
 }
