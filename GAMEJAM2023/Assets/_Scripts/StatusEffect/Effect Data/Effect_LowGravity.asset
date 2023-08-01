@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Effect_LowGravity
   m_EditorClassIdentifier: 
   Duration: 4
-  JumpHeightModifier: 2
+  JumpHeightModifier: 20
   JumpVelocityModifier: 2
   FallForceModifier: 0.25

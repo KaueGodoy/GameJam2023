@@ -15,6 +15,21 @@ public class Enemy_Beetle : MonoBehaviour, IEnemy
     HealthSystem healthSystem;
     Transform healthBarTransform;
 
+    public float baseSpeed = 3f;
+    public float baseSpeedBonus = 0f;
+    protected EffectableObject Effectable;
+
+    public float CurrentSpeed
+    {
+        get
+        {
+            float currentSpeed = Effectable.Effect_GroundSpeed(baseSpeed * (1 + Effectable.Effect_BonusGroundSpeed(baseSpeedBonus)));
+
+            return Mathf.Max(currentSpeed, 0f);
+        }
+    }
+
+
     public float CurrentHealth { get; set; }
     public float MaxHealth { get; set; }
     public int ID { get; set; }
@@ -24,6 +39,9 @@ public class Enemy_Beetle : MonoBehaviour, IEnemy
     {
         _rb = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
+
+        Effectable = GetComponent<EffectableObject>();
+
         pfDeathEffect = Resources.Load<GameObject>("Prefabs/pfDeathAnimationEffect");
     }
 

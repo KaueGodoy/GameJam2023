@@ -39,8 +39,4 @@ public class Interactable : MonoBehaviour
             }
         }
     }
-
-
-
-
 }

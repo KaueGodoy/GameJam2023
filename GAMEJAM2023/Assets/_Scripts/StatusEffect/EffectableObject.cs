@@ -7,10 +7,11 @@ public class EffectableObject : MonoBehaviour
     private CharacterStats characterStats;
     List<BaseEffect> ActiveEffects = new List<BaseEffect>();
 
-    private void Start()
-    {
-        characterStats = GetComponent<Player>().characterStats;
-    }
+    //private void Start()
+    //{
+    //    characterStats = GetComponent<Player>().characterStats;
+    //}
+
     void Update()
     {
         // tick all active effects - clean up any that are finished (in reverse order to not get null index)
@@ -51,6 +52,23 @@ public class EffectableObject : MonoBehaviour
         }
 
         return workingJumpHeight;
+    }
+
+    public float Effect_JumpHeightBonus(float originalJumpHeightBonus)
+    {
+        float workingJumpHeightBonus = originalJumpHeightBonus;
+
+        for (int index = 0; index < ActiveEffects.Count; ++index)
+        {
+            if (!ActiveEffects[index].IsActive)
+            {
+                continue;
+            }
+
+            workingJumpHeightBonus = ActiveEffects[index].Effect_JumpHeightBonus(workingJumpHeightBonus);
+        }
+
+        return workingJumpHeightBonus;
     }
 
     public float Effect_JumpVelocity(float originalJumpVelocity)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e381fa41ac4b664db8580d0ca1a92d6, type: 3}
   m_Name: Effect_SuperGravity
   m_EditorClassIdentifier: 
-  Duration: 8
+  Duration: 4
   JumpHeightModifier: 0.5
   JumpVelocityModifier: 0.5
   FallForceModifier: 4

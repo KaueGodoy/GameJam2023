@@ -1,26 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Lore : ActionItem
 {
+    private bool lorePanelIsActive;
+    public GameObject itemPanel;
+
     public override void Interact()
     {
         base.Interact();
         Debug.Log("Interacting with lore item");
     }
 
-    public override void OnTriggerEnter2D(Collider2D collision)
+    public override void InteractWithItem()
     {
-        base.OnTriggerEnter2D(collision);
+        if (_playerInput.Player.Interaction.triggered)
+        {
+            itemPanel.SetActive(!lorePanelIsActive);
+            Debug.Log("did something.");
+        }
     }
 
-    public override void OnTriggerExit2D(Collider2D collision)
+    public override void EndInteraction()
     {
-        base.OnTriggerExit2D(collision);
+        base.EndInteraction();
+        itemPanel.SetActive(lorePanelIsActive);
     }
-
-
-
 }

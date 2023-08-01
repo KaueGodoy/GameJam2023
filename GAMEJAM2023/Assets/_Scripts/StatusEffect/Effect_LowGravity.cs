@@ -5,13 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Effects/Low Gravity", fileName = "Effect_LowGravity")]
 public class Effect_LowGravity : BaseEffect
 {
-    [SerializeField] float JumpHeightModifier = 2f;
+    [SerializeField] float JumpHeightModifier = 20f;
     [SerializeField] float JumpVelocityModifier = 2f;
     [SerializeField] float FallForceModifier = 0.25f;
 
     public override float Effect_JumpHeight(float originalJumpHeight)
     {
-        return originalJumpHeight * JumpHeightModifier;
+        return originalJumpHeight;
+    }
+
+    public override float Effect_JumpHeightBonus(float originalJumpHeightBonus)
+    {
+        return originalJumpHeightBonus + (JumpHeightModifier / 100);
     }
 
     public override float Effect_JumpVelocity(float originalJumpVelocity)

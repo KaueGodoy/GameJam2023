@@ -15,8 +15,25 @@ public class EnemyBehavior_Patrol : MonoBehaviour, IEnemyBehavior
 
     public bool isMovingRight;
 
+
+    public float baseSpeed = 3f;
+    public float baseSpeedBonus = 0f;
+    protected EffectableObject Effectable;
+
+    public float CurrentSpeed
+    {
+        get
+        {
+            float currentSpeed = Effectable.Effect_GroundSpeed(baseSpeed * (1 + Effectable.Effect_BonusGroundSpeed(baseSpeedBonus)));
+
+            return Mathf.Max(currentSpeed, 0f);
+        }
+    }
+
     private void Awake()
     {
+        Effectable = GetComponent<EffectableObject>();
+
         _rb = GetComponent<Rigidbody2D>();
         _flipSprite = GetComponent<FlipSprite>();
     }
@@ -33,7 +50,7 @@ public class EnemyBehavior_Patrol : MonoBehaviour, IEnemyBehavior
 
         if (isMovingRight)
         {
-            _rb.velocity = new Vector2(MoveSpeed, _rb.velocity.y);
+            _rb.velocity = new Vector2(CurrentSpeed, _rb.velocity.y);
             if (_rb.position.x >= _destination.x)
             {
                 isMovingRight = false;
@@ -41,7 +58,7 @@ public class EnemyBehavior_Patrol : MonoBehaviour, IEnemyBehavior
         }
         else
         {
-            _rb.velocity = new Vector2(-MoveSpeed, _rb.velocity.y);
+            _rb.velocity = new Vector2(-CurrentSpeed, _rb.velocity.y);
             if (_rb.position.x <= _originalPosition.x)
             {
                 isMovingRight = true;

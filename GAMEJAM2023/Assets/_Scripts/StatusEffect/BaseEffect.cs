@@ -28,6 +28,11 @@ public class BaseEffect : ScriptableObject
         return originalJumpHeight;
     }
 
+    public virtual float Effect_JumpHeightBonus(float originalJumpHeightBonus)
+    {
+        return originalJumpHeightBonus;
+    }
+
     public virtual float Effect_JumpVelocity(float originalJumpVelocity)
     {
         return originalJumpVelocity;

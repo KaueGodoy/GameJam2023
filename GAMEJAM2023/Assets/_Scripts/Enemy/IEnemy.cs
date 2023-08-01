@@ -11,6 +11,4 @@ public interface IEnemy
     void PerformAttack();
     void Die();
     bool IsDead { get; set; }
-
-
 }

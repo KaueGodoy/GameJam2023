@@ -363,16 +363,28 @@ public class Player : MonoBehaviour
     private bool doubleJump;
     private bool jumpRequest = false;
 
+    public float JumpForce
+    {
+        get
+        {
+            baseJumpHeight = characterStats.GetStat(BaseStat.BaseStatType.JumpHeight).GetCalculatedStatValue();
+            baseJumpHeightBonus = characterStats.GetStat(BaseStat.BaseStatType.JumpHeightBonus).GetCalculatedStatValue() / 100;
+
+            float jumpForce = Effectable.Effect_JumpHeight(baseJumpHeight * (1 + Effectable.Effect_JumpHeightBonus(baseJumpHeightBonus)));
+
+            return Mathf.Max(jumpForce, 0f);
+        }
+    }
+
     void Jump()
     {
         if (jumpRequest)
         {
             FindObjectOfType<AudioManager>().PlayOneShot("Jump");
 
-            jumpForce = baseJumpHeight * (1 + (characterStats.GetStat(BaseStat.BaseStatType.JumpHeightBonus).GetCalculatedStatValue() / 100));
-            Debug.Log(jumpForce);
+            Debug.Log(JumpForce);
 
-            _rb.velocity = Vector2.up * jumpForce;
+            _rb.velocity = Vector2.up * JumpForce;
             jumpRequest = false;
         }
     }
