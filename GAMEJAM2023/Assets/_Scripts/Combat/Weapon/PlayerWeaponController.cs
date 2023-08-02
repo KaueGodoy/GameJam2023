@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerWeaponController : MonoBehaviour
 {
     public GameObject playerHand;
+    public CharacterPanel characterPanel;
     public GameObject EquippedWeapon { get; set; }
 
     Transform spawnProjectile;
@@ -24,6 +25,8 @@ public class PlayerWeaponController : MonoBehaviour
     {
         spawnProjectile = transform.Find("ProjectileSpawn");
         characterStats = GetComponent<Player>().characterStats;
+        //characterPanel = GetComponent<CharacterPanel>();
+
     }
     private void OnEnable()
     {
@@ -68,10 +71,14 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void UnequipWeapon()
     {
-        InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
-        characterStats.RemoveStatBonus(weaponEquipped.Stats);
-        Destroy(EquippedWeapon.transform.gameObject);
-        UIEventHandler.StatsChanged();
+        if (EquippedWeapon != null)
+        {
+            InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
+            characterStats.RemoveStatBonus(weaponEquipped.Stats);
+            characterPanel.UnequipWeapon();
+            UIEventHandler.StatsChanged();
+            Destroy(EquippedWeapon.transform.gameObject);
+        }
     }
 
     private void Update()
@@ -103,8 +110,8 @@ public class PlayerWeaponController : MonoBehaviour
 
     private float CalculateDamage()
     {
-        float baseDamage =   (characterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue())
-                             * (1 + (characterStats.GetStat(BaseStat.BaseStatType.AttackBonus).GetCalculatedStatValue() / 100)) 
+        float baseDamage = (characterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue())
+                             * (1 + (characterStats.GetStat(BaseStat.BaseStatType.AttackBonus).GetCalculatedStatValue() / 100))
                              + (characterStats.GetStat(BaseStat.BaseStatType.FlatAttack).GetCalculatedStatValue());
 
         float damageToDeal = baseDamage * (1 + characterStats.GetStat(BaseStat.BaseStatType.DamageBonus).GetCalculatedStatValue() / 100);

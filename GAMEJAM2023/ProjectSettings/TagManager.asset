@@ -12,6 +12,7 @@ TagManager:
   - OneWayPlatform
   - Enemy
   - InteractableObject
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX

@@ -55,11 +55,11 @@ public class CharacterPanel : MonoBehaviour
         PlayerUltController = player.GetComponent<PlayerUltController>();
 
         //UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
+        InitializeStats();
         UIEventHandler.OnStatsChanged += UpdateStats;
         UIEventHandler.OnItemEquipped += UpdateEquippedWeapon;
         UIEventHandler.OnSkillEquipped += UpdateEquippedSkill;
         UIEventHandler.OnUltEquipped += UpdateEquippedUlt;
-        InitializeStats();
 
     }
 
@@ -149,7 +149,7 @@ public class CharacterPanel : MonoBehaviour
                 Destroy(weaponStatTexts[i].gameObject);
             }
             weaponStatTexts.Clear();
-            PlayerWeaponController.UnequipWeapon();
+            //PlayerWeaponController.UnequipWeapon();
         }
     }
 
