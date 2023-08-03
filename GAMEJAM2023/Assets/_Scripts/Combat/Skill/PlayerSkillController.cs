@@ -7,6 +7,8 @@ using UnityEngine.Rendering.Universal;
 public class PlayerSkillController : MonoBehaviour
 {
     public GameObject playerHandSkill;
+    public CharacterPanel characterPanel;
+
     public GameObject EquippedSkill { get; set; }
 
     Transform spawnProjectile;
@@ -71,10 +73,14 @@ public class PlayerSkillController : MonoBehaviour
 
     public void UnequipSkill()
     {
-        InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
-        characterStats.RemoveStatBonus(skillEquipped.Stats);
-        Destroy(EquippedSkill.transform.gameObject);
-        UIEventHandler.StatsChanged();
+        if (EquippedSkill != null)
+        {
+            InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
+            characterStats.RemoveStatBonus(skillEquipped.Stats);
+            characterPanel.UnequipSkill();
+            UIEventHandler.StatsChanged();
+            Destroy(EquippedSkill.transform.gameObject);
+        }
     }
 
     private void Update()

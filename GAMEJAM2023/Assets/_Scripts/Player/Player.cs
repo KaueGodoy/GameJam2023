@@ -295,6 +295,7 @@ public class Player : MonoBehaviour
     {
         isAlive = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //_rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     public void Die()

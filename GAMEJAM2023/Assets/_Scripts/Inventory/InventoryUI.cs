@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,6 +32,7 @@ public class InventoryUI : MonoBehaviour
 
         ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
         UIEventHandler.OnItemAddedToInventory += ItemAdded;
+
         inventoryPanel.gameObject.SetActive(false);
 
         sectionPanelWeapon.gameObject.SetActive(true);
@@ -47,6 +49,7 @@ public class InventoryUI : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
+        UIEventHandler.OnItemAddedToInventory -= ItemAdded;
     }
 
     private void Start()

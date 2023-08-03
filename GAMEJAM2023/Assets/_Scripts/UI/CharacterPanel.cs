@@ -47,6 +47,8 @@ public class CharacterPanel : MonoBehaviour
     private PlayerUltController PlayerUltController;
     private List<TextMeshProUGUI> ultStatTexts = new List<TextMeshProUGUI>();
 
+    public TextMeshProUGUI originalWeaponStatPrefab;
+
 
     private void Awake()
     {
@@ -55,12 +57,24 @@ public class CharacterPanel : MonoBehaviour
         PlayerUltController = player.GetComponent<PlayerUltController>();
 
         //UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
-        InitializeStats();
         UIEventHandler.OnStatsChanged += UpdateStats;
         UIEventHandler.OnItemEquipped += UpdateEquippedWeapon;
         UIEventHandler.OnSkillEquipped += UpdateEquippedSkill;
         UIEventHandler.OnUltEquipped += UpdateEquippedUlt;
+        InitializeStats();
+    }
 
+    private void OnDestroy()
+    {
+        UIEventHandler.OnStatsChanged -= UpdateStats;
+        UIEventHandler.OnItemEquipped -= UpdateEquippedWeapon;
+        UIEventHandler.OnSkillEquipped -= UpdateEquippedSkill;
+        UIEventHandler.OnUltEquipped -= UpdateEquippedUlt;
+    }
+
+    private void Start()
+    {
+        originalWeaponStatPrefab = weaponStatPrefab;
     }
 
     //private void UpdateHealth(float currentHealth, float maxHealth)
@@ -94,8 +108,16 @@ public class CharacterPanel : MonoBehaviour
 
     private void UpdateEquippedWeapon(Item item)
     {
-        weaponIcon.sprite = Resources.Load<Sprite>("UI/Icons/Items/" + item.ObjectSlug);
+        //    foreach (var text in weaponStatTexts)
+        //    {
+        //        Destroy(text.gameObject);
+        //    }
+        //    weaponStatTexts.Clear();
+
+        //weaponStatPrefab = originalWeaponStatPrefab;
+
         weaponNameText.text = item.ItemName;
+        weaponIcon.sprite = Resources.Load<Sprite>("UI/Icons/Items/" + item.ObjectSlug);
 
         for (int i = 0; i < item.Stats.Count; i++)
         {
@@ -165,7 +187,7 @@ public class CharacterPanel : MonoBehaviour
                 Destroy(skillStatTexts[i].gameObject);
             }
             skillStatTexts.Clear();
-            PlayerSkillController.UnequipSkill();
+            //PlayerSkillController.UnequipSkill();
         }
     }
 
@@ -181,7 +203,7 @@ public class CharacterPanel : MonoBehaviour
                 Destroy(ultStatTexts[i].gameObject);
             }
             ultStatTexts.Clear();
-            PlayerUltController.UnequipUlt();
+            //PlayerUltController.UnequipUlt();
         }
     }
 

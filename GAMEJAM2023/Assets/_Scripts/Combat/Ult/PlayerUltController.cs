@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 public class PlayerUltController : MonoBehaviour
 {
     public GameObject playerHandUlt;
+    public CharacterPanel characterPanel;
     public GameObject EquippedUlt { get; set; }
 
     Transform spawnProjectile;
@@ -70,10 +71,14 @@ public class PlayerUltController : MonoBehaviour
 
     public void UnequipUlt()
     {
-        InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
-        characterStats.RemoveStatBonus(ultEquipped.Stats);
-        Destroy(EquippedUlt.transform.gameObject);
-        UIEventHandler.StatsChanged();
+        if (EquippedUlt != null)
+        {
+            InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
+            characterStats.RemoveStatBonus(ultEquipped.Stats);
+            characterPanel.UnequipUlt();
+            UIEventHandler.StatsChanged();
+            Destroy(EquippedUlt.transform.gameObject);
+        }
     }
 
     private void Update()

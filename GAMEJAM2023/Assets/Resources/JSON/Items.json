@@ -74,6 +74,26 @@
       }
     ]
   },
+    {
+    "objectSlug": "weaponInitial",
+    "itemName": "ATK+ [WEAPON]",
+    "description": "Aumenta ATK em 40%",
+    "itemType": "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "Attack",
+        "BaseValue": 20,
+        "StatName": "ATK"
+      },
+      {
+        "StatType": "AttackBonus",
+        "BaseValue": 40.0,
+        "StatName": "ATK%"
+      }
+    ]
+  },
   {
     "objectSlug": "skillTest",
     "itemName": "Speed up [SKILL]",
@@ -97,6 +117,26 @@
         "BaseValue": 20.0,
         "StatName": "Jump Height%"
       }
+    ]
+  },
+    {
+    "objectSlug": "skillInitial",
+    "itemName": "CRIT Damage+ [SKILL]",
+    "description": "Aumenta crit damage em 20%", 
+    "itemType": "Skill",
+    "actionName": "Equip Skill",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "Attack",
+        "BaseValue": 40,
+        "StatName": "ATK"
+      },
+      {
+        "StatType": "CritDamage",
+        "BaseValue": 20,
+        "StatName": "CRIT DAMAGE"
+      },
     ]
   },
   {
@@ -146,6 +186,26 @@
         "StatType": "FlatAttack",
         "BaseValue": 80,
         "StatName": "ATK FLAT"
+      }
+    ]
+  },
+    {
+    "objectSlug": "ultInitial",
+    "itemName": "CRIT Rate+ [ULT]",
+    "description": "Aumenta a taxa em 10%",
+    "itemType": "Ult",
+    "actionName": "Equip Ult",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "Attack",
+        "BaseValue": 60,
+        "StatName": "ATK"
+      },
+      {
+        "StatType": "CritRate",
+        "BaseValue": 10,
+        "StatName": "CRIT RATE"
       }
     ]
   },

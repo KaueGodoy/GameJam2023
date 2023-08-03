@@ -40,6 +40,9 @@ public class InventoryController : MonoBehaviour
         GiveItem("skillTest");
         GiveItem("ultTest");
         GiveItem("skillFireball");
+        GiveItem("ultInitial");
+        GiveItem("skillInitial");
+        GiveItem("weaponInitial");
     }
 
     public void GiveItem(string itemSlug)

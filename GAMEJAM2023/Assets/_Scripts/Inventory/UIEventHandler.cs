@@ -18,32 +18,31 @@ public class UIEventHandler : MonoBehaviour
 
     public static void ItemAddedToInventory(Item item)
     {
-        OnItemAddedToInventory(item);
+        OnItemAddedToInventory?.Invoke(item);
     }
 
     public static void ItemEquipped(Item item)
     {
-        OnItemEquipped(item);
+        OnItemEquipped?.Invoke(item);
     }
 
     public static void SkillEquipped(Item item)
     {
-        OnSkillEquipped(item);
+        OnSkillEquipped?.Invoke(item);
     }
 
     public static void UltEquipped(Item item)
     {
-        OnUltEquipped(item);
+        OnUltEquipped?.Invoke(item);
     }
 
     public static void HealthChanged(float currentHealth, float maxHealth)
     {
-        OnPlayerHealthChanged(currentHealth, maxHealth);
+        OnPlayerHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     public static void StatsChanged()
     {
-        OnStatsChanged();
+        OnStatsChanged?.Invoke();
     }
-
 }
