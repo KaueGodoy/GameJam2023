@@ -5,8 +5,8 @@ using UnityEngine;
 public class Platform_OneWayController : MonoBehaviour
 {
     private Transform _player;
-    private Platform_OneWayBelow _platform_OneWayBelow;
-    private Platform_OneWayAbove _platform_OneWayAbove;
+    private Platform_OneWayBelowRaycast _platform_OneWayBelow;
+    private Platform_OneWayAboveRaycast _platform_OneWayAbove;
 
     [SerializeField] private float platformActivationRadius = 5f;
     private float platformActivationRadiusSquared;

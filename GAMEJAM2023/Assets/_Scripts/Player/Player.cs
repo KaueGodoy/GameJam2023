@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
         isAlive = true;
 
         UpdateHealthBar();
-        downButton.SetActive(false);
+        //downButton.SetActive(false);
     }
 
     private void OnEnable()
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
             Jump();
             BetterJump();
             DashTrigger();
-            ExitPlatform();
+            //ExitPlatform();
             UpdateHealthBar();
         }
 
@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
         // exit platform
         if (_playerInput.Player.Down.triggered)
         {
-            exitPlatformTrigger = true;
+            //exitPlatformTrigger = true;
         }
 
         // damage test DELETE
@@ -542,52 +542,52 @@ public class Player : MonoBehaviour
 
     #region oneWayPlatform
 
-    [Header("One Way Platform")]
-    [SerializeField] private float collisionDisableTime = 0.5f;
-    [SerializeField] private GameObject downButton;
+    //[Header("One Way Platform")]
+    //[SerializeField] private float collisionDisableTime = 0.5f;
+    //[SerializeField] private GameObject downButton;
 
-    private GameObject currentOneWayPlatform;
-    private bool exitPlatformTrigger = false;
+    //private GameObject currentOneWayPlatform;
+    //private bool exitPlatformTrigger = false;
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("OneWayPlatform"))
-        {
-            currentOneWayPlatform = collision.gameObject;
-            downButton.SetActive(true);
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("OneWayPlatform"))
+    //    {
+    //        currentOneWayPlatform = collision.gameObject;
+    //        downButton.SetActive(true);
+    //    }
+    //}
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("OneWayPlatform"))
-        {
-            currentOneWayPlatform = null;
-            downButton.SetActive(false);
-        }
-    }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("OneWayPlatform"))
+    //    {
+    //        currentOneWayPlatform = null;
+    //        downButton.SetActive(false);
+    //    }
+    //}
 
-    private IEnumerator DisableCollision()
-    {
-        BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
+    //private IEnumerator DisableCollision()
+    //{
+    //    BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
 
-        Physics2D.IgnoreCollision(_boxCollider, platformCollider);
-        yield return new WaitForSeconds(collisionDisableTime);
-        Physics2D.IgnoreCollision(_boxCollider, platformCollider, false);
-    }
+    //    Physics2D.IgnoreCollision(_boxCollider, platformCollider);
+    //    yield return new WaitForSeconds(collisionDisableTime);
+    //    Physics2D.IgnoreCollision(_boxCollider, platformCollider, false);
+    //}
 
-    private void ExitPlatform()
-    {
-        if (exitPlatformTrigger)
-        {
-            exitPlatformTrigger = false;
+    //private void ExitPlatform()
+    //{
+    //    if (exitPlatformTrigger)
+    //    {
+    //        exitPlatformTrigger = false;
 
-            if (currentOneWayPlatform != null)
-            {
-                StartCoroutine(DisableCollision());
-            }
-        }
-    }
+    //        if (currentOneWayPlatform != null)
+    //        {
+    //            StartCoroutine(DisableCollision());
+    //        }
+    //    }
+    //}
 
     #endregion
 
