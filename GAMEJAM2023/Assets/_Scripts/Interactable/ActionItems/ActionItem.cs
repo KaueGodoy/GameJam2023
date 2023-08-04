@@ -53,14 +53,4 @@ public class ActionItem : Interactable
         interactPanel.SetActive(panelIsActive);
         _canInteract = false;
     }
-
-    public override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
-    }
-
-    public override void OnTriggerExit2D(Collider2D collision)
-    {
-        base.OnTriggerExit2D(collision);
-    }
 }

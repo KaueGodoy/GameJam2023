@@ -14,7 +14,6 @@ public class Trap_ExplosiveChest : ActionItem
     [SerializeField] private float _explosionDamage = 50f;
     [SerializeField] private float _explosionRadius = 5f;
 
-
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

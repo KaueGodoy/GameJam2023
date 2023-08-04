@@ -8,6 +8,8 @@ public class ParallaxBackground : MonoBehaviour
     [SerializeField] private bool _infiniteHorizontal;
     [SerializeField] private bool _infiniteVertical;
 
+    //public Transform _cameraTransformInitial;
+    // initial public transform = empty game obj for solving the camera initiaziling problem getting the current position of the player
     private Transform _cameraTransform;
     private Vector3 _lastCameraPosition;
 
@@ -19,6 +21,7 @@ public class ParallaxBackground : MonoBehaviour
 
     private void Awake()
     {
+        //_cameraTransform = _cameraTransformInitial;
         _cameraTransform = Camera.main.transform;
         _lastCameraPosition = _cameraTransform.position;
 
