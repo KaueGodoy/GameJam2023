@@ -15,21 +15,22 @@ Available for Windows.
 
 ## Screenshots
 <p align="center">
-  <a href="https://drive.google.com/file/d/1OaeFE-xSN2Mzmfjsqxec0LUls8uIKvAn/view" target="_blank" rel="noreferrer">
-    <img src="img/fase_1.jpg" alt="Ike - Stage 1" width="300">
+  <a href="https://imgur.com/cRvzgCf" target="_blank" rel="noreferrer">
+    <img src="https://imgur.com/cRvzgCf.jpg" alt="Ike - Stage 1" width="300">
   </a>
-  <a href="https://drive.google.com/file/d/1OaeFE-xSN2Mzmfjsqxec0LUls8uIKvAn/view" target="_blank" rel="noreferrer">
-    <img src="img/fase_2.jpg" alt="Ike - Stage 2" width="300">
+  <a href="https://imgur.com/gBAu732" target="_blank" rel="noreferrer">
+    <img src="https://imgur.com/gBAu732.jpg" alt="Ike - Stage 2" width="300">
   </a>
-  <a href="https://drive.google.com/file/d/1OaeFE-xSN2Mzmfjsqxec0LUls8uIKvAn/view" target="_blank" rel="noreferrer">
-    <img src="img/fase_3.jpg" alt="Ike - Stage 3" width="300">
+  <a href="https://imgur.com/EBz5u8e" target="_blank" rel="noreferrer">
+    <img src="https://imgur.com/EBz5u8e.jpg" alt="Ike - Stage 3" width="300">
   </a>
 </p>
 
 ## How to Play
-- **Move**: Use WASD to move Ike.
-- **Jump**: Press space to jump.
-- **Shoot**: Use the left mouse button to shoot.
+- **Move**: Use **WASD** to move Ike.
+- **Jump**: Press **space** to jump.
+- **Dash**: Press **shift** to dash.
+- **Shoot**: Use the **left mouse button** to shoot.
 
 ## Installation Instructions
 1. Download the latest build from the link above.
